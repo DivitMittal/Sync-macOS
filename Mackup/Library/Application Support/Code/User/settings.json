@@ -1,0 +1,284 @@
+// Visual Studio Code Settings
+{
+    //Diff Editor
+    "diffEditor.wordWrap": "on",
+    "diffEditor.ignoreTrimWhitespace": true,
+
+    //Security
+    "security.workspace.trust.enabled": false,
+    "security.workspace.trust.emptyWindow": false,
+    "security.workspace.trust.banner": "never",
+    "security.workspace.trust.startupPrompt": "never",
+
+    //Telemetry
+    "telemetry.telemetryLevel": "off",
+
+    //Github CoPilot - Extension
+    "github.copilot.enable": {
+        "*": true,
+        "yaml": true,
+        "plaintext": true,
+        "markdown": true
+    },
+
+    //Code Spell Checker - Extension
+    "cSpell.enableFiletypes": ["gas"],
+    "cSpell.userWords": [
+        "asciz",
+        "cmpq",
+        "Colemak",
+        "decq",
+        "Divit",
+        "divitmittal",
+        "dotenv",
+        "dtype",
+        "leaq",
+        "miniconda",
+        "movq",
+        "mulq",
+        "Neovim",
+        "nvim",
+        "popq",
+        "printf",
+        "pushq",
+        "scanf",
+        "shlq",
+        "shrq",
+        "spacebar",
+        "syscall",
+        "TLTR"
+    ],
+
+    //VSCode Neovim - Extension
+    "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
+
+    //Python - Extension
+    // "python.defaultInterpreterPath": "/usr/local/Caskroom/miniconda/base/bin/python",
+    // "python.linting.enabled": true,
+    // "python.linting.pylintEnabled": false,
+    // "python.linting.flake8Enabled": false,
+    // "python.linting.banditEnabled": true,
+
+    //Jupyter IPython Notebook - Extension
+    "jupyter.allowUnauthorizedRemoteConnection": true,
+    "jupyter.themeMatplotlibPlots": true,
+
+    //Files
+    "files.eol": "\n",
+    "files.autoSave": "afterDelay",
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true,
+    "files.simpleDialog.enable": true,
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+
+    //Terminal
+    "terminal.integrated.profiles.osx": {
+        "Fish": {
+            "path": "/usr/local/bin/fish"
+        },
+        "Bash": {
+            "path": "/bin/bash"
+        },
+        "Bourne Shell": {
+            "path": "/bin/sh"
+        }
+    },
+    "terminal.integrated.defaultProfile.osx": "Bash",
+    "terminal.integrated.fontFamily": "'CaskaydiaCove Nerd Font', 'Courier New', monospace",
+    "terminal.integrated.fontSize": 18,
+    "terminal.integrated.inheritEnv": false,
+    "terminal.external.osxExec": "kitty.app",
+
+    //Workbench
+    "workbench.enableExperiments": false,
+    "workbench.tips.enabled": false,
+    "workbench.view.alwaysShowHeaderActions": true,
+    "workbench.activityBar.iconClickBehavior": "focus",
+    "workbench.editor.untitled.hint": "hidden",
+    "workbench.startupEditor": "none",
+    "workbench.colorCustomizations": {
+        "editor.lineHighlightBackground": "#1073cf2d",
+        "editor.lineHighlightBorder": "#9fced11f",
+        "editorCursor.foreground": "#ff0000",
+        "terminalCursor.foreground": "#ff0000",
+        "editorWhitespace.foreground": "#ffffff15"
+    },
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.sideBar.location": "right",
+
+    //Editor
+    "editor.largeFileOptimizations": true,
+    "editor.lineNumbers": "relative",
+    "editor.renderLineHighlight": "none",
+    "editor.cursorBlinking": "solid",
+    "editor.minimap.renderCharacters": false,
+    "editor.minimap.enabled": false,
+    "editor.minimap.maxColumn": 50,
+    "editor.quickSuggestionsDelay": 5,
+    "editor.fontFamily": "'CaskaydiaCove Nerd Font', 'Courier New', monospace",
+    "editor.fontSize": 18,
+    "editor.fontLigatures": true,
+    "editor.wordWrap": "off",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.accessibilitySupport": "off",
+    "editor.inlayHints.enabled": true,
+    "editor.inlineSuggest.enabled": true,
+    "editor.bracketPairColorization.enabled": true,
+    //"editor.guides.bracketPairs": "active",
+    "editor.tabCompletion": "on",
+    "editor.stickyTabStops": true,
+    "editor.tabSize": 4,
+    "editor.detectIndentation": true,
+    "editor.scrollBeyondLastLine": false,
+    "editor.renderWhitespace": "all",
+    "editor.renderControlCharacters": true,
+    "editor.tokenColorCustomizations": {
+        "comments": "#3c8cfa"
+    },
+    "editor.colorDecorators": false,
+    "editor.unicodeHighlight.invisibleCharacters": false,
+
+    //Explorer
+    "explorer.confirmDelete": false,
+
+    //TODOTree - Extension
+    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS).*(\\n\\s*//\\s{2,}.*)*",
+    "todo-tree.highlights.defaultHighlight": {
+        "icon": "alert",
+        "type": "text-and-comment",
+        "foreground": "black",
+        "background": "white",
+        "opacity": 50,
+        "iconColor": "blue",
+        "gutterIcon": true
+    },
+    "todo-tree.highlights.customHighlight": {
+        "TODO": {
+            "icon": "check",
+            "foreground": "black",
+            "background": "white",
+            "iconColor": "white"
+        },
+        "NOTE": {
+            "icon": "note",
+            "foreground": "white",
+            "background": "gray",
+            "iconColor": "gray"
+        },
+        "COMMENT": {
+            "icon": "note",
+            "foreground": "white",
+            "background": "gray",
+            "iconColor": "gray"
+        },
+        "FIXME": {
+            "foreground": "black",
+            "background": "yellow",
+            "iconColor": "yellow"
+        },
+        "BUG": {
+            "foreground": "black",
+            "background": "red",
+            "iconColor": "red"
+        },
+        "[ ]": {
+            "icon": "check",
+            "foreground": "black",
+            "background": "white",
+            "iconColor": "yellow"
+        },
+        "[x]": {
+            "icon": "check",
+            "foreground": "white",
+            "background": "green",
+            "iconColor": "green"
+        }
+    },
+    "todo-tree.general.tags": [
+        "BUG",
+        "FIXME",
+        "TODO",
+        "NOTE",
+        "COMMENT",
+        "[ ]",
+        "[x]"
+    ],
+
+    //Update
+    "update.mode": "manual",
+    "update.showReleaseNotes": false,
+
+    //Bookmarks - Extension
+    "bookmarks.useWorkaroundForFormatters": true,
+
+    //File Specific
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    },
+
+    //Java
+    "[java]": {
+        "editor.defaultFormatter": "redhat.java"
+    },
+    "redhat.telemetry.enabled": false,
+    "java.jdt.ls.java.home": "/Library/Java/JavaVirtualMachines/openjdk.jdk/Contents/Home",
+    "java.import.gradle.java.home": "/Library/Java/JavaVirtualMachines/openjdk.jdk/Contents/Home",
+
+    //XML
+    "[xml]": {
+        "editor.defaultFormatter": "DotJoshJohnson.xml"
+    },
+
+    //SCM
+    "scm.alwaysShowRepositories": true,
+    "scm.alwaysShowActions": true,
+
+    //Render Line Endings - Extension
+    "code-eol.highlightExtraWhitespace": true,
+    "code-eol.highlightNonDefault": true,
+
+    //Extensions
+    "extensions.ignoreRecommendations": true,
+    "workbench.productIconTheme": "material-product-icons",
+    "cSpell.enabled": true,
+    "editor.hover.enabled": true,
+    "workbench.colorTheme": "Bearded Theme Vivid Black",
+
+
+    // APC - Extension
+    "window.titleBarStyle": "native",
+    "apc.electron": {
+        "titleBarStyle": "hiddenInset",
+    },
+    "apc.header": {
+      "height": 37
+    },
+    "apc.sidebar.titlebar": {
+      "height": 37
+    },
+    "apc.activityBar": {
+        "size": 48
+    },
+    "apc.stylesheet": {
+        ".custom-sidebar-titlebar .sidebar .composite.title": "padding-left: 0;",
+        // Make room for the traffic lights.
+        ".custom-activitybar div.monaco-workbench div.activitybar > div.content": "margin-top: var(--titlebar-height);",
+        // Reset strange APC .activitybar styling back to VSCode defaults.
+        ".custom-activitybar div.monaco-workbench div.activitybar > div.content div.monaco-action-bar ul.actions-container li.action-item": "margin-top: 0 !important;",
+        ".custom-activitybar div.monaco-workbench div.activitybar > div.content div.monaco-action-bar ul.actions-container li.action-item a.action-label": "width: 48px; height: 48px; font-size: 24px; margin: 0 auto; -webkit-mask-size: 1em;",
+        ".custom-activitybar div.monaco-workbench div.activitybar > div.content div.monaco-action-bar ul.actions-container li.action-item .badge div.badge-content": "top: 24px; right: 8px;",
+        // Don't indent the statusbar items.
+        ".monaco-workbench .part.statusbar>.items-container>.statusbar-item.left.first-visible-item": "padding-left: 0;",
+        // Show the host button, and make it as wide as the .activitybar.
+        ".statusbar #status\\.host": "display: block !important; width: calc(var(--activity-bar-action-size) - 1px); background: [#555](https://github.com/lehni/vscode-titlebar-less-macos/issues/555) !important;",
+        ".statusbar #status\\.host .codicon": "margin: 0 auto;",
+    },
+    "workbench.layoutControl.enabled": false,
+    "code-runner.runInTerminal": true,
+}

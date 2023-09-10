@@ -1,0 +1,3 @@
+-- CONFIGS
+require('impatient')
+

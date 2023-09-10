@@ -1,0 +1,206 @@
+# ################################################################ #
+# THE FOLLOWING IS AN EXPLANATION OF THE GRAMMAR THAT SKHD PARSES. #
+# FOR SIMPLE EXAMPLE MAPPINGS LOOK FURTHER DOWN THIS FILE..        #
+# ################################################################ #
+# A list of all built-in modifier and literal keywords can
+# be found at https://github.com/koekeishiya/skhd/issues/1
+#
+# A hotkey is written according to the following rules:
+#
+#   hotkey       = <mode> '<' <action> | <action>
+#
+#   mode         = 'name of mode' | <mode> ',' <mode>
+#
+#   action       = <keysym> '[' <proc_map_lst> ']' | <keysym> '->' '[' <proc_map_lst> ']'
+#                  <keysym> ':' <command>          | <keysym> '->' ':' <command>
+#                  <keysym> ';' <mode>             | <keysym> '->' ';' <mode>
+#
+#   keysym       = <mod> '-' <key> | <key>
+#
+#   mod          = 'modifier keyword' | <mod> '+' <mod>
+#
+#   key          = <literal> | <keycode>
+#
+#   literal      = 'single letter or built-in keyword'
+#
+#   keycode      = 'apple keyboard kVK_<Key> values (0x3C)'
+#
+#   proc_map_lst = * <proc_map>
+#
+#   proc_map     = <string> ':' <command> | <string>     '~' |
+#                  '*'      ':' <command> | '*'          '~'
+#
+#   string       = '"' 'sequence of characters' '"'
+#
+#   command      = command is executed through '$SHELL -c' and
+#                  follows valid shell syntax. if the $SHELL environment
+#                  variable is not set, it will default to '/bin/bash'.
+#                  when bash is used, the ';' delimeter can be specified
+#                  to chain commands.
+#
+#                  to allow a command to extend into multiple lines,
+#                  prepend '\' at the end of the previous line.
+#
+#                  an EOL character signifies the end of the bind.
+#
+#   ->           = keypress is not consumed by skhd
+#
+#   *            = matches every application not specified in <proc_map_lst>
+#
+#   ~            = application is unbound and keypress is forwarded per usual, when specified in a <proc_map>
+#
+# A mode is declared according to the following rules:
+#
+#   mode_decl = '::' <name> '@' ':' <command> | '::' <name> ':' <command> |
+#               '::' <name> '@'               | '::' <name>
+#
+#   name      = desired name for this mode,
+#
+#   @         = capture keypresses regardless of being bound to an action
+#
+#   command   = command is executed through '$SHELL -c' and
+#               follows valid shell syntax. if the $SHELL environment
+#               variable is not set, it will default to '/bin/bash'.
+#               when bash is used, the ';' delimeter can be specified
+#               to chain commands.
+#
+#               to allow a command to extend into multiple lines,
+#               prepend '\' at the end of the previous line.
+#
+#               an EOL character signifies the end of the bind.
+
+
+#### IMPORTANT
+# Dependencies ->
+# skhd,
+# yabai,
+# dash,
+# jq
+# spaceman
+#
+# Make sure to edit the skhd service/daemon macOS plist xml file for performance.
+# Setting dash as the shell to run skhd & yabai commands.
+# Scroll down to the Plist file relevant for you (either with or without logging) and change like this
+#
+#  <key>EnvironmentVariables</key>
+#  <dict>
+#    <key>PATH</key>
+#    <string>#{HOMEBREW_PREFIX}/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+# +  <key>SHELL</key>
+# +  <string>/bin/dash</string>
+#  </dict>
+#
+#  The path to the plist xml can be found by running "skhd --install-service"
+
+########################################################################
+#                                 CONFIG                             #
+########################################################################
+# General rules and keys defined to integrate seamlessly with my custom TLTR keyboard layout
+#
+# cmd + ctrl + shift + alt -> TL + d - hyper key (meant for popping stuff on the display)
+# cmd + ctrl + alt -> TL + w - window key (meant for window management)
+# fn -> TL + p (function key)
+
+### Application specific keyboard shortcuts (not part of skhdrc; for reference purpose) to be set for (spaceman)
+# ctrl + space - refresh current spaces info
+
+################## Launcher stuff onto the screen ##################
+cmd + ctrl + shift + alt - return : open -a "kitty"
+cmd + ctrl + shift + alt - b      : open -a "waterfox"
+cmd + ctrl + shift + alt - l      : open -a "launchpad"
+# cmd + ctrl + shift + alt - f     : homerow hints
+# cmd + ctrl + shift + alt - r     : homerow scroll
+# cmd + ctrl + shift + alt - space : launches raycast
+# cmd + ctrl + shift + alt - p     : raycast command palatte generated from the help menu
+# cmd + ctrl + shift + alt - w     : raycast list windows
+# launch misson control
+cmd + ctrl + alt - space  : open -a "Mission Control"
+
+################## Window Manipulation ############################
+######### focus window
+# switch focus linear tree active window within a space in both bsp & floating modes
+cmd + ctrl + alt - down  : yabai -m window --focus "$(yabai -m query --windows | jq -re "sort_by(.display, .space, .frame.x, .frame.y, .id) | map(select(.\"is-visible\" == true and .role != \"AXUnknown\")) | reverse | nth(index(map(select(.\"has-focus\" == true))) - 1).id")"
+cmd + ctrl + alt - up    : yabai -m window --focus "$(yabai -m query --windows | jq -re "sort_by(.display, .space, .frame.x, .frame.y, .id) | map(select(.\"is-visible\" == true and .role != \"AXUnknown\")) | nth(index(map(select(.\"has-focus\" == true))) - 1).id")"
+# manoeuvre focus b/w windows when tiled
+cmd + ctrl + alt - u     : yabai -m window --focus north
+cmd + ctrl + alt - n     : yabai -m window --focus west
+cmd + ctrl + alt - e     : yabai -m window --focus south
+cmd + ctrl + alt - i     : yabai -m window --focus east
+
+########### fill window
+# floating window management (must have implemented a numpad layout layer)
+cmd + ctrl + alt - 7     : yabai -m window --grid 2:2:0:0:1:1
+cmd + ctrl + alt - 9     : yabai -m window --grid 2:2:1:0:1:1
+cmd + ctrl + alt - 1     : yabai -m window --grid 2:2:0:1:1:1
+cmd + ctrl + alt - 3     : yabai -m window --grid 2:2:1:1:1:1
+cmd + ctrl + alt - 4     : yabai -m window --grid 1:2:0:0:1:1
+cmd + ctrl + alt - 6     : yabai -m window --grid 1:2:1:0:1:1
+cmd + ctrl + alt - 8     : yabai -m window --grid 2:1:0:0:1:1
+cmd + ctrl + alt - 2     : yabai -m window --grid 2:1:0:1:1:1
+cmd + ctrl + alt - 5     : yabai -m window --grid 1:1:0:0:1:1
+
+########## window positioning
+# window mirroring
+cmd + ctrl + alt - y     : yabai -m space --mirror y-axis
+cmd + ctrl + alt - x     : yabai -m space --mirror x-axis
+# window warping
+# cmd + ctrl + alt - y: yabai -m window --warp east
+# cmd + ctrl + alt - l: yabai -m window --warp north
+# cmd + ctrl + alt - : yabai -m window --warp north
+# cmd + ctrl + alt - : yabai -m window --warp south
+# swap managed window
+# cmd + ctrl + alt - q: yabai -m window --swap east
+# cmd + ctrl + alt - 4 : yabai -m window --swap west
+
+# Send window to desktop and follow focus
+cmd + ctrl + alt - tab          : yabai -m window --space next
+cmd + ctrl + shift + alt - tab  : yabai -m window --space prev
+
+################################# Switching modes ##########################################
+# toggle sticky(+float), topmost, picture-in-picture
+cmd + ctrl + alt - p      : yabai -m window --toggle sticky --toggle topmost --toggle pip
+# float / unfloat window and center on screen
+# cmd + ctrl + alt - space : yabai -m window --toggle float --grid 1:1:0:0:1:1
+# Windowing Layout for current space
+# for toggling b/w bsp & floating modes
+cmd + ctrl + alt - t      : yabai -m space --layout $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')
+
+################################ Desktop/Space Manipulation ##################################
+cmd + ctrl + alt - right  : yabai -m space --focus next; echo "refresh" | cliclick kd:ctrl kp:esc ku:ctrl
+cmd + ctrl + alt - left   : yabai -m space --focus prev; echo "refresh" | cliclick kd:ctrl kp:esc ku:ctrl
+cmd + ctrl + alt - c      : yabai -m space --create; echo "refresh" | cliclick kd:ctrl kp:esc ku:ctrl
+cmd + ctrl + alt - d      : yabai -m space --destroy; echo "refresh" | cliclick kd:ctrl kp:esc ku:ctrl
+
+############################################################################
+#                             Unimplemented Samples                      #
+############################################################################
+# balance size of windows
+# shift + alt - 0 : yabai -m space --balance
+
+# create desktop, move window and follow focus - uses jq for parsing json (brew install jq)
+# shift + cmd - n : yabai -m space --create && \
+#                   index="$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == false))[-1].index')" && \
+#                   yabai -m window --space "${index}" && \
+#                   yabai -m space --focus "${index}"
+
+# move floating window
+# shift + ctrl - a : yabai -m window --move rel:-20:0
+# shift + ctrl - s : yabai -m window --move rel:0:20
+
+# increase window size
+# shift + alt - a : yabai -m window --resize left:-20:0
+# shift + alt - w : yabai -m window --resize top:0:-20
+
+# decrease window size
+# shift + cmd - s : yabai -m window --resize bottom:0:-20
+# shift + cmd - w : yabai -m window --resize top:0:20
+
+# set insertion point in focused container
+# ctrl + alt - h : yabai -m window --insert west
+
+# toggle window zoom
+# alt - d : yabai -m window --toggle zoom-parent
+# alt - f : yabai -m window --toggle zoom-fullscreen
+# toggle window split type
+# alt - e : yabai -m window --toggle split
+

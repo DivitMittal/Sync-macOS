@@ -1,0 +1,45 @@
+.
+..
+.DS_Store
+.Karabiner-VirtualHIDDevice-Manager.app
+.localized
+AlDente.app
+AltTab.app
+Bartender 4.app
+CleanShot X.app
+Docker.app
+ForkLift.app
+Free Download Manager.app
+Hand Mirror.app
+Intel Power Gadget
+JetBrains Toolbox.app
+Karabiner-Elements.app
+Karabiner-EventViewer.app
+Microsoft Edge Dev.app
+Microsoft Excel.app
+Microsoft OneNote.app
+Microsoft PowerPoint.app
+Microsoft Teams.app
+Microsoft Word.app
+Mission Control Plus.app
+Monolingual.app
+Obsidian.app
+OneDrive.app
+Open-with-Nvim.app
+PDF Expert.app
+Raycast.app
+Safari.app
+Syncthing.app
+Syntax Highlight.app
+Tor Browser.app
+Utilities
+Vimac.app
+Visual Studio Code.app
+Wacom Tablet.localized
+Waterfox.app
+WhatsApp.app
+Xcode-14.3.0.app
+Xcodes.app
+gSwitch.app
+iStat Menus.app
+kitty.app

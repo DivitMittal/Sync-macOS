@@ -1,0 +1,77 @@
+[filter "lfs"]
+	smudge        = git-lfs smudge -- %f
+	process       = git-lfs filter-process
+	required      = true
+	clean         = git-lfs clean -- %f
+
+[user]
+	name          = Divit Mittal
+	email         = mittaldivit@gmail.com
+
+[core]
+	editor        = nvim
+	autocrlf      = input
+	ignorecase    = false
+	excludesfile  = ~/.gitignore
+
+[init]
+	defaultBranch = master
+
+[push]
+	default       = simple
+	followTags    = true
+
+[fetch]
+	prune         = true
+
+[grep]
+	lineNumber    = true
+
+[help]
+	autocorrect   = 1
+
+[color]
+	ui            = auto
+
+[color "branch"]
+	current       = yellow reverse
+	local         = yellow
+	remote        = blue
+
+[color "diff"]
+	meta          = yellow bold
+	frag          = magenta bold
+	old           = red bold
+	new           = green bold
+
+[color "status"]
+	added         = yellow
+	changed       = red
+	untracked     = white
+
+[color "diff-highlight"]
+	oldNormal     = red bold
+	oldHighlight  = red bold 52
+	newNormal     = green bold
+	newHighlight  = green bold 22
+
+[alias]
+	last       = log -1 HEAD
+	graph      = log --graph --all --full-history --pretty=format:'%Cred%h%Creset %ad %s %C(yellow)%d%Creset %C(bold blue)<%an>%Creset' --date=short
+	url        = ls-remote --get-url
+	ft         = fetch --all --prune
+	unstage    = restore --staged
+	clean-U-dr = clean -d -x f -n
+	clean-U    = clean -d -x -f
+	reset-HEAD = reset --hard HEAD
+	branches   = branch -a
+	st         = status
+	bcl-dr     = !nu \"/Users/divitmittal/Sync_macOS/Shell-Scripts/nu/gitalias_bcl-dr.nu\"
+	bcl        = !nu \"/Users/divitmittal/Sync_macOS/Shell-Scripts/nu/gitalias_bcl.nu\"
+
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/local/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/local/bin/gh auth git-credential

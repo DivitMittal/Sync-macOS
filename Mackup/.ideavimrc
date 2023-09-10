@@ -1,0 +1,78 @@
+" Adds relative numbers
+set number
+set relativenumber
+
+" Smart IdeaVim Features
+set idearefactormode=keep
+set ideastatusicon
+set ideajoin
+set ideavimsupport
+set ideamarks
+
+" Shows mode of editing at the bottom of the screen
+set showmode
+
+" Turn off annoying bells
+set visualbell
+
+" Copy to system clipboard as well
+set clipboard
+
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Makes regex search for characters typed as far as you type
+set incsearch
+
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader=";"
+
+" Fast saving
+nmap <leader>w :w!<cr>
+
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=5
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Editing mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remap VIM 0 to first non-blank character
+map 0 ^
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+map <leader>r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+map <leader>d <Action>(Debug)
+
+"" Map \b to toggle the breakpoint on the current line
+map <leader>b <Action>(ToggleLineBreakpoint)
+
+" Terminal
+map <leader>T <Action>(ActivateTerminalToolWindow)<cr>
+
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugins
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set sneak
+set multicursor
+Plug 'preservim/nerdtree'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'machakann/vim-highlightedyank'
+Plug 'michaeljsmith/vim-indent-object'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

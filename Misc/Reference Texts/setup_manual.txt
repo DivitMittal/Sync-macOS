@@ -1,0 +1,19 @@
+Battery {
+	Turn off - optimized battery charging
+	Turn off - automatic graphics switching
+}
+
+Display {
+	Scaling - more space
+}
+
+Accessibility {
+    Increase Contrast
+    Change pointer appearance
+}
+
+Keyboard {
+	set keyboard layout to Unicode Hex Input
+	set press fn/globe key to do nothing
+	remove keyboard bindings except for screenshots
+}
