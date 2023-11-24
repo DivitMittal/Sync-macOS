@@ -1,3 +1,0 @@
--- CONFIGS
-require('impatient')
-

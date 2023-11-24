@@ -6,14 +6,13 @@
 #######################################################
 
 # Left prompt format
-format = """
-[ ╭─account─➜⇉❯>](bold blue) $username$sudo$time
-[ ┣─system───➜⇉❯>](bold yellow) $shell$status$cmd_duration$docker_context$hostname
-[ ┣─project──➜⇉❯>](bold red) $directory$git_branch$git_commit$git_status
-[ ╰─cmd─➜⇉❯](bold green) $character
-"""
+format = """[╭─a/c─➜⇉❯>](bold blue) $username$sudo$time
+[┣─sys───➜⇉❯>](bold yellow) $shell$status$cmd_duration$docker_context$hostname
+[┣─proj──➜⇉❯>](bold red) $directory$git_branch$git_commit$git_status
+[╰─cmd─➜⇉❯](bold green) $character"""
+
 # Right prompt format
-right_format = """$lua$rust$java$kotlin$dart$python$golang$swift$nodejs$php$conda${custom.docker}$package """
+right_format = """$lua$rust$java$kotlin$dart$python$golang$swift$nodejs$php$conda${custom.docker}$package"""
 
 # Adds a new line after the prompt
 add_newline = true
@@ -22,8 +21,9 @@ command_timeout = 800
 # Max time for scaning files in the current directory in milliseconds
 scan_timeout = 50
 
+
 # System
-####################################################################
+#######################################################
 
 [character]
 disabled = false
@@ -97,8 +97,9 @@ format = "🔋:$symbol "
 [[battery.display]]
 threshold = 100
 
+
 # Services
-##############################################################################
+#######################################################
 
 [git_commit]
 disabled = true
@@ -132,6 +133,7 @@ disabled = true
 disabled = false
 format = "in [$symbol$environment](dimmed green) "
 ignore_base = true
+
 
 # Programming Languages and Frameworks
 #############################################################################
@@ -167,7 +169,7 @@ disabled = false
 
 [custom.docker]
 disabled = false
-description = "Shows the docker symbol if the current directory has Dockerfile or docker-compose.yml files"
+description = "Shows a  docker symbol if the current directory has Dockerfile or docker-compose.yml files"
 files = ["Dockerfile", "docker-compose.yml", "docker-compose.yaml"]
 symbol = "🐳"
 format = "with $symbol "

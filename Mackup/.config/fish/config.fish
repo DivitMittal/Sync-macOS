@@ -4,12 +4,7 @@ set --erase fish_user_paths
 
 fish_add_path /usr/local/bin
 fish_add_path /usr/local/sbin
-fish_add_path (brew --prefix gcc)/bin #GNU compiler collection
 fish_add_path /System/Library/PrivateFrameworks/Apple80211.framework/Resources #Airport Utility
-
-#fish_add_path (brew --prefix coreutils)/libexec/gnubin
-#fish_add_path (brew --prefix make)/libexec/gnubin
-#fish_add_path /Users/divitmittal/.emacs.d/bin #Doom Emacs
 
 #################################### Setting environment variables ########################################
 # Removes the default fish greeting
@@ -19,15 +14,8 @@ set fish_greeting
 set -x EDITOR "nvim"
 set -x VISUAL "nvim"
 
-# FZF - fuzzy finder
-set -x FZF_DEFAULT_OPTS '--multi --cycle'
-set -x FZF_DEFAULT_COMMAND 'fd --hidden --exclude=.git'
- # set -x FZF_CTRL_T_COMMAND "fd --type f --hidden --exclude=.git"
-set -x FZF_CTRL_T_COMMAND "command find -L \$dir -type f 2> /dev/null | sed '1d; s#^\./##'"
-set -x FZF_ALT_C_COMMAND "fd --type d --hidden --exclude=.git"
-
 ################################################### Aliases #################################################
-# Mapping "ls" to "exa"
+# Mapping "ls" to "eza"
 alias ll='eza -al --icons --color=always --group-directories-first --header' # long format
 alias la='eza -a --icons --color=always --group-directories-first'  # all
 alias ls='eza --icons --color=always --group-directories-first'  # prefered
@@ -40,14 +28,11 @@ alias dt='cd ~/Desktop/'
 alias dl='cd ~/Downloads/'
 alias apps='cd /Applications/'
 
-# Get week number
-alias week-no='date +%V'
-
 # Brew ultimate alias
-alias brew-ultimate='brew update; and brew upgrade; and brew autoremove; and brew cleanup - s; and brew bundle dump --file=~/.Brewfile --force; and rm -rf (brew --cache); and brew cleanup'
+alias brew-ultimate='brew update; and brew upgrade; and brew autoremove; and brew cleanup -s; and brew bundle dump --file=~/.Brewfile --force; and rm -rf (brew --cache); and brew cleanup'
 
 # Enable aliases to be sudo’ed
-alias sudo='sudo '
+alias sudo="sudo "
 
 # Recursively delete `.DS_Store` files
 alias cleanup-DS="find . -type f -name '*.DS_Store' -ls -delete"
@@ -60,30 +45,62 @@ alias empty-trash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo
 alias .2='cd ../..'
 alias .3='cd ../../..'
 
-#######################Addional Language/Software Specific ##############################################
-# Java
+# Utils
+alias nv='nvim'
+
+####################### Additional Language/Software Specific ##############################################
+### Java
+# Java utils
 fish_add_path /usr/local/opt/openjdk/bin
+# compiler flags
 set -gx CPPFLAGS "-I/usr/local/opt/openjdk/include"
 
-# Python
-# Conda - miniconda (python package and environment manager)
-eval /usr/local/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
+## Ruby
+# ruby utils
+fish_add_path /usr/local/opt/ruby/bin
+# Ruby linker & compiler flags
+set -gx LDFLAGS "-L/usr/local/opt/ruby/lib"
+set -gx CPPFLAGS "-I/usr/local/opt/ruby/include"
 
 # Postgresql
-fish_add_path /usr/local/opt/postgresql@15/bin #Postgresql
-set -gx LDFLAGS "-L/usr/local/opt/postgresql@15/lib"
-set -gx CPPFLAGS "-I/usr/local/opt/postgresql@15/include"
+# fish_add_path /usr/local/opt/postgresql@15/bin #Postgresql
+# set -gx LDFLAGS "-L/usr/local/opt/postgresql@15/lib"
+# set -gx CPPFLAGS "-I/usr/local/opt/postgresql@15/include"
+
+# fish_add_path (brew --prefix coreutils)/libexec/gnubin
+# fish_add_path (brew --prefix make)/libexec/gnubin
+# fish_add_path /Users/divitmittal/.emacs.d/bin #Doom Emacs
+# fish_add_path (brew --prefix gcc)/bin #GNU compiler collection
+
+# FZF - fuzzy finder
+set -x FZF_DEFAULT_OPTS '--multi --cycle'
+set -x FZF_DEFAULT_COMMAND 'fd --hidden --exclude=.git'
+ # set -x FZF_CTRL_T_COMMAND "fd --type f --hidden --exclude=.git"
+set -x FZF_CTRL_T_COMMAND "command find -L \$dir -type f 2> /dev/null | sed '1d; s#^\./##'"
+set -x FZF_ALT_C_COMMAND "fd --type d --hidden --exclude=.git" #
 
 ############################## Initializations ########################################################
-# Run Fastfetch (if the current terminal emulator is kitty)
-switch $TERMINFO
-        case "*kitty*"
+# Run Fastfetch
+switch $TERM_PROGRAM
+        case "*WezTerm*"
                 fastfetch
 end
 
-# Starship custom prompt - keep it the last command to run
+# Starship custom prompt
 starship init fish | source
 
 # Zoxide utility
 zoxide init fish | source
+alias c='z'
 
+
+# conda initialize
+if test -f /usr/local/Caskroom/miniconda/base/bin/conda
+    eval /usr/local/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
+else
+    if test -f "/usr/local/Caskroom/miniconda/base/etc/fish/conf.d/conda.fish"
+        . "/usr/local/Caskroom/miniconda/base/etc/fish/conf.d/conda.fish"
+    else
+        set -x PATH "/usr/local/Caskroom/miniconda/base/bin" $PATH
+    end
+end

@@ -69,8 +69,9 @@
 #
 #               an EOL character signifies the end of the bind.
 
-
-#### IMPORTANT
+######################################################################################
+#                                       Important
+######################################################################################
 # Dependencies ->
 # skhd,
 # yabai,
@@ -90,25 +91,28 @@
 # +  <string>/bin/dash</string>
 #  </dict>
 #
-#  The path to the plist xml can be found by running "skhd --install-service"
+# The path to the plist xml can be found by running "skhd --install-service"
+#
 
 ########################################################################
 #                                 CONFIG                             #
 ########################################################################
-# General rules and keys defined to integrate seamlessly with my custom TLTR keyboard layout
+# General rules and keys defined to integrate seamlessly with custom TLTR keyboard layout
 #
-# cmd + ctrl + shift + alt -> TL + d - hyper key (meant for popping stuff on the display)
-# cmd + ctrl + alt -> TL + w - window key (meant for window management)
-# fn -> TL + p (function key)
+# cmd + ctrl + shift + alt or TL + d - hyper key (meant for popping stuff on the display)
+# cmd + ctrl + alt or TL + w - window key (meant for window management)
+# fn or TL + p - function key
 
 ### Application specific keyboard shortcuts (not part of skhdrc; for reference purpose) to be set for (spaceman)
-# ctrl + space - refresh current spaces info
+# ctrl + esc - refresh current spaces info
 
 ################## Launcher stuff onto the screen ##################
-cmd + ctrl + shift + alt - return : open -a "kitty"
-cmd + ctrl + shift + alt - b      : open -a "waterfox"
+cmd + ctrl + shift + alt - t      : open -a "wezterm"
+cmd + ctrl + shift + alt - b      : open -a "floorp"
 cmd + ctrl + shift + alt - l      : open -a "launchpad"
+# cmd + ctrl + shift + alt - return : open -a "iTerm"
 # cmd + ctrl + shift + alt - f     : homerow hints
+# cmd + ctrl + shift + alt - s     : homerow search
 # cmd + ctrl + shift + alt - r     : homerow scroll
 # cmd + ctrl + shift + alt - space : launches raycast
 # cmd + ctrl + shift + alt - p     : raycast command palatte generated from the help menu
@@ -203,4 +207,3 @@ cmd + ctrl + alt - d      : yabai -m space --destroy; echo "refresh" | cliclick 
 # alt - f : yabai -m window --toggle zoom-fullscreen
 # toggle window split type
 # alt - e : yabai -m window --toggle split
-

@@ -83,7 +83,7 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 # defaults delete -g ApplePressAndHoldEnabled
 
 # First key repeat delay, default is 15 (225 ms); 1 = 15ms
-defaults write NSGlobalDomain InitialKeyRepeat -float 17.0
+defaults write -g InitialKeyRepeat -float 17.0
 # or
 # defaults write -g InitialKeyRepeat -float 10.0
 
@@ -293,13 +293,13 @@ defaults write -g NSScrollViewRubberbanding -bool false
 defaults write com.apple.dock autohide -bool true
 
 # To Autohide Menu Bar
-defaults write NSGlobalDomain _HIHideMenuBar -bool true
+# defaults write NSGlobalDomain _HIHideMenuBar -bool true
 
 # Make dock appear instantaneously, if hidden
-defaults write com.apple.dock autohide-delay -float 0
+# defaults write com.apple.dock autohide-delay -float 0
 
 # Disables application bouncing animation
-#defaults write com.apple.dock no-bouncing -bool true
+# defaults write com.apple.dock no-bouncing -bool true
 
 # Don't show recently used applications in the Dock
 defaults write com.Apple.Dock show-recents -bool false
@@ -322,10 +322,10 @@ defaults write com.apple.dock magnification -bool true
 # System Preferences > Dock > Size (magnified):
 defaults write com.apple.dock largesize -int 64
 
-# System Preferences > Dock > Minimize windows using: Scale effect
-defaults write com.apple.dock mineffect -string "scale"
+# System Preferences > Dock > Minimize windows using: Scale effect/Genie effect
+# defaults write com.apple.dock mineffect -string "scale"
 
-# System Preferences > Dock > Minimize windows into application icon
+# System Preferences > Dock > Minimise windows into application icon
 defaults write com.apple.dock minimize-to-application -bool true
 
 # Wipe all (default) app icons from the Dock
@@ -347,7 +347,7 @@ killall Dock
 # Show the main window when launching Activity Monitor
 defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
 
-# Visualize CPU usage in the Activity Monitor Dock icon
+# Visualise CPU usage in the Activity Monitor Dock icon
 defaults write com.apple.ActivityMonitor IconType -int 5
 
 # Show all processes in Activity Monitor
@@ -370,7 +370,7 @@ defaults write com.apple.DiskUtility advanced-image-options -bool true
 # Prevent Photos from opening automatically when devices are plugged in
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
-# Turn Spotlight Off (in case of utilization of alternate tools, eg. Raycast)
+# Turn Spotlight Off (in case of utilisation of alternate tools, eg. Raycast)
 sudo mdutil -a -i off
 # Also, disable all spotlight indexing and add root directory as an exception from System Preferences
 

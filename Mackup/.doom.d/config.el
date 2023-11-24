@@ -72,3 +72,6 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+;; Set bash as the default shell for emacs commands
+(setq shell-file-name (executable-find "bash"))
+

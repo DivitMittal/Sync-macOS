@@ -1,0 +1,30 @@
+AlDente.app
+Floorp.app
+ForkLift.app
+Homerow.app
+JetBrains Toolbox.app
+Karabiner-Elements.app
+Karabiner-EventViewer.app
+LocalSend.app
+Menu Bar Dock.app
+Microsoft Excel.app
+Microsoft OneNote.app
+Microsoft Outlook.app
+Microsoft PowerPoint.app
+Notion.app
+Obsidian.app
+OneDrive.app
+PDF Expert.app
+Raycast.app
+Safari.app
+Spaceman.app
+Spotify.app
+Syntax Highlight.app
+Utilities
+VLC.app
+Visual Studio Code.app
+Wacom Tablet.localized
+WezTerm.app
+WhatsApp.app
+gSwitch.app
+iTerm.app

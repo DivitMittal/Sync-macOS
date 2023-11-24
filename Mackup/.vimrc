@@ -25,6 +25,9 @@ set showmode
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 
+" fzf
+set rtp+=/usr/local/opt/fzf
+
 " Allow backspcae key in insert mode
 set backspace=indent,eol,start
 
@@ -341,4 +344,3 @@ function! VisualSelection(direction, extra_filter) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
-

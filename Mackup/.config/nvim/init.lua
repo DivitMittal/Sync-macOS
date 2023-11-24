@@ -1,27 +1,21 @@
-local g = vim.g -- global vim variable
+require "core"
 
--- ───────────────────────────────────────────────── --
--- ────────────────❰ Leader Mapping ❱─────────────── --
--- mapping leader here. it will work for every mapped
-g.mapleader = ';'
-g.maplocalleader = '|'
--- ───────────────────────────────────────────────── --
+local custom_init_path = vim.api.nvim_get_runtime_file("lua/custom/init.lua", false)[1]
 
--- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ --
--- ━━━━━━━━━━━━━❰ Load/Source Configs ❱━━━━━━━━━━━━━ --
-
-if not g.vscode then
-    -- plugin config to improve start-up time.
-    -- it should be always on top on init.lua file
-    -- require('plugins/impatient_nvim') -- impatient needs to be setup before any other lua plugin is loaded so it is recommended you add the following near the start of your init
-    require('plugins/filetype_nvim') -- Easily speed up your neovim startup time!
+if custom_init_path then
+  dofile(custom_init_path)
 end
 
-require('configs') -- plugin independent configs
-require('mappings') -- plugin independent mappings
+require("core.utils").load_mappings()
 
--- load/source PLUGINS CONFIGS
--- loading plugins and its configs are managed in seperate config file
--- ~/.config/nvim/lua/plugins/packer_nvim.lua
--- NOTE: laways load plugins at last
-require('packer_nvim')
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+
+-- bootstrap lazy.nvim!
+if not vim.loop.fs_stat(lazypath) then
+  require("core.bootstrap").gen_chadrc_template()
+  require("core.bootstrap").lazy(lazypath)
+end
+
+dofile(vim.g.base46_cache .. "defaults")
+vim.opt.rtp:prepend(lazypath)
+require "plugins"
