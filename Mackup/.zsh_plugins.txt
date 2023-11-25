@@ -1,0 +1,13 @@
+# .zsh_plugins.txt
+ohmyzsh/ohmyzsh
+ohmyzsh/ohmyzsh path:plugins/macos
+ohmyzsh/ohmyzsh path:plugins/git
+ohmyzsh/ohmyzsh path:plugins/starship
+ohmyzsh/ohmyzsh path:plugins/zoxide
+ohmyzsh/ohmyzsh path:plugins/vi-mode
+zsh-users/zsh-completions
+zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-autosuggestions
+z-shell/zsh-eza
+hlissner/zsh-autopair
+
