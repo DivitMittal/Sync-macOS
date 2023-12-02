@@ -11,6 +11,7 @@ function fish_user_key_bindings
   # Exits out of the current terminal session
   bind \cd 'exit'
 
+  bind R 'fuck'
   # Copy paste to system clipboard
   bind yy fish_clipboard_copy
   bind p fish_clipboard_paste

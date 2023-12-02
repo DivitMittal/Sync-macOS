@@ -1,3 +1,7 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => IdeaVim RC
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Adds relative numbers
 set number
 set relativenumber
@@ -16,7 +20,7 @@ set showmode
 set visualbell
 
 " Copy to system clipboard as well
-set clipboard
+set clipboard = clipboard + "unnamedplus"
 
 " Ignore case when searching
 set ignorecase
@@ -30,12 +34,7 @@ set hlsearch
 " Makes regex search for characters typed as far as you type
 set incsearch
 
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader=";"
-
-" Fast saving
-nmap <leader>w :w!<cr>
+let mapleader=" "
 
 " Show a few lines of context around the cursor. Note that this makes the
 " text scroll if you mouse-click near the start or end of the window.
@@ -48,31 +47,47 @@ map Q gq
 " => Editing mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remap VIM 0 to first non-blank character
-map 0 ^
+nmap 0 ^
 
-"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
 "" Map \r to the Reformat Code action
-map <leader>r <Action>(ReformatCode)
+nmap <leader>r <Action>(ReformatCode)
 
 "" Map <leader>d to start debug
-map <leader>d <Action>(Debug)
+nmap <leader>d <Action>(Debug)
 
 "" Map \b to toggle the breakpoint on the current line
-map <leader>b <Action>(ToggleLineBreakpoint)
+nmap <leader>b <Action>(ToggleLineBreakpoint)
 
 " Terminal
-map <leader>T <Action>(ActivateTerminalToolWindow)<cr>
+nmap <leader>ht <Action>(ActivateTerminalToolWindow)<cr>
 
-" Find more examples here: https://jb.gg/share-ideavimrc
+" Adjustments for Colemak layout
+nmap U :undo <cr>
+nmap u <Nop>
+nmap R :redo <cr>
+
+" Clear highlighting in search results
+nmap // :nohlsearch <cr>
+
+" Fast saving
+nmap <leader>w :w!<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Installed from JetBrains Plugins store
 set sneak
 set multicursor
+set which-key
+set notimeout
+" Installed from remote repo
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'machakann/vim-highlightedyank'
 Plug 'michaeljsmith/vim-indent-object'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugins Mappings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <CR> :action KJumpAction.Char2<cr>

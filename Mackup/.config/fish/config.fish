@@ -17,8 +17,7 @@ set -x VISUAL "nvim"
 ################################################### Aliases #################################################
 # Mapping "ls" to "eza"
 alias ll='eza -al --icons --color=always --group-directories-first --header' # long format
-alias la='eza -a --icons --color=always --group-directories-first'  # all
-alias ls='eza --icons --color=always --group-directories-first'  # prefered
+alias l='eza -aF -G --icons --color=always --group-directories-first '  # all
 alias lt='eza -aT --icons --level=1 --color=always --group-directories-first' # tree listing
 alias lt2='eza -aT --icons --level=2 --color=always --group-directories-first' # tree listing with depth 2
 alias l.='eza -a | egrep "^\."' # hidden files only
@@ -48,7 +47,7 @@ alias .3='cd ../../..'
 # Utils
 alias nv='nvim'
 
-####################### Additional Language/Software Specific ##############################################
+####################### Additional Programs ##############################################
 ### Java
 # Java utils
 fish_add_path /usr/local/opt/openjdk/bin
@@ -62,6 +61,9 @@ fish_add_path /usr/local/opt/ruby/bin
 set -gx LDFLAGS "-L/usr/local/opt/ruby/lib"
 set -gx CPPFLAGS "-I/usr/local/opt/ruby/include"
 
+# Conda initialize
+eval /usr/local/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
+
 # Postgresql
 # fish_add_path /usr/local/opt/postgresql@15/bin #Postgresql
 # set -gx LDFLAGS "-L/usr/local/opt/postgresql@15/lib"
@@ -72,19 +74,23 @@ set -gx CPPFLAGS "-I/usr/local/opt/ruby/include"
 # fish_add_path /Users/divitmittal/.emacs.d/bin #Doom Emacs
 # fish_add_path (brew --prefix gcc)/bin #GNU compiler collection
 
-# FZF - fuzzy finder
-set -x FZF_DEFAULT_OPTS '--multi --cycle'
-set -x FZF_DEFAULT_COMMAND 'fd --hidden --exclude=.git'
- # set -x FZF_CTRL_T_COMMAND "fd --type f --hidden --exclude=.git"
-set -x FZF_CTRL_T_COMMAND "command find -L \$dir -type f 2> /dev/null | sed '1d; s#^\./##'"
-set -x FZF_ALT_C_COMMAND "fd --type d --hidden --exclude=.git" #
 
-############################## Initializations ########################################################
+############################## Integral Programs ########################################################
 # Run Fastfetch
 switch $TERM_PROGRAM
         case "*WezTerm*"
                 fastfetch
 end
+
+# FZF - fuzzy finder
+set -x FZF_DEFAULT_OPTS '--multi --cycle'
+set -x FZF_DEFAULT_COMMAND 'fd --hidden --exclude=.git'
+#set -x FZF_CTRL_T_COMMAND "fd --type f --hidden --exclude=.git"
+set -x FZF_CTRL_T_COMMAND "command find -L \$dir -type f 2> /dev/null | sed '1d; s#^\./##'"
+set -x FZF_ALT_C_COMMAND "fd --type d --hidden --exclude=.git" #
+
+# GRC - generic colouriser
+source (brew --prefix)/etc/grc.fish
 
 # Starship custom prompt
 starship init fish | source
@@ -93,14 +99,3 @@ starship init fish | source
 zoxide init fish | source
 alias c='z'
 
-
-# conda initialize
-if test -f /usr/local/Caskroom/miniconda/base/bin/conda
-    eval /usr/local/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
-else
-    if test -f "/usr/local/Caskroom/miniconda/base/etc/fish/conf.d/conda.fish"
-        . "/usr/local/Caskroom/miniconda/base/etc/fish/conf.d/conda.fish"
-    else
-        set -x PATH "/usr/local/Caskroom/miniconda/base/bin" $PATH
-    end
-end
