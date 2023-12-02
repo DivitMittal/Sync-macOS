@@ -40,6 +40,7 @@ Desktop & Dock {
 	Widget Style - monochrome
 	Use iPhone widgets - OFF
 	Prefer tabs when opening documents - Always
+	Hot Corners - setup accordingly
 }
 
 Keyboard {
@@ -48,3 +49,4 @@ Keyboard {
 	remove keyboard bindings except for screenshots
 	customize touchbar
 }
+
