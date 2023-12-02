@@ -1,6 +1,7 @@
-![dotfiles-logo](./assets/dotfiles.svg)
-# ~/.dotfiles
-These are my dotfiles, preferences files, config files, shell scripts, etc., predominantly for macOS, but can also be used for any other POSIX-compliant OS.
+<p align="center"><img src="./assets/dotfiles.svg" alt="dotfiles-logo" height="100px" width="100px"/></p>
 
-## Highlights
-* Makes use of Mackup to synchronize files and directories
+# ~/.dotfiles</h2>
+These are dotfiles, pref. files, config. files, shell scripts, etc., predominantly for macOS, but can also be utilized for any other POSIX-compliant OS.
+
+## [0] Dependencies
+* Mackup - as dotfiles manager
