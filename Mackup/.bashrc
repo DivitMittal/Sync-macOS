@@ -1,36 +1,57 @@
-# User configuration
+#!/usr/local/bin/bash
+##########################################################################################################
+# Variables & Environment Variables (exported variables to child processes)
+##########################################################################################################
+## Variables
+brew_prefix=$(brew --prefix)
+
+## Environment Variables
 export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
 export LANG=en_US.UTF-8
-
+export TERM="xterm-256color"
+export BASH_SILENCE_DEPRECATION_WARNING=1
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='nvim'
-else
   export EDITOR='vim'
+else
+  export EDITOR='nvim'
 fi
-
+export VISUAL='nvim'
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
+## PATH environment variable
+# Homebrew paths
+export PATH="$brew_prefix/bin:$brew_prefix/sbin:$PATH"
+
+##########################################################################################################
 # Aliases
+##########################################################################################################
+# Utilities
 alias nv="nvim"
+alias ls="ls -aF"
+alias ll="ls -lbhHigUmuSa"
 
-#Display colors properly
-export TERM="xterm-256color"
+# Directory shortcuts
+alias dt='cd ~/Desktop/'
+alias dl='cd ~/Downloads/'
+alias apps='cd /Applications/'
 
-# Silence bash deprecated warning
-export BASH_SILENCE_DEPRECATION_WARNING=1
+##########################################################################################################
+# Initializations
+##########################################################################################################
+# Run if current shell is interactive
+if [[ $- == *i* ]]; then
+    # vi key bindings
+    set -o vi
 
-# fzf - fuzzy finder for bash
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+    # Bash completions
+    [[ -r "$brew_prefix/etc/profile.d/bash_completion.sh" ]] && . "$brew_prefix/etc/profile.d/bash_completion.sh"
 
-# vi key bindings
-set -o vi
+    # Starship - CLI prompt
+    eval "$(starship init bash)"
 
-# Bash completions
-[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+    # broot - terminal file explorer
+    source ~/.config/broot/launcher/bash/br
+fi
 
-# Starship prompt
-eval "$(starship init bash)"

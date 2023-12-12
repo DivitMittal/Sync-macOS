@@ -1,4 +1,3 @@
 changeps1: false
 channels:
-  - conda-forge
   - defaults

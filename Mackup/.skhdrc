@@ -110,7 +110,7 @@
 cmd + ctrl + shift + alt - t      : open -a "wezterm"
 cmd + ctrl + shift + alt - b      : open -a "floorp"
 cmd + ctrl + shift + alt - l      : open -a "launchpad"
-# cmd + ctrl + shift + alt - return : open -a "iTerm"
+cmd + ctrl + shift + alt - return : open -a "Finder"
 # cmd + ctrl + shift + alt - f     : homerow hints
 # cmd + ctrl + shift + alt - s     : homerow search
 # cmd + ctrl + shift + alt - r     : homerow scroll

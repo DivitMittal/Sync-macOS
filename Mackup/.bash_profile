@@ -33,3 +33,6 @@ export SHORT_USER=${USER:0:8}
 # Uncomment this to set.
 export SHORT_TERM_LINE=true
 
+# Bash completion directory variable
+export BASH_COMPLETION_COMPAT_DIR=/usr/local/etc/bash_completion.d
+

@@ -1,5 +1,5 @@
 local wezterm = require 'wezterm';
-local act = wezterm.action
+-- local act = wezterm.action
 
 -- Tab title string
 local function basename(s)
@@ -33,7 +33,7 @@ local config = {
         cursor_fg  = 'silver',
         cursor_border = 'silver',
     },
-    default_cursor_style = 'SteadyBlock',
+    default_cursor_style = 'SteadyBar',
     hide_tab_bar_if_only_one_tab = true,
     initial_cols = 100,
     initial_rows = 40,

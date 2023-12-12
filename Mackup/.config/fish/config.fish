@@ -1,101 +1,133 @@
-################################### ADDING TO THE PATH ####################################################
+#!/usr/local/bin/fish
+####################### Adding to the PATH environment variable ###############################
 # Delete all previous paths in current fish terminal session
 set --erase fish_user_paths
 
-fish_add_path /usr/local/bin
-fish_add_path /usr/local/sbin
-fish_add_path /System/Library/PrivateFrameworks/Apple80211.framework/Resources #Airport Utility
+#################################### Setting variables ########################################
+## Fish variables
+set -g fish_greeting ""
+set -l brew_prefix (brew --prefix)
 
-#################################### Setting environment variables ########################################
-# Removes the default fish greeting
-set fish_greeting
-
-# Sets the default editor to neovim
-set -x EDITOR "nvim"
-set -x VISUAL "nvim"
-
-################################################### Aliases #################################################
-# Mapping "ls" to "eza"
-alias ll='eza -al --icons --color=always --group-directories-first --header' # long format
-alias l='eza -aF -G --icons --color=always --group-directories-first '  # all
-alias lt='eza -aT --icons --level=1 --color=always --group-directories-first' # tree listing
-alias lt2='eza -aT --icons --level=2 --color=always --group-directories-first' # tree listing with depth 2
-alias l.='eza -a | egrep "^\."' # hidden files only
-
-# Directory shortcuts
-alias dt='cd ~/Desktop/'
-alias dl='cd ~/Downloads/'
-alias apps='cd /Applications/'
-
-# Brew ultimate alias
-alias brew-ultimate='brew update; and brew upgrade; and brew autoremove; and brew cleanup -s; and brew bundle dump --file=~/.Brewfile --force; and rm -rf (brew --cache); and brew cleanup'
-
-# Enable aliases to be sudo’ed
-alias sudo="sudo "
-
-# Recursively delete `.DS_Store` files
-alias cleanup-DS="find . -type f -name '*.DS_Store' -ls -delete"
-
-# Empty the Trash on all mounted volumes and the main HDD.
-# Also, clear Apple’s System Logs to improve shell startup speed.
-alias empty-trash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
-
-# Navigation
-alias .2='cd ../..'
-alias .3='cd ../../..'
-
-# Utils
-alias nv='nvim'
-
-####################### Additional Programs ##############################################
-### Java
-# Java utils
-fish_add_path /usr/local/opt/openjdk/bin
-# compiler flags
-set -gx CPPFLAGS "-I/usr/local/opt/openjdk/include"
-
-## Ruby
-# ruby utils
-fish_add_path /usr/local/opt/ruby/bin
-# Ruby linker & compiler flags
-set -gx LDFLAGS "-L/usr/local/opt/ruby/lib"
-set -gx CPPFLAGS "-I/usr/local/opt/ruby/include"
-
-# Conda initialize
-eval /usr/local/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
-
-# Postgresql
-# fish_add_path /usr/local/opt/postgresql@15/bin #Postgresql
-# set -gx LDFLAGS "-L/usr/local/opt/postgresql@15/lib"
-# set -gx CPPFLAGS "-I/usr/local/opt/postgresql@15/include"
-
-# fish_add_path (brew --prefix coreutils)/libexec/gnubin
-# fish_add_path (brew --prefix make)/libexec/gnubin
-# fish_add_path /Users/divitmittal/.emacs.d/bin #Doom Emacs
-# fish_add_path (brew --prefix gcc)/bin #GNU compiler collection
-
-
-############################## Integral Programs ########################################################
-# Run Fastfetch
-switch $TERM_PROGRAM
-        case "*WezTerm*"
-                fastfetch
+if status --is-interactive
+    # Emulates vim's cursor shape behavior
+    set -g fish_vi_force_cursor 1
+    # Set the normal and visual mode cursors to a block
+    set -g fish_cursor_default block
+    # Set the insert mode cursor to a line
+    set -g fish_cursor_insert line
+    # Set the replace mode cursor to an underscore
+    set -g fish_cursor_replace_one underscore
+    # The following variable can be used to configure cursor shape in
+    # visual mode, but due to fish_cursor_default, is redundant here
+    set -g fish_cursor_visual block
 end
 
-# FZF - fuzzy finder
-set -x FZF_DEFAULT_OPTS '--multi --cycle'
-set -x FZF_DEFAULT_COMMAND 'fd --hidden --exclude=.git'
-#set -x FZF_CTRL_T_COMMAND "fd --type f --hidden --exclude=.git"
-set -x FZF_CTRL_T_COMMAND "command find -L \$dir -type f 2> /dev/null | sed '1d; s#^\./##'"
-set -x FZF_ALT_C_COMMAND "fd --type d --hidden --exclude=.git" #
+## Environment Variables
+set -gx EDITOR "nvim"
+set -gx VISUAL "nvim"
 
-# GRC - generic colouriser
-source (brew --prefix)/etc/grc.fish
+# Homebrew paths
+fish_add_path $brew_prefix/bin
+fish_add_path $brew_prefix/sbin
 
-# Starship custom prompt
-starship init fish | source
+################################## Additional Programs ##############################################
+## Update macOS default utilities
+# GNU utils
+fish_add_path $brew_prefix/opt/coreutils/libexec/gnubin #GNU coreutils (cd, env, ls, test, type, etc.)
+fish_add_path $brew_prefix/opt/findutils/libexec/gnubin #GNU findutils(find, xargs, locate)
+fish_add_path $brew_prefix/opt/binutils/bin #GNU binutils(ar, elfedit, sysdump, size, etc.)
+fish_add_path $brew_prefix/opt/gnu-sed/libexec/gnubin #GNU sed
+fish_add_path $brew_prefix/opt/ed/bin; alias ed 'ged'; alias red 'gred'; #GNU ed(ed & red)
+fish_add_path $brew_prefix/opt/grep/libexec/gnubin #GNU grep(grep, egrep, fgrep)
+fish_add_path $brew_prefix/opt/gnu-indent/libexec/gnubin #GNU indent
+fish_add_path $brew_prefix/opt/gnu-which/libexec/gnubin #GNU which
+fish_add_path $brew_prefix/opt/gnu-tar/libexec/gnubin #GNU tar
+fish_add_path $brew_prefix/opt/gawk/libexec/gnubin #GNU awk
+fish_add_path $brew_prefix/opt/make/libexec/gnubin #GNU make
+fish_add_path $brew_prefix/opt/gcc/bin #GNU compiler collection
+fish_add_path $brew_prefix/opt/m4/bin #GNU m4
+fish_add_path $brew_prefix/opt/curl/bin #GNU curl
+# Other utils
+fish_add_path $brew_prefix/opt/zip/bin #Info-Zip zip
+fish_add_path $brew_prefix/opt/flex/bin #westes/flex
 
-# Zoxide utility
-zoxide init fish | source
-alias c='z'
+## Ruby
+fish_add_path $brew_prefix/opt/ruby/bin
+
+## Java
+fish_add_path $brew_prefix/opt/openjdk/bin
+
+## Python
+# conda initialize
+eval /usr/local/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
+
+## Postgresql
+fish_add_path $brew_prefix/opt/postgresql@14/bin
+
+if status --is-interactive
+    fish_add_path ~/.config/emacs/bin #Doom Emacs
+    fish_add_path /System/Library/PrivateFrameworks/Apple80211.framework/Resources #Airport Utility
+
+    # fifc plugin environment variables
+    set -gx fifc_editor nvim
+    set -gx fifc_fd_opts --hidden
+    set -gx fifc_bat_opts --style=numbers
+    set -gx fifc_exa_opts --all --classify --icons --oneline --group-directories-first --group
+
+    # PatrickF1/fzf.fish plugin environment variables
+    set -gx fzf_fd_opts --hidden
+    set -gx fzf_preview_dir_cmd eza --all --color=always --icons=always --classify --group-directories-first --group --hyperlink --color-scale --color-scale-mode=gradient
+end
+
+
+############################################ Aliases #################################################
+if status --is-interactive
+    # Mapping "ls" to "eza"
+    set -l eza_params "--all" "--classify" "--icons=always" "--group-directories-first" "--color=always" "--color-scale" "--color-scale-mode=gradient" "--hyperlink"
+    alias ll "eza -lbhHigUmuSa@ $eza_params"
+    alias lt "eza -T --level=2 $eza_params" # tree listing with depth 2
+    alias ls "eza $eza_params"
+
+    # Directory shortcuts
+    alias dt 'cd ~/Desktop/'
+    alias dl 'cd ~/Downloads/'
+    alias apps 'cd /Applications/'
+
+    # Brew ultimate alias
+    alias brew-ultimate 'brew update; and brew upgrade; and brew autoremove; and brew cleanup -s; and brew bundle dump --file=~/.Brewfile --force; and rm -rf (brew --cache); and brew cleanup'
+
+    # Enable aliases to be sudo’ed
+    alias sudo "sudo "
+
+    # Recursively delete `.DS_Store` files
+    alias cleanup-DS "sudo find . -type f -name '*.DS_Store' -ls -delete"
+
+    # Empty the Trash on all mounted volumes and the main HDD.& clear Apple’s System Logs
+    alias empty-trash "sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
+
+    # Navigation
+    alias .2 'cd ../..'
+    alias .3 'cd ../../..'
+
+    # Command-line utilities
+    alias nv 'nvim'
+end
+
+####################################### Initializations ###############################################
+if status --is-interactive
+    # Run Fastfetch
+    if type -q fastfetch && test "$TERM_PROGRAM" = "WezTerm"
+        fastfetch
+    end
+
+    # Starship custom prompt
+    if type -q starship
+        starship init fish | source
+    end
+
+    # Zoxide utility
+    if type -q zoxide
+        zoxide init fish | source
+    end
+end
 
