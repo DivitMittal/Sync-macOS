@@ -56,4 +56,14 @@ M.nvimtree = {
   },
 }
 
+-- change nvim-cmp mappings
+local cmp = require "cmp"
+M.nvimcmp = {
+  mapping = {
+    ["<Up>"] = cmp.mapping.select_prev_item(),
+    ["<Down>"] = cmp.mapping.select_next_item(),
+  }
+}
+
 return M
+

@@ -25,6 +25,7 @@ end
 ## Environment Variables
 set -gx EDITOR "nvim"
 set -gx VISUAL "nvim"
+set -gx HOMEBREW_NO_ENV_HINTS 1
 
 # Homebrew paths
 fish_add_path $brew_prefix/bin
@@ -94,7 +95,7 @@ if status --is-interactive
     alias apps 'cd /Applications/'
 
     # Brew ultimate alias
-    alias brew-ultimate 'brew update; and brew upgrade; and brew autoremove; and brew cleanup -s; and brew bundle dump --file=~/.Brewfile --force; and rm -rf (brew --cache); and brew cleanup'
+    alias brew-ultimate 'brew update; and brew upgrade; and brew autoremove; and brew cleanup -s --prune=0; and brew bundle dump --file=~/.Brewfile --force; and rm -rf (brew --cache)'
 
     # Enable aliases to be sudo’ed
     alias sudo "sudo "

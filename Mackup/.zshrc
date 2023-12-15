@@ -3,7 +3,7 @@
 # Variables & Environment variables (variables exported to child processes)
 ################################################################################################################################################
 ## Variables
-brew_prefix=$(brew --prefix)
+brew_prefix="/usr/local"
 
 ## Environment variables
 export MANPATH="/usr/local/man:$MANPATH"

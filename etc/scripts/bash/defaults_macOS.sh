@@ -200,7 +200,7 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 
 # Display full POSIX path as Finder window title
-# defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 
 # Finder: Show path bar
 # defaults write com.apple.finder ShowPathbar -bool true

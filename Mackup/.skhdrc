@@ -88,7 +88,7 @@
 #    <key>PATH</key>
 #    <string>#{HOMEBREW_PREFIX}/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
 # +  <key>SHELL</key>
-# +  <string>/bin/dash</string>
+# +  <string>/usr/local/bin/dash</string>
 #  </dict>
 #
 # The path to the plist xml can be found by running "skhd --install-service"

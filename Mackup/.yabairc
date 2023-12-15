@@ -17,7 +17,7 @@
 #    <key>PATH</key>
 #    <string>#{HOMEBREW_PREFIX}/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
 # +  <key>SHELL</key>
-# +  <string>/bin/dash</string>
+# +  <string>/usr/local/bin/dash</string>
 #  </dict>
 #
 #  The path to the plist xml can be found by running "yabai --install-service"
@@ -81,6 +81,7 @@ yabai -m rule --add app="^JetBrains Toolbox$" manage=off
 yabai -m rule --add app="^Karabiner-Elements$" manage=off border=off
 yabai -m rule --add app="^Karabiner-EventViewer$" manage=off border=off
 yabai -m rule --add app="^Karabiner-NotificatonWindow$" manage=off border=off
+# Transparent apps
 yabai -m rule --add app="^Code$" opacity=0.97
 yabai -m rule --add app="^IntelliJ IDEA$" opacity=0.97
 yabai -m rule --add app="^CLion$" opacity=0.97
@@ -88,6 +89,9 @@ yabai -m rule --add app="^DataSpell$" opacity=0.97
 yabai -m rule --add app="^DataGrip$" opacity=0.97
 yabai -m rule --add app="^WebStorm$" opacity=0.97
 yabai -m rule --add app="^Notion$" opacity=0.97
+yabai -m rule --add app="^Obsidian$" opacity=0.97
+yabai -m rule --add app="^Finder$" opacity=0.97
+yabai -m rule --add app="^Forklift$" opacity=0.97
 yabai -m rule --add app="^Calculator$" sticky=on
 
 echo "yabai configuration loaded.."

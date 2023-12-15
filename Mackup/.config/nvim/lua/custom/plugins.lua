@@ -41,6 +41,12 @@ local plugins = {
     opts = overrides.nvimtree,
   },
 
+  {
+    "hrsh7th/nvim-cmp",
+    enabled = true,
+    opts = overrides.nvimcmp,
+  },
+
   -- ----------------------------------------------------------- --
   --                   Custom Plugins
   -- ----------------------------------------------------------- --
