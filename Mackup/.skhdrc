@@ -73,11 +73,13 @@
 #                                       Important
 ######################################################################################
 # Dependencies ->
-# skhd,
-# yabai,
-# dash,
+# skhd
+# yabai
+# dash
 # jq
 # spaceman
+# hammerspoon
+# cliclick
 #
 # Make sure to edit the skhd service/daemon macOS plist xml file for performance.
 # Setting dash as the shell to run skhd & yabai commands.
@@ -117,8 +119,7 @@ cmd + ctrl + shift + alt - return : open -a "Finder"
 # cmd + ctrl + shift + alt - space : launches raycast
 # cmd + ctrl + shift + alt - p     : raycast command palatte generated from the help menu
 # cmd + ctrl + shift + alt - w     : raycast list windows
-# launch misson control
-cmd + ctrl + alt - space  : open -a "Mission Control"
+cmd + ctrl + alt - space  : open -a "Mission Control" # launch misson control
 
 ################## Window Manipulation ############################
 ######### focus window
@@ -170,10 +171,14 @@ cmd + ctrl + alt - p      : yabai -m window --toggle sticky --toggle topmost --t
 cmd + ctrl + alt - t      : yabai -m space --layout $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')
 
 ################################ Desktop/Space Manipulation ##################################
-cmd + ctrl + alt - right  : yabai -m space --focus next; echo "refresh" | cliclick kd:ctrl kp:esc ku:ctrl
-cmd + ctrl + alt - left   : yabai -m space --focus prev; echo "refresh" | cliclick kd:ctrl kp:esc ku:ctrl
-cmd + ctrl + alt - c      : yabai -m space --create; echo "refresh" | cliclick kd:ctrl kp:esc ku:ctrl
-cmd + ctrl + alt - d      : yabai -m space --destroy; echo "refresh" | cliclick kd:ctrl kp:esc ku:ctrl
+# cmd + ctrl + alt - right  : yabai -m space --focus next; echo "refresh" | cliclick kd:ctrl kp:esc ku:ctrl
+# cmd + ctrl + alt - left   : yabai -m space --focus prev; echo "refresh" | cliclick kd:ctrl kp:esc ku:ctrl
+# cmd + ctrl + alt - c      : yabai -m space --create; echo "refresh" | cliclick kd:ctrl kp:esc ku:ctrl
+# cmd + ctrl + alt - d      : yabai -m space --destroy; echo "refresh" | cliclick kd:ctrl kp:esc ku:ctrl
+cmd + ctrl + alt - right  : hs -c "GoNextSpace()"; sleep 0.5; cliclick kd:ctrl kp:esc ku:ctrl
+cmd + ctrl + alt - left   : hs -c "GoPrevSpace()"; sleep 0.5; cliclick kd:ctrl kp:esc ku:ctrl
+cmd + ctrl + alt - d      : hs -c "RemoveCurrentSpace()"; sleep 0.5; cliclick kd:ctrl kp:esc ku:ctrl
+cmd + ctrl + alt - c      : hs -c "AddSpace()"; sleep 0.5; cliclick kd:ctrl kp:esc ku:ctrl
 
 ############################################################################
 #                             Unimplemented Samples                      #

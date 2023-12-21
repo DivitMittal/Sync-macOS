@@ -1,8 +1,8 @@
-# .bash_profile -*- mode: sh -*-
+# .zprofile -*- mode: sh -*-
 
 # Load interactive settings
-if [[ -f $HOME/.bashrc ]]; then
-  source $HOME/.bashrc
+if [[ -f $HOME/.zshrc ]]; then
+  source $HOME/.zshrc
 fi
 
 # Place for hosting Git repos

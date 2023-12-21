@@ -1,19 +1,20 @@
-#!/usr/local/bin/zsh
+#!/usr/bin/env zsh
 ################################################################################################################################################
 # Variables & Environment variables (variables exported to child processes)
 ################################################################################################################################################
 ## Variables
 brew_prefix="/usr/local"
+PROMPT="%1~ %# "
 
 ## Environment variables
 export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
 export TERM="xterm-256color"
-# Preferred editor for local and remote sessions
+# Preferred editor for remote and local sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+    export EDITOR='vim'
 else
-  export EDITOR='nvim'
+    export EDITOR='nvim'
 fi
 export VISUAL='nvim'
 # Compilation flags
@@ -21,7 +22,7 @@ export ARCHFLAGS="-arch x86_64"
 
 ## PATH environment variable
 # Homebrew paths
-export PATH="$brew_prefix/bin:$brew_prefix/sbin:$PATH"
+export PATH="$PATH:$brew_prefix/bin:$brew_prefix/sbin"
 
 ################################################################################################################################################
 # Antidote - zsh plugin manager
@@ -32,7 +33,7 @@ antidote load
 ################################################################################################################################################
 # Oh-my-zsh - zsh framework & plugin manager, also a dependency for many of the plugins instlled via Antidote
 ################################################################################################################################################
-export ZSH="/Users/div/Library/Caches/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh"
+export ZSH="$HOME/Library/Caches/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh"
 plugins=()
 
 ################################################################################################################################################
@@ -46,9 +47,8 @@ alias ll='eza -lbhHigUmuSa@ $eza_params'
 alias lt='eza --tree --level=2 $eza_params'
 
 # Directory shortcuts
-alias dt='cd ~/Desktop/'
-alias dl='cd ~/Downloads/'
-alias apps='cd /Applications/'
+alias dt="cd $HOME/Desktop/"
+alias dl="cd $HOME/Downloads/"
 
 ################################################################################################################################################
 # Additional Programs
@@ -56,6 +56,8 @@ alias apps='cd /Applications/'
 # Run if current shell is interactive
 if [[ -o interactive ]]; then
     # broot - terminal file explorer
-    source ~/.config/broot/launcher/bash/br
+    if type broot &> /dev/null; then
+      source $HOME/.config/broot/launcher/bash/br
+    fi
 fi
 

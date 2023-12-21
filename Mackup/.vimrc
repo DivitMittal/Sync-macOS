@@ -1,14 +1,21 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Custom Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Mapping of escape key in all modes
-"inoremap qi <Esc>
-"noremap qi <Esc>
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = " "
+" sets timeout for discrete keymappings
+set tm=500
+
+" keymappings for accomodating the colemak layout
+nnoremap U <cmd>undo<cr>
+nnoremap R <cmd>redo<cr>
+nnoremap u <nop>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Make Vim more useful
+" Make Vim more usefula
 set nocompatible
 
 " Set line numbers
@@ -16,8 +23,8 @@ set number
 set relativenumber
 
 " Set cursor highlighting
-set cursorline
-set cursorcolumn
+" set cursorline
+" set cursorcolumn
 
 " Show editing mode
 set showmode
@@ -26,7 +33,7 @@ set showmode
 set clipboard=unnamed
 
 " fzf
-set rtp+=/usr/local/opt/fzf
+" set rtp+=/usr/local/bin/fzf
 
 " Allow backspcae key in insert mode
 set backspace=indent,eol,start
@@ -50,13 +57,6 @@ filetype indent on
 " Set to auto read when a file is changed from the outside
 set autoread
 au FocusGained,BufEnter * checktime
-
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = ";"
-
-" Fast saving
-nmap <leader>w :w!<cr>
 
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
@@ -118,24 +118,21 @@ set belloff=all
 " No annoying sound on errors
 set noerrorbells
 set novisualbell
-set tm=500
 
-" Add a bit extra margin to the left
-set foldcolumn=1
+" Adds margin to the left
+set foldcolumn=0
 
 " Don’t reset cursor to start of line when moving around.
 set nostartofline
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Colors and Fonts
+" => Formatting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
 syntax enable
 
 " Enable 256 colors palette in Gnome Terminal
-if $COLORTERM == 'gnome-terminal'
-    set t_Co=256
-endif
+set t_Co=256
 
 try
     colorscheme default
@@ -149,6 +146,25 @@ set encoding=utf8
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
+
+" Use a line cursor within insert mode and a block cursor everywhere else.
+"
+" Reference chart of values:
+"   Ps = 0  -> blinking block.
+"   Ps = 1  -> blinking block (default).
+"   Ps = 2  -> steady block.
+"   Ps = 3  -> blinking underline.
+"   Ps = 4  -> steady underline.
+"   Ps = 5  -> blinking bar (xterm).
+"   Ps = 6  -> steady bar (xterm).
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
+" Always show the status line
+set laststatus=2
+
+" Format the status line
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
@@ -231,24 +247,13 @@ endtry
 " Return to last edit position when opening files (You want this!)
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-""""""""""""""""""""""""""""""
-" => Status line
-""""""""""""""""""""""""""""""
-" Always show the status line
-set laststatus=2
-
-" Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remap VIM 0 to first non-blank character
-map 0 ^
-
 " Move lines up and down in visual mode
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
+vnoremap <M-Up> :m '>+1<CR>gv=gv
+vnoremap <M-Down> :m '<-2<CR>gv=gv
 
 " Delete trailing white space on save, useful for some filetypes ;)
 fun! CleanExtraSpaces()

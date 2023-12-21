@@ -1,19 +1,22 @@
--- Wait time for mission control in seconds to perform certain functions
-hs.spaces.MCwaitTime = 0.275
+local ipc    = require("hs.ipc")
+local timer  = require("hs.timer")
+local spaces = require("hs.spaces")
 
--- start of switchSpaces
+------------------------------------------ start of switchSpaces
+-- Wait time for mission control in seconds to perform certain functions
+local mcWaitTime = 0.275
+-- spaces.MCwaitTime = mcWaitTime
 
 local function getAllSpaceIDs()
-    local spaces = hs.spaces.allSpaces()
     local spaceIDs = {}
-    for _, space in pairs(spaces) do
+    for _, space in pairs(spaces.allSpaces()) do
         table.insert(spaceIDs, space)
     end
     return spaceIDs[1]
 end
 
 local function getCurrentSpaceID()
-    local tspace = hs.spaces.activeSpaces()
+    local tspace = spaces.activeSpaces()
     for _, space in pairs(tspace) do
         return space
     end
@@ -40,22 +43,49 @@ local function getPreviousSpaceID()
     end
 end
 
--- end of switchSpaces
-
-local windowKey = {"cmd", "alt", "ctrl"}
-
--- Keybindings
-hs.hotkey.bind(windowKey, "right", function()
+function GoNextSpace()
     local nextSpaceID = getNextSpaceID()
     if nextSpaceID then
-        hs.spaces.gotoSpace(nextSpaceID)
+        spaces.gotoSpace(nextSpaceID)
     end
-end)
+end
 
-hs.hotkey.bind(windowKey, "left", function()
+function GoPrevSpace()
     local previousSpaceID = getPreviousSpaceID()
     if previousSpaceID then
-        hs.spaces.gotoSpace(previousSpaceID)
+        spaces.gotoSpace(previousSpaceID)
     end
-end)
+end
+
+function RemoveCurrentSpace()
+    local toRemoveSpaceID = getCurrentSpaceID()
+    GoPrevSpace()
+    timer.doAfter(mcWaitTime, function()
+        spaces.removeSpace(toRemoveSpaceID)
+    end)
+end
+
+function AddSpace()
+    spaces.addSpaceToScreen()
+end
+
+-------------------------------------- end of switchSpaces
+
+-- Keybindings
+-- local windowKey = {"cmd", "alt", "ctrl"}
+--
+-- hs.hotkey.bind(windowKey, "right", function()
+--     local nextSpaceID = getNextSpaceID()
+--     if nextSpaceID then
+--         hs.spaces.gotoSpace(nextSpaceID)
+--     end
+-- end)
+--
+-- hs.hotkey.bind(windowKey, "left", function()
+--     local previousSpaceID = getPreviousSpaceID()
+--     if previousSpaceID then
+--         hs.spaces.gotoSpace(previousSpaceID)
+--     end
+-- end)
+--
 

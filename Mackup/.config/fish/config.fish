@@ -6,7 +6,7 @@ set --erase fish_user_paths
 #################################### Setting variables ########################################
 ## Fish variables
 set -g fish_greeting ""
-set -l brew_prefix (brew --prefix)
+set -l brew_prefix "/usr/local"
 
 if status --is-interactive
     # Emulates vim's cursor shape behavior
@@ -92,7 +92,6 @@ if status --is-interactive
     # Directory shortcuts
     alias dt 'cd ~/Desktop/'
     alias dl 'cd ~/Downloads/'
-    alias apps 'cd /Applications/'
 
     # Brew ultimate alias
     alias brew-ultimate 'brew update; and brew upgrade; and brew autoremove; and brew cleanup -s --prune=0; and brew bundle dump --file=~/.Brewfile --force; and rm -rf (brew --cache)'
