@@ -4,7 +4,7 @@
 ##########################################################################################################
 ## Variables
 brew_prefix='/usr/local'
-PROMPT="%1~ %# "
+PS1="%~ %# "
 
 ## Environment Variables
 export MANPATH="/usr/local/man:$MANPATH"

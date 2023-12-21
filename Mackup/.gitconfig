@@ -10,6 +10,7 @@
 
 [core]
 	editor        = nvim
+	pager		  = delta
 	autocrlf      = input
 	ignorecase    = false
 	excludesfile  = ~/.gitignore
@@ -29,6 +30,9 @@
 
 [help]
 	autocorrect   = 1
+
+[merge]
+	conflictstyle = diff3
 
 [color]
 	ui            = auto
@@ -69,9 +73,20 @@
 	bcl-dr     = !nu \"/Users/divitmittal/Sync_macOS/Shell-Scripts/nu/gitalias_bcl-dr.nu\"
 	bcl        = !nu \"/Users/divitmittal/Sync_macOS/Shell-Scripts/nu/gitalias_bcl.nu\"
 
+[interactive]
+	diffFilter = delta --color-only
+
+[diff]
+	colorMoved = default
+
+[delta]
+	navigate = true
+	light    = false
+
 [credential "https://github.com"]
-	helper = 
+	helper =
 	helper = !/usr/local/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
+	helper =
 	helper = !/usr/local/bin/gh auth git-credential
+
