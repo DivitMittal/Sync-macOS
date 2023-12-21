@@ -1,12 +1,12 @@
-#!/usr/local/bin/fish
+#!/usr/bin/env fish
 ####################### Adding to the PATH environment variable ###############################
 # Delete all previous paths in current fish terminal session
 set --erase fish_user_paths
 
 #################################### Setting variables ########################################
 ## Fish variables
-set -g fish_greeting ""
-set -l brew_prefix "/usr/local"
+set -g fish_greeting ''
+set -l brew_prefix '/usr/local'
 
 if status --is-interactive
     # Emulates vim's cursor shape behavior
@@ -23,8 +23,8 @@ if status --is-interactive
 end
 
 ## Environment Variables
-set -gx EDITOR "nvim"
-set -gx VISUAL "nvim"
+set -gx EDITOR 'nvim'
+set -gx VISUAL 'nvim'
 set -gx HOMEBREW_NO_ENV_HINTS 1
 
 # Homebrew paths
@@ -90,9 +90,11 @@ if status --is-interactive
     alias ls "eza $eza_params"
 
     # Directory shortcuts
-    alias dt 'cd ~/Desktop/'
-    alias dl 'cd ~/Downloads/'
+    alias dt "cd $HOME/Desktop/"
+    alias dl "cd $HOME/Downloads/"
 
+    # macOS installed apps backup alias
+    alias apps-backup "env ls /Applications/ 1> $HOME/Sync-macOS/etc/ref-txts/apps_(date +%b%d).txt"
     # Brew ultimate alias
     alias brew-ultimate 'brew update; and brew upgrade; and brew autoremove; and brew cleanup -s --prune=0; and brew bundle dump --file=~/.Brewfile --force; and rm -rf (brew --cache)'
 
