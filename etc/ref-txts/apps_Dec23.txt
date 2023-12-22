@@ -14,7 +14,6 @@ Microsoft Excel.app
 Microsoft OneNote.app
 Microsoft PowerPoint.app
 Microsoft Word.app
-Notion.app
 Obsidian.app
 OneDrive.app
 PDF Expert.app

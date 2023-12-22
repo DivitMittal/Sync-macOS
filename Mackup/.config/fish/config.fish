@@ -94,9 +94,10 @@ if status --is-interactive
     alias dl "cd $HOME/Downloads/"
 
     # macOS installed apps backup alias
-    alias apps-backup "env ls /Applications/ 1> $HOME/Sync-macOS/etc/ref-txts/apps_(date +%b%d).txt"
+    alias apps-backup "env ls /Applications/ 1> $HOME/Sync-macOS/etc/ref-txts/apps_(date +%b%y).txt"
     # Brew ultimate alias
     alias brew-ultimate 'brew update; and brew upgrade; and brew autoremove; and brew cleanup -s --prune=0; and brew bundle dump --file=~/.Brewfile --force; and rm -rf (brew --cache)'
+    alias mac-ultimate 'sudo -v; brew-ultimate; apps-backup; gem update; npm update -g; conda update --all; softwareupdate -l'
 
     # Enable aliases to be sudo’ed
     alias sudo "sudo "
