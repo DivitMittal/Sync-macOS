@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>children</key>
+	<array>
+		<dict>
+			<key>fileURL</key>
+			<string>file:///Users/div/Sync-macOS/</string>
+			<key>lastOpenedDate</key>
+			<real>1705174747.1507931</real>
+			<key>name</key>
+			<string>Sync-macOS</string>
+			<key>repositoryIdentifier</key>
+			<string>E9E260D4-31BE-422A-9BE6-5FFF9E6F3E78</string>
+			<key>type</key>
+			<integer>2</integer>
+			<key>valid</key>
+			<true/>
+		</dict>
+	</array>
+	<key>expanded</key>
+	<true/>
+	<key>name</key>
+	<string>Repositories</string>
+	<key>type</key>
+	<integer>3</integer>
+</dict>
+</plist>

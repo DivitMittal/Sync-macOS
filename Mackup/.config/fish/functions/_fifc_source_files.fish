@@ -12,13 +12,13 @@ function _fifc_source_files -d "Return a command to recursively find files"
         end
 
         if test "$path" = {$PWD}/
-            echo "fd . $fifc_fd_opts --color=always --hidden $fd_custom_opts"
+            echo "fd . $fifc_fd_opts --color=always $fd_custom_opts"
         else if test "$path" = "."
             echo "fd . $fifc_fd_opts --color=always --hidden $fd_custom_opts"
         else if test -n "$hidden"
-            echo "fd . $fifc_fd_opts --color=always --hidden $path"
+            echo "fd . $fifc_fd_opts --color=always --hidden -- $path"
         else
-            echo "fd . $fifc_fd_opts --color=always --hidden $path"
+            echo "fd . $fifc_fd_opts --color=always -- $path"
         end
     else if test -n "$hidden"
         # Use sed to strip cwd prefix

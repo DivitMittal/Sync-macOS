@@ -1,12 +1,6 @@
-[filter "lfs"]
-	smudge        = git-lfs smudge -- %f
-	process       = git-lfs filter-process
-	required      = true
-	clean         = git-lfs clean -- %f
-
 [user]
-	name          = Divit Mittal
-	email         = mittaldivit@gmail.com
+	name = Divit Mittal
+	email = 64.69.76.69.74.m@gmail.com
 
 [core]
 	editor        = nvim
@@ -86,7 +80,14 @@
 [credential "https://github.com"]
 	helper =
 	helper = !/usr/local/bin/gh auth git-credential
+
 [credential "https://gist.github.com"]
 	helper =
 	helper = !/usr/local/bin/gh auth git-credential
+
+[filter "lfs"]
+	smudge        = git-lfs smudge -- %f
+	process       = git-lfs filter-process
+	required      = true
+	clean         = git-lfs clean -- %f
 

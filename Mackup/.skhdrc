@@ -171,14 +171,17 @@ cmd + ctrl + alt - p      : yabai -m window --toggle sticky --toggle topmost --t
 cmd + ctrl + alt - t      : yabai -m space --layout $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')
 
 ################################ Desktop/Space Manipulation ##################################
-# cmd + ctrl + alt - right  : yabai -m space --focus next; echo "refresh" | cliclick kd:ctrl kp:esc ku:ctrl
-# cmd + ctrl + alt - left   : yabai -m space --focus prev; echo "refresh" | cliclick kd:ctrl kp:esc ku:ctrl
-# cmd + ctrl + alt - c      : yabai -m space --create; echo "refresh" | cliclick kd:ctrl kp:esc ku:ctrl
-# cmd + ctrl + alt - d      : yabai -m space --destroy; echo "refresh" | cliclick kd:ctrl kp:esc ku:ctrl
-cmd + ctrl + alt - right  : hs -c "GoNextSpace()"; sleep 0.5; cliclick kd:ctrl kp:esc ku:ctrl
-cmd + ctrl + alt - left   : hs -c "GoPrevSpace()"; sleep 0.5; cliclick kd:ctrl kp:esc ku:ctrl
-cmd + ctrl + alt - d      : hs -c "RemoveCurrentSpace()"; sleep 0.5; cliclick kd:ctrl kp:esc ku:ctrl
-cmd + ctrl + alt - c      : hs -c "AddSpace()"; sleep 0.5; cliclick kd:ctrl kp:esc ku:ctrl
+cmd + ctrl + alt - right  : id="$(yabai -m query --spaces --display | jq 'sort_by(.index) | reverse | .[map(."has-focus") | index(true) - 1].index')" && yabai -m space --focus "${id}"; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
+cmd + ctrl + alt - left   : id="$(yabai -m query --spaces --display | jq 'sort_by(.index) | .[map(."has-focus") | index(true) - 1].index')" && yabai -m space --focus "${id}"; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
+# cmd + ctrl + alt - right  : yabai -m space --focus next; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
+# cmd + ctrl + alt - left   : yabai -m space --focus prev; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
+cmd + ctrl + alt - c      : yabai -m space --create; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
+cmd + ctrl + alt - d      : yabai -m space --destroy; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
+# cmd + ctrl + alt - right  : hs -c "GoNextSpace()"; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
+# cmd + ctrl + alt - left   : hs -c "GoPrevSpace()"; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
+# cmd + ctrl + alt - d      : hs -c "RemoveCurrentSpace()"; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
+# cmd + ctrl + alt - c      : hs -c "AddSpace()"; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
+
 
 ############################################################################
 #                             Unimplemented Samples                      #

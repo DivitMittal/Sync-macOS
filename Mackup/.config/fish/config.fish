@@ -65,6 +65,9 @@ eval /usr/local/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | so
 ## Postgresql
 fish_add_path $brew_prefix/opt/postgresql@14/bin
 
+## Flutter
+set -gx CHROME_EXECUTABLE '/Applications/Google Chrome Dev.app/Contents/MacOS/Google Chrome Dev'
+
 if status --is-interactive
     fish_add_path ~/.config/emacs/bin #Doom Emacs
     fish_add_path /System/Library/PrivateFrameworks/Apple80211.framework/Resources #Airport Utility
@@ -78,6 +81,11 @@ if status --is-interactive
     # PatrickF1/fzf.fish plugin environment variables
     set -gx fzf_fd_opts --hidden
     set -gx fzf_preview_dir_cmd eza --all --color=always --icons=always --classify --group-directories-first --group --hyperlink --color-scale --color-scale-mode=gradient
+
+    # tuifi environment variables
+    set -gx tuifi_show_hidden 'True'
+    set -gx tuifi_vim_mode 'True'
+    set -gx tuifi_default_editor 'nvim'
 end
 
 
@@ -93,11 +101,11 @@ if status --is-interactive
     alias dt "cd $HOME/Desktop/"
     alias dl "cd $HOME/Downloads/"
 
-    # macOS installed apps backup alias
+    # Ultimate aliases
     alias apps-backup "env ls /Applications/ 1> $HOME/Sync-macOS/etc/ref-txts/apps_(date +%b%y).txt"
-    # Brew ultimate alias
+    alias gem-ultimate 'sudo gem update; sudo gem cleanup'
     alias brew-ultimate 'brew update; and brew upgrade; and brew autoremove; and brew cleanup -s --prune=0; and brew bundle dump --file=~/.Brewfile --force; and rm -rf (brew --cache)'
-    alias mac-ultimate 'sudo -v; brew-ultimate; apps-backup; gem update; npm update -g; conda update --all; softwareupdate -l'
+    alias mac-ultimate 'sudo -v; brew-ultimate; apps-backup; gem-ultimate; npm update -g; conda update --all; softwareupdate -l'
 
     # Enable aliases to be sudo’ed
     alias sudo "sudo "
