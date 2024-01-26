@@ -67,7 +67,7 @@
  '(message-mml-face ((t (:foreground "green"))))
  '(message-separator-face ((t (:foreground "blue"))))
 
- '(modeline ((t (:background "white" :foreground "blue"))))
+ '(modeline ((t (:background "yellow" :foreground "blue"))))
  '(modeline-buffer-id ((t (:background "white" :foreground "red"))))
  '(modeline-mousable ((t (:background "white" :foreground "magenta"))))
  '(modeline-mousable-minor-mode ((t (:background "white" :foreground "yellow"))))
