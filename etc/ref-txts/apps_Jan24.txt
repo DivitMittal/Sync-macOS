@@ -21,7 +21,6 @@ Spotify.app
 Syntax Highlight.app
 Thunderbird.app
 Tor Browser.app
-Tower.app
 Utilities
 Visual Studio Code.app
 Vivaldi.app
