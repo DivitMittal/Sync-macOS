@@ -132,7 +132,7 @@ end
 ####################################### Initializations ###############################################
 if status --is-interactive
     # Run Fastfetch
-    if type -q fastfetch && test "$TERM_PROGRAM" = "WezTerm"
+    if type -q fastfetch && test "$TERM_PROGRAM" = "WezTerm" && test "$TERM" = "xterm-256color"
         fastfetch --logo-type iterm --logo $HOME/Sync-macOS/assets/a-12.tiff --pipe false --structure Title:OS:Kernel:Uptime:Display:Terminal:CPU:CPUUsage:GPU:Memory:Swap:LocalIP --gpu-temp true --cpu-temp true --title-color-user magenta --title-color-at blue
     end
 
