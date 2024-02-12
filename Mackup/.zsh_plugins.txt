@@ -5,6 +5,7 @@ ohmyzsh/ohmyzsh path:plugins/macos
 ohmyzsh/ohmyzsh path:plugins/git
 ohmyzsh/ohmyzsh path:plugins/starship
 ohmyzsh/ohmyzsh path:plugins/zoxide
+ohmyzsh/ohmyzsh path:plugins/tmux
 jeffreytse/zsh-vi-mode
 zsh-users/zsh-completions
 zsh-users/zsh-syntax-highlighting

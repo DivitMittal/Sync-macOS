@@ -31,7 +31,7 @@ set.fillchars         = {
     vert     = ' ',                                       -- remove ugly vertical lines on window division
 }
 
-set.wrap              = false                             -- automatically wrap on load
+set.wrap              = true                             -- automatically wrap on load
 set.breakindent       = true                              -- automatically break lines on load with respect to indent
 -- set.cursorcolumn   = true                                 -- highlight current column
 -- set.cursorline     = true                                 -- highlight current line

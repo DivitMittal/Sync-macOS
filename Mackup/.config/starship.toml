@@ -2,13 +2,13 @@
 # Starship Preferences
 #######################################################
 
+
 # Prompt
 #######################################################
-
 # Left prompt format
 format = """[╭─a/c─➜⇉❯>](bold blue) $username$sudo$time
 [┣─sys───➜⇉❯>](bold yellow) $shell$status$cmd_duration$docker_context$hostname
-[┣─proj──➜⇉❯>](bold red) $directory$git_branch$git_commit$git_status
+[┣─pwd──➜⇉❯>](bold red) $directory$git_branch$git_commit$git_status
 [╰─cmd─➜⇉❯](bold green) $character"""
 
 # Right prompt format
@@ -24,7 +24,6 @@ scan_timeout = 50
 
 # System
 #######################################################
-
 [character]
 disabled = false
 success_symbol = "[➜](bold green)"
@@ -73,7 +72,8 @@ format = "as $symbol "
 
 [time]
 disabled = false
-format = 'at ⏰:[\[$time\]](bold yellow) '
+format = '@ ⏰:[\[$time\]](bold yellow) '
+use_12hr = true
 
 [hostname]
 disabled = false
@@ -100,7 +100,6 @@ threshold = 100
 
 # Services
 #######################################################
-
 [git_commit]
 disabled = true
 only_detached = false

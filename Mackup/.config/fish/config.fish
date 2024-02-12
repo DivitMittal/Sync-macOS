@@ -30,6 +30,9 @@ set -gx HOMEBREW_NO_ENV_HINTS 1
 # Homebrew paths
 fish_add_path $brew_prefix/bin
 fish_add_path $brew_prefix/sbin
+# Other package manager paths
+fish_add_path $HOME/.local/bin
+fish_add_path $HOME/.cargo/bin
 
 ################################## Additional Programs ##############################################
 ## Update macOS default utilities
@@ -38,7 +41,7 @@ fish_add_path $brew_prefix/opt/coreutils/libexec/gnubin #GNU coreutils (cd, env,
 fish_add_path $brew_prefix/opt/findutils/libexec/gnubin #GNU findutils(find, xargs, locate)
 fish_add_path $brew_prefix/opt/binutils/bin #GNU binutils(ar, elfedit, sysdump, size, etc.)
 fish_add_path $brew_prefix/opt/gnu-sed/libexec/gnubin #GNU sed
-fish_add_path $brew_prefix/opt/ed/bin; alias ed 'ged'; alias red 'gred'; #GNU ed(ed & red)
+fish_add_path $brew_prefix/opt/ed/bin; alias ed 'ged -v -p ":"'; #GNU ed(ed & red)
 fish_add_path $brew_prefix/opt/grep/libexec/gnubin #GNU grep(grep, egrep, fgrep)
 fish_add_path $brew_prefix/opt/gnu-indent/libexec/gnubin #GNU indent
 fish_add_path $brew_prefix/opt/gnu-which/libexec/gnubin #GNU which
@@ -48,9 +51,9 @@ fish_add_path $brew_prefix/opt/make/libexec/gnubin #GNU make
 fish_add_path $brew_prefix/opt/gcc/bin #GNU compiler collection
 fish_add_path $brew_prefix/opt/m4/bin #GNU m4
 fish_add_path $brew_prefix/opt/curl/bin #GNU curl
+fish_add_path $brew_prefix/opt/bc/bin #GNU bc
 # Other utils
 fish_add_path $brew_prefix/opt/zip/bin #Info-Zip zip
-fish_add_path $brew_prefix/opt/flex/bin #westes/flex
 
 ## Ruby
 fish_add_path $brew_prefix/opt/ruby/bin
@@ -91,13 +94,25 @@ end
 
 ############################################ Aliases #################################################
 if status --is-interactive
+    # Navigation
+    alias .2 'cd ../..'
+    alias .3 'cd ../../..'
+
+    # Enable aliases to be sudo’ed
+    alias sudo "sudo "
+
     # Mapping "ls" to "eza"
     set -l eza_params "--all" "--classify" "--icons=always" "--group-directories-first" "--color=always" "--color-scale" "--color-scale-mode=gradient" "--hyperlink"
     alias ll "eza -lbhHigUmuSa@ $eza_params"
     alias lt "eza -T --level=2 $eza_params" # tree listing with depth 2
     alias ls "eza $eza_params"
 
-    # Directory shortcuts
+    # Other similar mappings
+    alias man "batman"
+    alias cat "bat"
+    alias nv 'nvim'
+
+    # Directory shortcuts for macOS
     alias dt "cd $HOME/Desktop/"
     alias dl "cd $HOME/Downloads/"
 
@@ -105,30 +120,20 @@ if status --is-interactive
     alias apps-backup "env ls /Applications/ 1> $HOME/Sync-macOS/etc/ref-txts/apps_(date +%b%y).txt"
     alias gem-ultimate 'sudo gem update; sudo gem cleanup'
     alias brew-ultimate 'brew update; and brew upgrade; and brew autoremove; and brew cleanup -s --prune=0; and brew bundle dump --file=~/.Brewfile --force; and rm -rf (brew --cache)'
-    alias mac-ultimate 'sudo -v; brew-ultimate; apps-backup; gem-ultimate; npm update -g'
+    alias mac-ultimate 'sudo -v; brew-ultimate; apps-backup'
 
-    # Enable aliases to be sudo’ed
-    alias sudo "sudo "
-
-    # Recursively delete `.DS_Store` files
+    # Recursively delete `.DS_Store` files for macOS
     alias cleanup-DS "sudo find . -type f -name '*.DS_Store' -ls -delete"
 
-    # Empty the Trash on all mounted volumes and the main HDD.& clear Apple’s System Logs
+    # Empty the Trash on all mounted volumes and the main HDD.& clear Apple’s System Logs for macOS
     alias empty-trash "sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
-
-    # Navigation
-    alias .2 'cd ../..'
-    alias .3 'cd ../../..'
-
-    # Command-line utilities
-    alias nv 'nvim'
 end
 
 ####################################### Initializations ###############################################
 if status --is-interactive
     # Run Fastfetch
     if type -q fastfetch && test "$TERM_PROGRAM" = "WezTerm"
-        fastfetch
+        fastfetch --logo-type iterm --logo $HOME/Sync-macOS/assets/a-12.tiff --pipe false --structure Title:OS:Kernel:Uptime:Display:Terminal:CPU:CPUUsage:GPU:Memory:Swap:LocalIP --gpu-temp true --cpu-temp true --title-color-user magenta --title-color-at blue
     end
 
     # Starship custom prompt

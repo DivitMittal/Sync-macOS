@@ -11,6 +11,7 @@ LocalSend.app
 Menu Bar Dock.app
 Microsoft Excel.app
 Microsoft OneNote.app
+Microsoft Word.app
 Obsidian.app
 OneDrive.app
 PDF Expert.app
