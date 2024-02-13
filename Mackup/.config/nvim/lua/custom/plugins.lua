@@ -190,6 +190,11 @@ local plugins = {
         },
   },
 
+  {
+    'mrjones2014/smart-splits.nvim',
+    enabled = true,
+  }
+
 }
 
 return plugins

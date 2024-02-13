@@ -61,15 +61,8 @@ fish_add_path $brew_prefix/opt/ruby/bin
 ## Java
 fish_add_path $brew_prefix/opt/openjdk/bin
 
-## Python
-# conda initialize
-eval /usr/local/Caskroom/miniconda/base/bin/conda "shell.fish" "hook" $argv | source
-
 ## Postgresql
 fish_add_path $brew_prefix/opt/postgresql@14/bin
-
-## Flutter
-set -gx CHROME_EXECUTABLE '/Applications/Google Chrome Dev.app/Contents/MacOS/Google Chrome Dev'
 
 if status --is-interactive
     fish_add_path ~/.config/emacs/bin #Doom Emacs
@@ -84,11 +77,6 @@ if status --is-interactive
     # PatrickF1/fzf.fish plugin environment variables
     set -gx fzf_fd_opts --hidden
     set -gx fzf_preview_dir_cmd eza --all --color=always --icons=always --classify --group-directories-first --group --hyperlink --color-scale --color-scale-mode=gradient
-
-    # tuifi environment variables
-    set -gx tuifi_show_hidden 'True'
-    set -gx tuifi_vim_mode 'True'
-    set -gx tuifi_default_editor 'nvim'
 end
 
 
@@ -99,7 +87,7 @@ if status --is-interactive
     alias .3 'cd ../../..'
 
     # Enable aliases to be sudo’ed
-    alias sudo "sudo "
+    alias sudo 'sudo '
 
     # Mapping "ls" to "eza"
     set -l eza_params "--all" "--classify" "--icons=always" "--group-directories-first" "--color=always" "--color-scale" "--color-scale-mode=gradient" "--hyperlink"
@@ -108,9 +96,10 @@ if status --is-interactive
     alias ls "eza $eza_params"
 
     # Other similar mappings
-    alias man "batman"
-    alias cat "bat"
+    alias man 'batman'
+    alias cat 'bat'
     alias nv 'nvim'
+    alias ff 'fastfetch --logo-type iterm --logo $HOME/Sync-macOS/assets/a-12.png --pipe false --structure Title:OS:Kernel:Uptime:Display:Terminal:CPU:CPUUsage:GPU:Memory:Swap:LocalIP --gpu-temp true --cpu-temp true --title-color-user magenta --title-color-at blue --cpu-format "{1} @ {#4;35}{8}°C{#}" --gpu-format "{2} @ {#4;35}{4}°C{#}"'
 
     # Directory shortcuts for macOS
     alias dt "cd $HOME/Desktop/"
@@ -119,6 +108,7 @@ if status --is-interactive
     # Ultimate aliases
     alias apps-backup "env ls /Applications/ 1> $HOME/Sync-macOS/etc/ref-txts/apps_(date +%b%y).txt"
     alias gem-ultimate 'sudo gem update; sudo gem cleanup'
+    alias pipx-ultimate 'pipx upgrade-all; pipx list --short 1> ~/Sync-macOS/etc/ref-txts/pipx_list.txt'
     alias brew-ultimate 'brew update; and brew upgrade; and brew autoremove; and brew cleanup -s --prune=0; and brew bundle dump --file=~/.Brewfile --force; and rm -rf (brew --cache)'
     alias mac-ultimate 'sudo -v; brew-ultimate; apps-backup'
 
@@ -126,14 +116,15 @@ if status --is-interactive
     alias cleanup-DS "sudo find . -type f -name '*.DS_Store' -ls -delete"
 
     # Empty the Trash on all mounted volumes and the main HDD.& clear Apple’s System Logs for macOS
-    alias empty-trash "sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
+    alias empty-trash 'bass "sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"'
 end
+
 
 ####################################### Initializations ###############################################
 if status --is-interactive
     # Run Fastfetch
     if type -q fastfetch && test "$TERM_PROGRAM" = "WezTerm" && test "$TERM" = "xterm-256color"
-        fastfetch --logo-type iterm --logo $HOME/Sync-macOS/assets/a-12.tiff --pipe false --structure Title:OS:Kernel:Uptime:Display:Terminal:CPU:CPUUsage:GPU:Memory:Swap:LocalIP --gpu-temp true --cpu-temp true --title-color-user magenta --title-color-at blue
+        ff
     end
 
     # Starship custom prompt
