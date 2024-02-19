@@ -1,10 +1,5 @@
 # .zprofile -*- mode: sh -*-
 
-# Load interactive settings
-if [[ -f $HOME/.zshrc ]]; then
-  source $HOME/.zshrc
-fi
-
 # Place for hosting Git repos
 export GIT_HOSTING='git@github.com:DivitMittal'
 
