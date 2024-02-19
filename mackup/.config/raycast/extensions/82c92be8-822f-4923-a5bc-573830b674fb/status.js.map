@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/status.ts"],
+  "sourcesContent": ["import { LaunchProps, updateCommandMetadata } from \"@raycast/api\";\nimport { execSync } from \"node:child_process\";\n\nfunction isCaffeinateProcessRunning() {\n  try {\n    execSync(\"pgrep caffeinate\");\n    return true;\n  } catch {\n    return false;\n  }\n}\nexport default async function Command(props: LaunchProps) {\n  const isCaffeinated = props.launchContext?.caffeinated ?? isCaffeinateProcessRunning();\n  const subtitle = isCaffeinated ? \"\u2615 Caffeinated\" : \"\u274C Decaffeinated\";\n\n  updateCommandMetadata({ subtitle });\n}\n"],
+  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,aAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAAmD,wBACnDC,EAAyB,8BAEzB,SAASC,GAA6B,CACpC,GAAI,CACF,qBAAS,kBAAkB,EACpB,EACT,MAAE,CACA,MAAO,EACT,CACF,CACA,eAAOJ,EAA+BK,EAAoB,CAExD,IAAMC,EADgBD,EAAM,eAAe,aAAeD,EAA2B,EACpD,qBAAkB,0BAEnD,yBAAsB,CAAE,SAAAE,CAAS,CAAC,CACpC",
+  "names": ["status_exports", "__export", "Command", "__toCommonJS", "import_api", "import_node_child_process", "isCaffeinateProcessRunning", "props", "subtitle"]
+}

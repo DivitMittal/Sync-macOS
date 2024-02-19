@@ -36,7 +36,7 @@ fish_add_path $HOME/.cargo/bin
 
 ################################## Additional Programs ##############################################
 ## Update macOS default utilities
-# GNU utils
+## GNU utils
 fish_add_path $brew_prefix/opt/coreutils/libexec/gnubin #GNU coreutils (cd, env, ls, test, type, etc.)
 fish_add_path $brew_prefix/opt/findutils/libexec/gnubin #GNU findutils(find, xargs, locate)
 fish_add_path $brew_prefix/opt/binutils/bin #GNU binutils(ar, elfedit, sysdump, size, etc.)
@@ -134,7 +134,7 @@ if status --is-interactive
 
     # Zoxide utility
     if type -q zoxide
-        zoxide init fish | source
+        zoxide init --cmd cd fish | source
     end
 end
 

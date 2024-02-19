@@ -2,6 +2,7 @@ AlDente.app
 AltTab.app
 Bartender 5.app
 Floorp.app
+GitButler.app
 Google Chrome Dev.app
 Hammerspoon.app
 Homerow.app
