@@ -6,6 +6,7 @@
            lmeta           spc                rmet
 )
 
+
 (defvar
   tap-timeout   100
   hold-timeout  200
@@ -18,7 +19,7 @@
   tr (layer-while-held tr)
 
   cmf (fork , - (lsft rsft))
-  pf (fork .  (lsft rsft))
+  pf (fork . S-/ (lsft rsft))
 )
 
 ;; Modded colemak with curl mod(mod dh) & wide mod & angle mod
@@ -40,9 +41,9 @@
 
 ;; TR layer
 (deflayer tr
-  _    q    w    e    r    t    y    u    7    8    9    kp+    kp=
-  _     a    s    d    f    g    h    j    4    5    6    kp-    _
-  _      z    x    c    v    b    n    0    1    2    3    _
+  _    q    w    e    r    t    y    kp/    7    8    9    kp+    kp=
+  _     a    s    d    f    g    h    kp*    4    5    6    kp-    _
+  _      z    x    c    v    b    _    0    1    2    3    _
          @tl              _                   XX
 )
 
