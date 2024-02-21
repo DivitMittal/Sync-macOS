@@ -1,9 +1,9 @@
 ;; Reduced ANSI for 60% keyboards
 (defsrc
-  tab    q    w    e    r    t    y    u    i    o    p    [    ]
+  tab    q    w    e    r    t    y    u    i    o    p    [     ]
   caps    a    s    d    f    g    h    j    k    l    ;    '    ret
   lsft     z    x    c    v    b    n    m    ,    .    /    rsft
-           lmeta           spc                rmet
+            lmeta              spc               rmet
 )
 
 
@@ -20,6 +20,12 @@
 
   cmf (fork , - (lsft rsft))
   pf (fork . S-/ (lsft rsft))
+
+  { S-[
+  } S-]
+
+  & S-7
+  | S-8
 )
 
 ;; Modded colemak with curl mod(mod dh) & wide mod & angle mod
@@ -27,39 +33,30 @@
   _    q    w    f    p    b    [    j    l    u    y    '    ;
   bspc  a    r    s    t    g    ]    m    n    e    i    o    _
   _      x    c    d    v    z    /    k    h    @cmf   .    _
-           @tl                _                   @tr
+            @tl                _                   @tr
 )
-
 
 ;; TL layer
 (deflayer tl
-  _    esc    w    e    r    t    y    u    i    up    tab    _    _
-  _     a    s    d    f    g    h    j    left  down  rght  caps  _
-  _      z    x    c    v    b    n    m    bspc    .    /    _
-        XX                 _                  @tr
+  _   esc  w    e    r    t    y    u    i    up    tab    _    _
+  _    a    s    d    f    g    h    j   left  down  rght  caps  _
+  _     z    x    c    v    b    n    m   bspc    .    /    _
+            XX                 _                  @tr
 )
 
 ;; TR layer
 (deflayer tr
-  _    q    w    e    r    t    y    kp/    7    8    9    kp+    kp=
-  _     a    s    d    f    g    h    kp*    4    5    6    kp-    _
-  _      z    x    c    v    b    _    0    1    2    3    _
-         @tl              _                   XX
+  _    q    w    e    r    t    y    kp/    7    8    9   kp+   kp=
+  _     &    |    {    f    g    h    kp*    4    5    6   kp-    _
+  _      z    x    c    v    b    _    0      1    2    3    _
+            @tl                _                   XX
 )
 
 
 ;; TLTR layer
 (deflayer tltr
   _    q    w    e    r    t    y    u    i    o    p    [    ]
-  _    a    s    d    f    g    h    j    k    l    ;    '    _
-  _     z    x    c    v    b    n    m    ,    .    /    _
-          XX                  _                 XX
-)
-
-;; Empty layer
-(deflayer empty
-  _    _    _    _    _    _    _    _    _    _    _    _   _
-  _    _    _    _    _    _    _    _    _    _    _    _   _
-  _     _    _    _    _    _    _    _    _    _       _   _
-          _                  _                 _
+  _     a    s    d    f    g    h    j    k    l    ;    '    _
+  _      z    x    c    v    b    n    m    ,    .    /    _
+            XX                  _                   XX
 )

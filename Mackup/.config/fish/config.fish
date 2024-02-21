@@ -1,9 +1,8 @@
 #!/usr/bin/env fish
-####################### Adding to the PATH environment variable ###############################
+#################################### Setting variables ########################################
 # Delete all previous paths in current fish terminal session
 set --erase fish_user_paths
 
-#################################### Setting variables ########################################
 ## Fish variables
 set -g fish_greeting ''
 set -l brew_prefix '/usr/local'
@@ -25,16 +24,17 @@ end
 ## Environment Variables
 set -gx EDITOR 'nvim'
 set -gx VISUAL 'nvim'
-set -gx HOMEBREW_NO_ENV_HINTS 1
+# Adding to PATH env var
+fish_add_path $HOME/.local/bin
 
+
+################################## Additional Programs ##############################################
+## Homebrew
+set -gx HOMEBREW_NO_ENV_HINTS 1
 # Homebrew paths
 fish_add_path $brew_prefix/bin
 fish_add_path $brew_prefix/sbin
-# Other package manager paths
-fish_add_path $HOME/.local/bin
-fish_add_path $HOME/.cargo/bin
 
-################################## Additional Programs ##############################################
 ## Update macOS default utilities
 ## GNU utils
 fish_add_path $brew_prefix/opt/coreutils/libexec/gnubin #GNU coreutils (cd, env, ls, test, type, etc.)
@@ -64,9 +64,24 @@ fish_add_path $brew_prefix/opt/openjdk/bin
 ## Postgresql
 fish_add_path $brew_prefix/opt/postgresql@14/bin
 
+## Rust
+fish_add_path $HOME/.cargo/bin
+
+## Python
+# pyenv
+set -gx PYENV_ROOT $HOME/.pyenv
+fish_add_path $PYENV_ROOT/bin
+pyenv init --path | source
+
 if status --is-interactive
     fish_add_path ~/.config/emacs/bin #Doom Emacs
     fish_add_path /System/Library/PrivateFrameworks/Apple80211.framework/Resources #Airport Utility
+
+    ## Python
+    # pyenv
+    alias pip-uninstall-all 'pip freeze | cut -d "@" -f1 | xargs pip uninstall -y'
+    pyenv init - | source
+    pyenv virtualenv-init - | source
 
     # fifc plugin environment variables
     set -gx fifc_editor nvim
@@ -88,6 +103,7 @@ if status --is-interactive
 
     # Enable aliases to be sudo’ed
     alias sudo 'sudo '
+    alias showpath 'echo $PATH | sed "s/ /\n/g"'
 
     # Mapping "ls" to "eza"
     set -l eza_params "--all" "--classify" "--icons=always" "--group-directories-first" "--color=always" "--color-scale" "--color-scale-mode=gradient" "--hyperlink"
