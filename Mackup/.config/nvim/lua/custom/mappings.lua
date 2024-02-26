@@ -36,6 +36,11 @@ M.general = {
       end,
       "New horizontal term", opts = silent
     },
+    ["<leader>tr"] = {
+      function()
+        require("base46").toggle_transparency()
+      end,
+    }
   },
   v = {
     [">"] = { ">gv", "indent"},

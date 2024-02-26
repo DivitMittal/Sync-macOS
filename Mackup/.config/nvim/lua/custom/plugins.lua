@@ -195,11 +195,6 @@ local plugins = {
     enabled = true,
   },
 
-  {
-    'luk400/vim-jukit',
-    enabled = true,
-  }
-
 }
 
 return plugins

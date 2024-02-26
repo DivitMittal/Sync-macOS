@@ -58,7 +58,7 @@ set.ignorecase        = true                              -- ignore case senseti
 set.smartcase         = true                              -- being smart about ignoring case when using ignorecase
 
 set.shiftround        = true                              -- round shiftwidth to the nearest multiple of shiftwidth
--- plugin guess-indent sets the following dynamically
+-- plugin guess-indent sets the following dynamically & editorconfig sets the defaults
 --set.shiftwidth  = 4                                     -- spaces per tab (when shifting), when using the >> or << commands, shift lines by 4 spaces
 --set.tabstop     = 4                                     -- actual spaces which are considered a tab
 --set.smarttab    = true                                  -- <tab>/<BS> indent/dedent in leading whitespace
