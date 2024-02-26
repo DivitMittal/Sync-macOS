@@ -1,3 +1,4 @@
+huggingface-hub 0.20.3
 mac-cleanup 3.0.4
 mackup 0.8.40
 pipenv 2023.12.1

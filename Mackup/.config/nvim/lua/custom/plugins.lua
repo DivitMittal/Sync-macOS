@@ -193,6 +193,11 @@ local plugins = {
   {
     'mrjones2014/smart-splits.nvim',
     enabled = true,
+  },
+
+  {
+    'luk400/vim-jukit',
+    enabled = true,
   }
 
 }
