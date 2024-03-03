@@ -5,8 +5,75 @@ local plugins = {
 
   -- Override plugin definition options
   {
+    "nvim-lua/plenary.nvim",
+    enabled = true,
+    cond = not vim.g.vscode,
+  },
+
+  {
+    "NvChad/base46",
+    enabled = true,
+    cond = not vim.g.vscode,
+  },
+
+  {
+    "NvChad/ui",
+    enabled = true,
+    cond = not vim.g.vscode,
+  },
+
+  {
+    "NvChad/nvterm",
+    enabled = true,
+    cond = not vim.g.vscode,
+  },
+
+  {
+    "NvChad/nvim-colorizer.lua",
+    enabled = true,
+    cond = not vim.g.vscode,
+  },
+
+  {
+    "nvim-tree/nvim-web-devicons",
+    enabled = true,
+    cond = not vim.g.vscode,
+  },
+
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    enabled = true,
+    cond = not vim.g.vscode,
+  },
+
+  {
+    "lewis6991/gitsigns.nvim",
+    enabled = true,
+    cond = not vim.g.vscode,
+  },
+
+  {
+    "numToStr/Comment.nvim",
+    enabled = true,
+    cond = not vim.g.vscode,
+  },
+
+  {
+    "nvim-telescope/telescope.nvim",
+    enabled = true,
+    cond = not vim.g.vscode,
+  },
+
+  {
+    "folke/which-key.nvim",
+    enabled = true,
+    cond = not vim.g.vscode,
+  },
+
+  {
     "neovim/nvim-lspconfig",
     enabled = true,
+    cond = not vim.g.vscode,
     dependencies = {
       -- format & linting
       {
@@ -22,28 +89,31 @@ local plugins = {
     end, -- Override to setup mason-lspconfig
   },
 
-  -- override plugin configs
   {
     "williamboman/mason.nvim",
     enabled = true,
+    cond = not vim.g.vscode,
     opts = overrides.mason,
   },
 
   {
     "nvim-treesitter/nvim-treesitter",
     enabled = true,
+    cond = not vim.g.vscode,
     opts = overrides.treesitter,
   },
 
   {
     "nvim-tree/nvim-tree.lua",
     enabled = true,
+    cond = not vim.g.vscode,
     opts = overrides.nvimtree,
   },
 
   {
     "hrsh7th/nvim-cmp",
     enabled = true,
+    cond = not vim.g.vscode,
     opts = overrides.nvimcmp,
   },
 
@@ -58,6 +128,7 @@ local plugins = {
     -- Automatically set indentation/tabstop space size of the current buffer
     'nmac427/guess-indent.nvim',
     enabled = true,
+    cond = not vim.g.vscode,
     event = "BufEnter",
     config = function()
       require('guess-indent').setup({
@@ -88,18 +159,6 @@ local plugins = {
       --     labels = 'oienarstwqyxcpl'
       -- })
 
-      -- nvim starter/dashboard
-      local starter = require('mini.starter')
-      starter.setup({
-      header = 'D!',
-      footer = '',
-      content_hooks = {
-          starter.gen_hook.adding_bullet(),
-          starter.gen_hook.indexing('all', { 'Builtin actions' }),
-          starter.gen_hook.padding(3, 2),
-        },
-      })
-
       -- vim-move like plugin
       require('mini.move').setup({
           mappings = {
@@ -119,6 +178,20 @@ local plugins = {
             reindent_linewise = true,
           },
       })
+
+      if( not vim.g.vscode ) then
+        -- nvim starter/dashboard
+        local starter = require('mini.starter')
+        starter.setup({
+        header = 'D!',
+        footer = '',
+        content_hooks = {
+            starter.gen_hook.adding_bullet(),
+            starter.gen_hook.indexing('all', { 'Builtin actions' }),
+            starter.gen_hook.padding(3, 2),
+          },
+        })
+      end
     end,
   },
 
@@ -126,6 +199,7 @@ local plugins = {
     -- vim-vinegar like plugin
     'stevearc/oil.nvim',
     enabled = true,
+    cond = not vim.g.vscode,
     opts = {},
     event = "VeryLazy",
     vscode = false,
@@ -143,6 +217,7 @@ local plugins = {
     -- vim-seek/vim-sneak/lightspeed.nvim/mini-jump.nvim/leap.nvim like plugin for Multi-charater searching & jumping
     "folke/flash.nvim",
     enabled = true,
+    cond = not vim.g.vscode,
     event = "VeryLazy",
     opts = {},
     keys = {
@@ -174,6 +249,7 @@ local plugins = {
   {
     "smoka7/multicursors.nvim",
     enabled = true,
+    cond = not vim.g.vscode,
     event = "VeryLazy",
     dependencies = {
         'smoka7/hydra.nvim',
@@ -181,21 +257,26 @@ local plugins = {
     opts = {},
     cmd = { 'MCstart', 'MCvisual', 'MCclear', 'MCpattern', 'MCvisualPattern', 'MCunderCursor' },
     keys = {
-            {
-                mode = { 'v', 'n' },
-                '<Leader>mc',
-                '<cmd>MCstart<cr>',
-                desc = 'Create a selection for selected text or word under the cursor',
-            },
-        },
+        { mode = { 'v', 'n' }, '<Leader>mc', '<cmd>MCstart<cr>', desc = 'Create a selection for selected text or word under the cursor', },
+      },
   },
 
   {
     'mrjones2014/smart-splits.nvim',
     enabled = true,
+    cond = not vim.g.vscode,
+    event = "BufEnter",
+    keys = {
+      { "<C-Left>", '<cmd>lua require("smart-splits").move_cursor_left() <CR>', desc = "move cursor left across splits" },
+      { "<C-Right>", '<cmd>lua require("smart-splits").move_cursor_right() <CR>', desc = "move cursor right across splits" },
+      { "<C-Down>", '<cmd>lua require("smart-splits").move_cursor_down() <CR>', desc = "move cursor down across splits" },
+      { "<C-Up>", '<cmd>lua require("smart-splits").move_cursor_up() <CR>', desc = "move cursor up across splits" },
+      { "<A-Up>", '<cmd>lua require("smart-splits").resize_up() <CR>', desc = "resize pane up across splits" },
+      { "<A-Down>", '<cmd>lua require("smart-splits").resize_down() <CR>', desc = "resize pane down across splits" },
+      { "<A-Right>", '<cmd>lua require("smart-splits").resize_right() <CR>', desc = "resize pane right across splits" },
+      { "<A-Left>", '<cmd>lua require("smart-splits").resize_left() <CR>', desc = "resize pane left across splits" },
+    }
   },
-
 }
 
 return plugins
-

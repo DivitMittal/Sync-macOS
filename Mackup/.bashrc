@@ -52,10 +52,5 @@ if [[ $- == *i* ]]; then
     if type starship &> /dev/null; then
         eval "$(starship init bash)"
     fi
-
-    # broot - terminal file explorer
-    if type broot &> /dev/null; then
-        source ~/.config/broot/launcher/bash/br
-    fi
 fi
 

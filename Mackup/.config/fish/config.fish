@@ -37,14 +37,15 @@ fish_add_path $brew_prefix/sbin
 
 ## Update macOS default utilities
 ## GNU utils
-fish_add_path $brew_prefix/opt/coreutils/libexec/gnubin #GNU coreutils (cd, env, ls, test, type, etc.)
-fish_add_path $brew_prefix/opt/findutils/libexec/gnubin #GNU findutils(find, xargs, locate)
-fish_add_path $brew_prefix/opt/binutils/bin #GNU binutils(ar, elfedit, sysdump, size, etc.)
-fish_add_path $brew_prefix/opt/gnu-sed/libexec/gnubin #GNU sed
-fish_add_path $brew_prefix/opt/ed/bin; alias ed 'ged -v -p ":"'; #GNU ed(ed & red)
-fish_add_path $brew_prefix/opt/grep/libexec/gnubin #GNU grep(grep, egrep, fgrep)
+# fish_add_path $brew_prefix/opt/coreutils/libexec/gnubin #GNU coreutils (cd, env, ls, test, type, etc.)
+# fish_add_path $brew_prefix/opt/findutils/libexec/gnubin #GNU findutils(find, xargs, locate)
+# fish_add_path $brew_prefix/opt/binutils/bin #GNU binutils(ar, elfedit, sysdump, size, etc.)
+# fish_add_path $brew_prefix/opt/gnu-sed/libexec/gnubin #GNU sed
+# fish_add_path $brew_prefix/opt/ed/bin; #GNU ed(ed & red)
+alias ed 'ged -v -p ":"';
+# fish_add_path $brew_prefix/opt/grep/libexec/gnubin #GNU grep(grep, egrep, fgrep)
+# fish_add_path $brew_prefix/opt/gnu-which/libexec/gnubin #GNU which
 fish_add_path $brew_prefix/opt/gnu-indent/libexec/gnubin #GNU indent
-fish_add_path $brew_prefix/opt/gnu-which/libexec/gnubin #GNU which
 fish_add_path $brew_prefix/opt/gnu-tar/libexec/gnubin #GNU tar
 fish_add_path $brew_prefix/opt/gawk/libexec/gnubin #GNU awk
 fish_add_path $brew_prefix/opt/make/libexec/gnubin #GNU make
@@ -74,8 +75,8 @@ fish_add_path $PYENV_ROOT/bin
 pyenv init --path | source
 
 if status --is-interactive
-    fish_add_path ~/.config/emacs/bin #Doom Emacs
-    fish_add_path /System/Library/PrivateFrameworks/Apple80211.framework/Resources #Airport Utility
+    fish_add_path $HOME/.config/emacs/bin # Doom Emacs
+    # fish_add_path /System/Library/PrivateFrameworks/Apple80211.framework/Resources #Airport Utility
 
     ## Python
     # pyenv
@@ -97,13 +98,8 @@ end
 
 ############################################ Aliases #################################################
 if status --is-interactive
-    # Navigation
-    alias .2 'cd ../..'
-    alias .3 'cd ../../..'
-
-    # Enable aliases to be sudo’ed
-    alias sudo 'sudo '
     alias showpath 'echo $PATH | sed "s/ /\n/g"'
+    alias showid "id | sed 's/ /\n/g' | sed 's/,/\n/g'"
 
     # Mapping "ls" to "eza"
     set -l eza_params "--all" "--classify" "--icons=always" "--group-directories-first" "--color=always" "--color-scale" "--color-scale-mode=gradient" "--hyperlink"
@@ -114,7 +110,6 @@ if status --is-interactive
     # Other similar mappings
     alias man 'batman'
     alias cat 'bat'
-    alias nv 'nvim'
     alias ff 'fastfetch --logo-type iterm --logo $HOME/Sync-macOS/assets/a-12.png --pipe false --structure Title:OS:Kernel:Uptime:Display:Terminal:CPU:CPUUsage:GPU:Memory:Swap:LocalIP --gpu-temp true --cpu-temp true --title-color-user magenta --title-color-at blue --cpu-format "{1} @ {#4;35}{8}°C{#}" --gpu-format "{2} @ {#4;35}{4}°C{#}"'
 
     # Directory shortcuts for macOS
@@ -131,26 +126,42 @@ if status --is-interactive
     # Recursively delete `.DS_Store` files for macOS
     alias cleanup-DS "sudo find . -type f -name '*.DS_Store' -ls -delete"
 
-    # Empty the Trash on all mounted volumes and the main HDD.& clear Apple’s System Logs for macOS
-    alias empty-trash 'bass "sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"'
+    # Empty the Trash on all mounted volumes and the main drive & clear system logs for macOS
+    alias empty-trash 'bass "sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sudo rm -rfv /private/tmp/*.log"'
+
+    # Abbreviations
+    abbr --position anywhere --add nv nvim
+    abbr --position anywhere --add v vim
+    abbr --position anywhere --add .2 'cd ../..'
+    abbr --position anywhere --add .3 'cd ../../..'
+    abbr --position command --add gits 'git status'
+    abbr --position command --add gitph 'git push'
+    abbr --position command --add gitpl 'git pull'
+    abbr --position command --add gitf 'git fetch'
+    abbr --position command --add gitc 'git commit'
 end
 
 
 ####################################### Initializations ###############################################
 if status --is-interactive
-    # Run Fastfetch
+    # Run Fastfetch - fetch system info
     if type -q fastfetch && test "$TERM_PROGRAM" = "WezTerm" && test "$TERM" = "xterm-256color"
         ff
     end
 
-    # Starship custom prompt
+    # Starship - custom shell prompt
     if type -q starship
         starship init fish | source
     end
 
-    # Zoxide utility
+    # Zoxide utility - smarter cd
     if type -q zoxide
         zoxide init --cmd cd fish | source
+    end
+
+    # Atuin - magical shell history
+    if type -q atuin
+        atuin init fish | source
     end
 end
 

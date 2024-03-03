@@ -1,6 +1,29 @@
+##########################################################################
+#                               NOTES                                    #
+##########################################################################
+################### Dependencies
+# skhd
+# yabai
+# dash
+# jq
+# spaceman
+# hammerspoon
+# cliclick
+
+################### Modify the launchctl plist (improved performance)
+# plist xml can be found at "skhd --install-service"
+# Setting dash as the shell for the service to run from.
+#
+#  <key>EnvironmentVariables</key>
+#  <dict>
+#    <key>PATH</key>
+#    <string>#{HOMEBREW_PREFIX}/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+# +  <key>SHELL</key>
+# +  <string>/usr/local/bin/dash</string>
+#  </dict>
+
 # ################################################################ #
 # THE FOLLOWING IS AN EXPLANATION OF THE GRAMMAR THAT SKHD PARSES. #
-# FOR SIMPLE EXAMPLE MAPPINGS LOOK FURTHER DOWN THIS FILE..        #
 # ################################################################ #
 # A list of all built-in modifier and literal keywords can
 # be found at https://github.com/koekeishiya/skhd/issues/1
@@ -69,35 +92,8 @@
 #
 #               an EOL character signifies the end of the bind.
 
-######################################################################################
-#                                       Important
-######################################################################################
-# Dependencies ->
-# skhd
-# yabai
-# dash
-# jq
-# spaceman
-# hammerspoon
-# cliclick
-#
-# Make sure to edit the skhd service/daemon macOS plist xml file for performance.
-# Setting dash as the shell to run skhd & yabai commands.
-# Scroll down to the Plist file relevant for you (either with or without logging) and change like this
-#
-#  <key>EnvironmentVariables</key>
-#  <dict>
-#    <key>PATH</key>
-#    <string>#{HOMEBREW_PREFIX}/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
-# +  <key>SHELL</key>
-# +  <string>/usr/local/bin/dash</string>
-#  </dict>
-#
-# The path to the plist xml can be found by running "skhd --install-service"
-#
-
 ########################################################################
-#                                 CONFIG                             #
+#                                 CONFIG                               #
 ########################################################################
 # General rules and keys defined to integrate seamlessly with custom TLTR keyboard layout
 #
@@ -184,7 +180,7 @@ cmd + ctrl + alt - d      : yabai -m space --destroy; sleep 0.2; cliclick kd:ctr
 
 
 ############################################################################
-#                             Unimplemented Samples                      #
+#                             Un-implemented Samples                      #
 ############################################################################
 # balance size of windows
 # shift + alt - 0 : yabai -m space --balance
@@ -215,3 +211,4 @@ cmd + ctrl + alt - d      : yabai -m space --destroy; sleep 0.2; cliclick kd:ctr
 # alt - f : yabai -m window --toggle zoom-fullscreen
 # toggle window split type
 # alt - e : yabai -m window --toggle split
+

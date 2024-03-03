@@ -39,7 +39,12 @@ plugins=()
 ################################################################################################################################################
 # Aliases
 ################################################################################################################################################
+# Enable aliases to be sudoed
+alias sudo='sudo '
+
+# Utilities
 alias nv="nvim"
+
 # eza command-line utility (gnu-ls alternative)
 eza_params=('--all' '--icons=always' '--classify' '--group-directories-first' '--time-style=long-iso' '--group' '--color-scale' '--hyperlink')
 alias ls='eza $eza_params'
@@ -55,9 +60,5 @@ alias dl="cd $HOME/Downloads/"
 ################################################################################################################################################
 # Run if current shell is interactive
 if [[ -o interactive ]]; then
-    # broot - terminal file explorer
-    if type broot &> /dev/null; then
-      source $HOME/.config/broot/launcher/bash/br
-    fi
 fi
 

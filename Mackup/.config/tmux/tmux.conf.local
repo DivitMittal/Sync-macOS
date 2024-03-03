@@ -1,11 +1,21 @@
 # : << EOF
 # https://github.com/gpakosz/.tmux
-# (‑●‑●)> dual licensed under the WTFPL v2 license and the MIT license,
-#         without any warranty.
-#         Copyright 2012— Gregory Pakosz (@gpakosz).
+
+# --------------------------------------------------------- Display -------------------------------------------------------------------
+
+# RGB 24-bit colour support, possible values are:
+#   - true
+#   - false
+#   - auto (default)
+#
+# automatic detection relies on the COLORTERM environment variable being defined
+# to 'truecolor' or '24bit' or '$ tput colors' answering '16777216'
+# see https://github.com/termstandard/colors
+tmux_conf_24b_colour=true
 
 
-# -- session creation ----------------------------------------------------------
+# -------------------------------------- Preferences for creation of new sessions, windows & panes -----------------------------------------------------
+# -- session creation -----------------
 
 # prompt for session name when creating a new session, possible values are:
 #   - true
@@ -14,7 +24,7 @@
 tmux_conf_new_session_prompt=false
 
 
-# -- windows & pane creation ---------------------------------------------------
+# -- windows & pane creation -----------------
 
 # new window retains current path, possible values are:
 #   - true
@@ -38,23 +48,10 @@ tmux_conf_new_pane_retain_current_path=true
 #   - true
 #   - false (default)
 #   - disabled (do not modify split-window bindings)
-tmux_conf_new_pane_reconnect_ssh=false
+tmux_conf_new_pane_reconnect_ssh=true
 
 
-# -- display -------------------------------------------------------------------
-
-# RGB 24-bit colour support, possible values are:
-#   - true
-#   - false
-#   - auto (default)
-#
-# automatic detection relies on the COLORTERM environment variable being defined
-# to 'truecolor' or '24bit' or '$ tput colors' answering '16777216'
-# see https://github.com/termstandard/colors
-tmux_conf_24b_colour=true
-
-
-# -- theming -------------------------------------------------------------------
+# -------------------------------------------------------------------------- Theming -------------------------------------------------------------------
 
 # enable or disable theming:
 #   - enabled (default)
@@ -68,11 +65,11 @@ tmux_conf_24b_colour=true
 tmux_conf_theme=enabled
 
 # default theme
-tmux_conf_theme_colour_1="#080808"    # dark gray
-tmux_conf_theme_colour_2="#303030"    # gray
+tmux_conf_theme_colour_1="default"    # default of the tty i.e., transparent
+tmux_conf_theme_colour_2="#000000"    # black
 tmux_conf_theme_colour_3="#8a8a8a"    # light gray
-tmux_conf_theme_colour_4="#00afff"    # light blue
-tmux_conf_theme_colour_5="#ffff00"    # yellow
+tmux_conf_theme_colour_4="#00ff00"    # bright green
+tmux_conf_theme_colour_5="#00ff00"    # green
 tmux_conf_theme_colour_6="#080808"    # dark gray
 tmux_conf_theme_colour_7="#e4e4e4"    # white
 tmux_conf_theme_colour_8="#080808"    # dark gray
@@ -109,11 +106,10 @@ tmux_conf_theme_colour_17="#e4e4e4"   # white
 tmux_conf_theme_window_fg="default"
 tmux_conf_theme_window_bg="default"
 
-# highlight focused pane, possible values are:
+###### highlight focused pane, possible values are:
 #   - true
 #   - false (default)
 tmux_conf_theme_highlight_focused_pane=false
-
 # focused pane colours:
 tmux_conf_theme_focused_pane_bg="$tmux_conf_theme_colour_2"
 
@@ -150,7 +146,7 @@ tmux_conf_theme_mode_attr="bold"
 
 # status line style
 tmux_conf_theme_status_fg="$tmux_conf_theme_colour_3"
-tmux_conf_theme_status_bg="$tmux_conf_theme_colour_1"
+tmux_conf_theme_status_bg="$tmux_conf_theme_colour_1"r
 tmux_conf_theme_status_attr="none"
 
 # terminal title
@@ -262,7 +258,7 @@ tmux_conf_theme_status_left_attr="bold,none,none"
 
 # status right style
 tmux_conf_theme_status_right_fg="$tmux_conf_theme_colour_12,$tmux_conf_theme_colour_13,$tmux_conf_theme_colour_14"
-tmux_conf_theme_status_right_bg="$tmux_conf_theme_colour_15,$tmux_conf_theme_colour_16,$tmux_conf_theme_colour_17"
+tmux_conf_theme_status_right_bg="$tmux_conf_theme_colour_1,$tmux_conf_theme_colour_16,$tmux_conf_theme_colour_17"
 tmux_conf_theme_status_right_attr="none,none,bold"
 
 # pairing indicator
@@ -339,7 +335,7 @@ tmux_conf_theme_clock_colour="$tmux_conf_theme_colour_4"
 tmux_conf_theme_clock_style="12"
 
 
-# -- clipboard -----------------------------------------------------------------
+# -- clipboard --------------------------
 
 # in copy mode, copying selection also copies to the OS clipboard
 #   - true
@@ -349,9 +345,7 @@ tmux_conf_theme_clock_style="12"
 tmux_conf_copy_to_os_clipboard=true
 
 
-# -- user customizations -------------------------------------------------------
-
-# this is the place to override or undo settings
+# -------------------------------------- user customizations ------------------------------------------------------- # this is the place to override or undo settings
 
 # increase history size
 #set -g history-limit 10000
@@ -373,16 +367,20 @@ set -g mode-keys vi
 
 # if you don't want Oh my tmux! to alter a binding, use #!important
 # bind c new-window -c '#{pane_current_path}' #!important
+bind - split-window -v -c "#{pane_current_path}" #!important
+bind | split-window -h -c "#{pane_current_path}" #!important
 
 # move status line to top
 set -g status-position top
 
+# allows certain programs running in tmux panes to pass through tmux via certain escape sequences
 set -g allow-passthrough on
 
+# Update tmux environment with environment variables from the parent process
 set -ga update-environment TERM
 set -ga update-environment TERM_PROGRAM
 
-# -- tpm -----------------------------------------------------------------------
+# ----------------------------------------------------------------- tpm (tmux plugin manager) -----------------------------------------------------------------------
 
 # while I don't use tpm myself, many people requested official support so here
 # is a seamless integration that automatically installs plugins in parallel
@@ -394,7 +392,7 @@ set -ga update-environment TERM_PROGRAM
 # by default, launching tmux will update tpm and all plugins
 #   - true (default)
 #   - false
-tmux_conf_update_plugins_on_launch=true
+tmux_conf_update_plugins_on_launch=false
 
 # by default, reloading the configuration will update tpm and all plugins
 #   - true (default)
@@ -417,16 +415,16 @@ tmux_conf_uninstall_plugins_on_reload=true
 
 # to enable a plugin, use the 'set -g @plugin' syntax:
 # visit https://github.com/tmux-plugins for available plugins
-set -g @plugin 'tmux-plugins/tmux-copycat'
-set -g @plugin 'tmux-plugins/tmux-cpu'
-# set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
 # set -g @plugin 'tmux-plugins/tmux-continuum'
 # set -g @continuum-restore 'on'
-set -g @plugin 'schasse/tmux-jump'
+set -g @plugin 'IngoMeyer441/tmux-easy-motion'
+set -g @easy-motion-prefix "j"
+# set -g @plugin 'schasse/tmux-jump'
 set -g @plugin 'sainnhe/tmux-fzf'
 set -g @plugin 'tmux-plugins/tmux-open'
 
-# -- custom variables ----------------------------------------------------------
+# ------------------------------------------------------------------- custom variables ----------------------------------------------------------
 
 # to define a custom #{foo} variable, define a POSIX shell function between the
 # '# EOF' and the '# "$@"' lines. Please note that the opening brace { character
@@ -436,7 +434,7 @@ set -g @plugin 'tmux-plugins/tmux-open'
 # then, use #{foo} in e.g. the 'tmux_conf_theme_status_left' or the
 # 'tmux_conf_theme_status_right' variables.
 
-# ------------------------------------------------------------------------------
+# --------------------------------------------------------
 
 # # /!\ do not remove the following line
 # EOF

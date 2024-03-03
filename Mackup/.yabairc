@@ -1,16 +1,11 @@
-#!/usr/bin/env sh
+#!/usr/local/bin/dash
 
-# for this to work you must configure sudo such that
-# it will be able to run the command without password
-#
-# see this wiki page for information:
-#  - https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)#configure-scripting-addition
-
-#### IMPORTANT
-# Make sure to edit the yabai service/daemon macOS plist xml file for performance.
-# Setting dash as the shell to run skhd & yabai commands.
-# Dependencies -> skhd, yabai, dash
-# Scroll down to the Plist file relevant for you (either with or without logging) and change like this
+##########################################################################
+#                               NOTES                                    #
+##########################################################################
+####################### Modify the launchctl plist (improved performance)
+# plist xml can be found at "yabai --install-service"
+# Setting dash as the shell for yabai commands.
 #
 #  <key>EnvironmentVariables</key>
 #  <dict>
@@ -19,19 +14,15 @@
 # +  <key>SHELL</key>
 # +  <string>/usr/local/bin/dash</string>
 #  </dict>
-#
-#  The path to the plist xml can be found by running "yabai --install-service"
-#
-############## Scripting Addition for yabai
-# create a new file for writing - visudo uses the vim editor by default.
-# go read about this if you have no idea what is going on.
-#       sudo visudo -f /private/etc/sudoers.d/yabai
+
+
+####################### Add yabai to sudoers
+# sudo visudo -f /private/etc/sudoers.d/yabai
 # input the line below into the file you are editing.
-# replace <yabai> with the path to the yabai binary (output of: which yabai).
-# replace <user> with your username (output of: whoami).
-# replace <hash> with the sha256 hash of the yabai binary (output of: shasum -a 256 $(which yabai)).
-# this hash must be updated manually after running brew upgrade.
-#       <user> ALL=(root) NOPASSWD: sha256:<hash> <yabai> --load-sa
+#       <user> ALL=(root) NOPASSWD: sha256:<hash> <yabai> --load-sa  # replace <yabai> with the path to the yabai binary (output of: which yabai).
+                                                                     # replace <user> with your username (output of: whoami).
+                                                                     # replace <hash> with the sha256 hash of the yabai binary (output of: shasum -a 256 $(which yabai)).
+                                                                     # this hash must be updated manually after running brew upgrade.
 
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 sudo yabai --load-sa
@@ -43,22 +34,13 @@ yabai -m config                                 \
     window_origin_display        default        \
     window_placement             second_child   \
     window_zoom_persist          off            \
-    window_topmost               off            \
     window_shadow                off            \
-    window_animation_duration    0.00           \
-    window_animation_frame_rate  00             \
+    window_animation_duration    0.0            \
     window_opacity_duration      0.0            \
     active_window_opacity        1.0            \
     normal_window_opacity        1.0            \
     window_opacity               off            \
     insert_feedback_color        0xffd75f5f     \
-    active_window_border_color   0xccff3131     \
-    normal_window_border_color   0xcc555555     \
-    window_border_width          0              \
-    window_border_radius         15             \
-    window_border_blur           off            \
-    window_border_hidpi          off            \
-    window_border                off            \
     split_ratio                  0.50           \
     split_type                   auto           \
     auto_balance                 off            \
@@ -72,15 +54,16 @@ yabai -m config                                 \
     mouse_action1                move           \
     mouse_action2                resize         \
     mouse_drop_action            swap           \
-    external_bar                 off
+    external_bar                 off:0:0
 
 # Exclude apps
 yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Raycast$" manage=off
 yabai -m rule --add app="^JetBrains Toolbox$" manage=off
-yabai -m rule --add app="^Karabiner-Elements$" manage=off border=off
-yabai -m rule --add app="^Karabiner-EventViewer$" manage=off border=off
-yabai -m rule --add app="^Karabiner-NotificatonWindow$" manage=off border=off
+yabai -m rule --add app="^Karabiner-Elements$" manage=off
+yabai -m rule --add app="^Karabiner-EventViewer$" manage=off
+yabai -m rule --add app="^Karabiner-NotificatonWindow$" manage=off
+
 # Transparent apps
 yabai -m rule --add app="^Code$" opacity=0.97
 yabai -m rule --add app="^IntelliJ IDEA$" opacity=0.97
@@ -91,9 +74,8 @@ yabai -m rule --add app="^WebStorm$" opacity=0.97
 yabai -m rule --add app="^Notion$" opacity=0.97
 yabai -m rule --add app="^Obsidian$" opacity=0.97
 yabai -m rule --add app="^Finder$" opacity=0.97
-yabai -m rule --add app="^Tower$" opacity=0.97
 yabai -m rule --add app="^Thunderbird$" opacity=0.97
 yabai -m rule --add app="^Calculator$" sticky=on
 
-echo "yabai configuration loaded.."
+echo "yabai configuration loaded..."
 
