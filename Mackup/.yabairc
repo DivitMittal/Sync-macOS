@@ -79,3 +79,4 @@ yabai -m rule --add app="^Calculator$" sticky=on
 
 echo "yabai configuration loaded..."
 
+

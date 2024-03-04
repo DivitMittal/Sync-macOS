@@ -14,7 +14,7 @@
   tab    q    w    e    r    t         u    i    o    p   [     ]   ;; 12 keys
   caps   a    s    d    f    g         j    k    l    ;    '    ret  ;; 12 keys
   lsft   z    x    c    v    b         n    m    ,    .    /    rsft ;; 12 keys
-            lmeta                spc               rmet              ;; 3  keys
+            lmet                spc               rmet              ;; 3  keys
 )
 
 ;; Alises for keys accessible via shifting
@@ -44,21 +44,16 @@
 (defvar
   tap-timeout   100
   hold-timeout  200
-  one-shot-timeout 750
+  one-shot-timeout 500
   tt $tap-timeout
   ht $hold-timeout
   ost $one-shot-timeout
 )
 
-#|
-(deffakekeys
-  tlfk (layer-while-held tl)
-  trfk (layer-while-held tr)
-)|#
-
 (defalias
   tl (layer-while-held tl)
   tr (layer-while-held tr)
+  tltr (layer-while-held tltr)
 
   slaf (fork / (unshift \) (lsft rsft))
   comf (fork comm @und (lsft rsft))
@@ -66,35 +61,48 @@
   delf (fork bspc (unshift del) (lsft rsft))
 )
 
+(defalias
+  tlc (chord tltr tl)
+  trc (chord tltr tr)
+)
+
+(defchords tltr 500
+  (tl  ) @tl
+  (  tr) @tr
+  (tl tr) @tltr
+)
+
 ;; First layer
 ;; Modded colemak with curl mod(mod dh) & wide mod & angle mod
 (deflayer colemak-dh-angle-wide
-  rpt      q    w    f    p    b        j    l    u    y     '     ;
+  rpt     q    w    f    p    b        j    l    u    y     '     ;
   @delf    a    r    s    t    g        m    n    e    i     o     _
   _        x    c    d    v    z      @slaf  k    h   @comf @perf  _
-                @tl                 _                 @tr
+                @tlc                 _                 @trc
 )
 
 (defalias
-  sMet (one-shot $ost lmet)
-  sCtl (one-shot $ost lctl)
-  sAlt (one-shot $ost lalt)
-  sSft (one-shot $ost lsft)
-  sFn (one-shot $ost fn)
-  sWin (multi (one-shot $ost lmet) (one-shot $ost lctl) (one-shot $ost lalt))
-  sHyp (multi (one-shot $ost lmet) (one-shot $ost lctl) (one-shot $ost lalt) (one-shot $ost lsft))
+  ;; sticky
+  sMet (one-shot-release $ost lmet)
+  sCtl (one-shot-release $ost lctl)
+  sAlt (one-shot-release $ost lalt)
+  sSft (one-shot-release $ost lsft)
+  sFn (one-shot-release $ost fn)
+  sWin (multi (one-shot-release $ost lmet) (one-shot-release $ost lctl) (one-shot-release $ost lalt)) ;; window manager key (meant for window manipulation)
+  sHyp (multi (one-shot-press $ost lmet) (one-shot-press $ost lctl) (one-shot-press $ost lalt) (one-shot-press $ost lsft)) ;; hyper key (meant for popping up different UI elements from apps on screen)
+
   cw (caps-word 2000)
-  upf (fork up (unshift home) (lsft rsft))
-  dowf (fork down (unshift end) (lsft rsft))
-  leff (fork left (unshift pgup) (lsft rsft))
-  rigf (fork rght (unshift pgdn) (lsft rsft))
+
+  ;; forks
+  pguf (fork pgup (unshift home) (lsft rsft))
+  pgdf (fork pgdn (unshift end) (lsft rsft))
 )
 
 ;; TL layer
 (deflayer tl
-  _   esc   @sWin   XX     XX    XX       XX  XX   @upf   XX    @cw   _
-  _  @sAlt  @sCtl  @sSft  @sMet lrld      @btb  @leff  @dowf  @rigf   tab   _
-  _   @sFn   XX    @sHyp   XX    XX       XX   XX     XX     XX     XX   _
+  _   esc   @sWin    XX     XX    XX       XX     @btb   up   tab    @cw   _
+  _   @sAlt  @sCtl  @sSft  @sMet  XX      @pguf  left  down  rght   @pgdf   _
+  _   @sFn   XX     @sHyp   XX    XX       XX      XX    bspc  del     XX   _
                XX                  _                 @tr
 )
 
@@ -106,21 +114,28 @@
   curf (fork @cuo @cuc (lsft rsft))
   parf (fork @pao @pac (lsft rsft))
   sqrf (fork [ (unshift ]) (lsft rsft))
-  angf (fork @ano @anc (lsft rsft))
 )
 
 ;; TR layer
 (deflayer tr
   _   @excf @atsf @octf  @dolf    XX       XX    7   8   9   @plu  eql
   _   @amp  @pip  @curf  @parf  @sqrf      @ast  4   5   6   min   _
-  _    XX    XX   @angf   XX      XX        _   0   1   2   3     _
+  _    XX    @ano   @anc   XX      XX        _   0   1   2   3     _
                  @tl                   _                XX
+)
+
+(defalias
+  srs (cmd /usr/local/bin/dash -c "/usr/bin/open -a ScreenSaverEngine")
+  zzz (cmd /usr/local/bin/dash -c "/usr/bin/pmset sleepnow")
+  voldf (fork vold (unshift mute) (lsft rsft))
+  scref (fork @srs @zzz (lsft rsft))
+  medif (fork next (unshift prev) (lsft rsft))
 )
 
 ;; TLTR layer
 (deflayer tltr
-  _    XX     bru    pp     volu    t            u    i    o    p    [    ]
-  _    a      s       d      f      g            j    k    l    ;    '    _
-  _    x     XX   vold   c      z            n    m    ,    .    /    _
+  _    @scref  brup    pp     volu   XX            XX    XX   XX   XX   XX    XX
+  _    XX      lrld      XX    XX    XX            XX    XX   XX   XX   XX    _
+  _    brdown  @medif  @voldf  XX    XX            XX    XX   XX   XX   XX    _
                  XX                         _                     XX
 )

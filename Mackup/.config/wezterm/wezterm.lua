@@ -17,12 +17,15 @@ w.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
         Text = text
     }}
 end)
+
+
 ----------------------------------------------------------------------------------------------------
 -- Pane navigation and resizing b/w wezterm and vim/nvim (smart-splits.nvim plugin required)
 local function is_vim(pane)
     -- this is set by the smart-splits.nvim plugin, and unset on ExitPre in Neovim
     return pane:get_user_vars().IS_NVIM == 'true'
 end
+
 
 local direction_from_key = {
     LeftArrow = 'Left',
@@ -59,6 +62,8 @@ local function split_nav(resize_or_move, key)
         end)
     }
 end
+
+
 ---------------------------------------------------------------------------------------------
 -- config
 local config = {
@@ -107,41 +112,48 @@ local config = {
         format = "https://www.github.com/$1/$3"
     }},
 
-    -- Keybindings
     leader = {
-        key = 'r',
         mods = 'CTRL',
+        key = 'r',
         timeout_milliseconds = 1000
     },
-
+    -- Keybindings
     keys = {
+
+        -- Send Ctrl+r to the terminal when pressing LEADER, LEADER
+        {
+            key = 'r',
+            mods = 'LEADER|CTRL',
+            action = w.action.SendKey { mods = 'CTRL', key = 'r'},
+        },
+
         -- splitting
         {
             mods = "LEADER",
             key = "-",
-            action = act.SplitVertical {
-                domain = 'CurrentPaneDomain'
-            }
+            action = act.SplitVertical { domain = 'CurrentPaneDomain' }
         },
+
         {
             mods = "LEADER",
             key = "|",
-            action = act.SplitHorizontal {
-                domain = 'CurrentPaneDomain'
-            }
+            action = act.SplitHorizontal { domain = 'CurrentPaneDomain' }
         },
+
         -- maximize a single pane
         {
             mods = 'LEADER',
             key = '5',
             action = act.TogglePaneZoomState
         },
+
         -- rotate panes
         {
             mods = "LEADER",
             key = "Space",
             action = act.RotatePanes "Clockwise"
         },
+
         -- show the pane selection mode, but have it swap the active and selected panes
         {
             mods = 'LEADER',
@@ -150,6 +162,7 @@ local config = {
                 mode = 'SwapWithActive'
             }
         },
+
         -- activate copy mode or vim mode
         {
             key = 'Enter',
@@ -168,6 +181,8 @@ local config = {
         split_nav('resize', 'RightArrow'),
         split_nav('resize', 'UpArrow'),
         split_nav('resize', 'DownArrow'),
+
+        -- C-S-l activates the debug overlay (implemented by default)
     }
 }
 

@@ -1,20 +1,16 @@
 # : << EOF
 # https://github.com/gpakosz/.tmux
 
-# --------------------------------------------------------- Display -------------------------------------------------------------------
-
-# RGB 24-bit colour support, possible values are:
+# --------------------------------------------------------- Bindings -------------------------------------------------------------------
+# preserve tmux stock bindings,
+# while adding bindings that don't conflict with these stock bindings
+# /!\ this disables some of Oh my tmux! bindings described in README.md
 #   - true
-#   - false
-#   - auto (default)
-#
-# automatic detection relies on the COLORTERM environment variable being defined
-# to 'truecolor' or '24bit' or '$ tput colors' answering '16777216'
-# see https://github.com/termstandard/colors
-tmux_conf_24b_colour=true
+#   - false (default)
+tmux_conf_preserve_stock_bindings=false
 
 
-# -------------------------------------- Preferences for creation of new sessions, windows & panes -----------------------------------------------------
+# -------------------------------- Preferences for creation of new sessions, windows & panes --------------------------------------------
 # -- session creation -----------------
 
 # prompt for session name when creating a new session, possible values are:
@@ -23,6 +19,11 @@ tmux_conf_24b_colour=true
 #   - disabled (do not modify new-session bindings)
 tmux_conf_new_session_prompt=false
 
+# new session retains current path, possible values are:
+#   - true
+#   - false (default)
+#   - disabled (do not modify new-session bindings)
+tmux_conf_new_session_retain_current_path=false
 
 # -- windows & pane creation -----------------
 
@@ -51,7 +52,16 @@ tmux_conf_new_pane_retain_current_path=true
 tmux_conf_new_pane_reconnect_ssh=true
 
 
-# -------------------------------------------------------------------------- Theming -------------------------------------------------------------------
+# --------------------------------------------------------- Theming -------------------------------------------------------------
+# RGB 24-bit colour support, possible values are:
+#   - true
+#   - false
+#   - auto (default)
+#
+# automatic detection relies on the COLORTERM environment variable being defined
+# to 'truecolor' or '24bit' or '$ tput colors' answering '16777216'
+# see https://github.com/termstandard/colors
+tmux_conf_24b_colour=true
 
 # enable or disable theming:
 #   - enabled (default)
@@ -71,7 +81,7 @@ tmux_conf_theme_colour_3="#8a8a8a"    # light gray
 tmux_conf_theme_colour_4="#00ff00"    # bright green
 tmux_conf_theme_colour_5="#00ff00"    # green
 tmux_conf_theme_colour_6="#080808"    # dark gray
-tmux_conf_theme_colour_7="#e4e4e4"    # white
+tmux_conf_theme_colour_7="#ffffff"    # white
 tmux_conf_theme_colour_8="#080808"    # dark gray
 tmux_conf_theme_colour_9="#ffff00"    # yellow
 tmux_conf_theme_colour_10="#ff00af"   # pink
@@ -146,10 +156,10 @@ tmux_conf_theme_mode_attr="bold"
 
 # status line style
 tmux_conf_theme_status_fg="$tmux_conf_theme_colour_3"
-tmux_conf_theme_status_bg="$tmux_conf_theme_colour_1"r
+tmux_conf_theme_status_bg="$tmux_conf_theme_colour_1"
 tmux_conf_theme_status_attr="none"
 
-# terminal title
+#------------ terminal title
 #   - built-in variables are:
 #     - #{circled_window_index}
 #     - #{circled_session_name}
@@ -159,9 +169,9 @@ tmux_conf_theme_status_attr="none"
 #     - #{hostname_full_ssh}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_terminal_title="#h ❐ #S ● #I #W"
+tmux_conf_theme_terminal_title="#{hostname} ❐#S●#I #W"
 
-# window status style
+#------------------------ window status style
 #   - built-in variables are:
 #     - #{circled_window_index}
 #     - #{circled_session_name}
@@ -171,7 +181,7 @@ tmux_conf_theme_terminal_title="#h ❐ #S ● #I #W"
 #     - #{hostname_full_ssh}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_window_status_fg="$tmux_conf_theme_colour_3"
+tmux_conf_theme_window_status_fg="$tmux_conf_theme_colour_2"
 tmux_conf_theme_window_status_bg="$tmux_conf_theme_colour_1"
 tmux_conf_theme_window_status_attr="none"
 tmux_conf_theme_window_status_format="#I #W#{?#{||:#{window_bell_flag},#{window_zoomed_flag}}, ,}#{?window_bell_flag,!,}#{?window_zoomed_flag,Z,}"
@@ -210,6 +220,7 @@ tmux_conf_theme_window_status_last_fg="$tmux_conf_theme_colour_4"
 tmux_conf_theme_window_status_last_bg="$tmux_conf_theme_colour_2"
 tmux_conf_theme_window_status_last_attr="none"
 
+# ---------------------- General Status bar styling
 # status left/right sections separators
 tmux_conf_theme_left_separator_main=""
 tmux_conf_theme_left_separator_sub="|"
@@ -292,47 +303,47 @@ tmux_conf_theme_synchronized_bg="none"
 tmux_conf_theme_synchronized_attr="none"
 
 # battery bar symbols
-tmux_conf_battery_bar_symbol_full="◼"
-tmux_conf_battery_bar_symbol_empty="◻"
+# tmux_conf_battery_bar_symbol_full="◼"
+# tmux_conf_battery_bar_symbol_empty="◻"
 #tmux_conf_battery_bar_symbol_full="♥"
 #tmux_conf_battery_bar_symbol_empty="·"
 
 # battery bar length (in number of symbols), possible values are:
 #   - auto
 #   - a number, e.g. 5
-tmux_conf_battery_bar_length="auto"
+# tmux_conf_battery_bar_length="auto"
 
 # battery bar palette, possible values are:
 #   - gradient (default)
 #   - heat
 #   - "colour_full_fg,colour_empty_fg,colour_bg"
-tmux_conf_battery_bar_palette="gradient"
+# tmux_conf_battery_bar_palette="gradient"
 #tmux_conf_battery_bar_palette="#d70000,#e4e4e4,#000000"   # red, white, black
 
 # battery hbar palette, possible values are:
 #   - gradient (default)
 #   - heat
 #   - "colour_low,colour_half,colour_full"
-tmux_conf_battery_hbar_palette="gradient"
+# tmux_conf_battery_hbar_palette="gradient"
 #tmux_conf_battery_hbar_palette="#d70000,#ff5f00,#5fff00"  # red, orange, green
 
 # battery vbar palette, possible values are:
 #   - gradient (default)
 #   - heat
 #   - "colour_low,colour_half,colour_full"
-tmux_conf_battery_vbar_palette="gradient"
+# tmux_conf_battery_vbar_palette="gradient"
 #tmux_conf_battery_vbar_palette="#d70000,#ff5f00,#5fff00"  # red, orange, green
 
 # symbols used to indicate whether battery is charging or discharging
-tmux_conf_battery_status_charging="↑"       # U+2191
-tmux_conf_battery_status_discharging="↓"    # U+2193
+# tmux_conf_battery_status_charging="↑"       # U+2191
+# tmux_conf_battery_status_discharging="↓"    # U+2193
 #tmux_conf_battery_status_charging="🔌"     # U+1F50C
 #tmux_conf_battery_status_discharging="🔋"  # U+1F50B
 
 # clock style (when you hit <prefix> + t)
 # you may want to use %I:%M %p in place of %R in tmux_conf_theme_status_right
-tmux_conf_theme_clock_colour="$tmux_conf_theme_colour_4"
-tmux_conf_theme_clock_style="12"
+# tmux_conf_theme_clock_colour="$tmux_conf_theme_colour_4"
+# tmux_conf_theme_clock_style="12"
 
 
 # -- clipboard --------------------------
@@ -347,17 +358,20 @@ tmux_conf_copy_to_os_clipboard=true
 
 # -------------------------------------- user customizations ------------------------------------------------------- # this is the place to override or undo settings
 
+# if you don't want Oh my tmux! to alter a binding, use #!important
 # increase history size
 #set -g history-limit 10000
 
 # start with mouse mode enabled
 set -g mouse on
+# unbind toggle mouse binding of oh-my-tmux
+unbind m #!important
 
 # set the time delay after which tmux sends escape in milliseconds
 set -sg escape-time 0
 
 # force Vi mode
-#   really you should export VISUAL or EDITOR environment variable, see manual
+# really you should export VISUAL or EDITOR environment variable, see manual
 set -g status-keys vi
 set -g mode-keys vi
 
@@ -365,11 +379,26 @@ set -g mode-keys vi
 # set -gu prefix2
 # unbind C-b
 
-# if you don't want Oh my tmux! to alter a binding, use #!important
-# bind c new-window -c '#{pane_current_path}' #!important
+#--------- Session manipulation
+bind n new-session #!important
+
+#--------- Window manipulation
+bind t new-window -c '#{pane_current_path}' #!important
+unbind c #!important
 bind - split-window -v -c "#{pane_current_path}" #!important
 bind | split-window -h -c "#{pane_current_path}" #!important
+bind Tab next-window #!important
+bind BTab previous-window #!important
 
+# ------------ Pane manipulation
+# maximize current pane
+bind 5 run "cut -c3- '#{TMUX_CONF}' | sh -s _maximize_pane '#{session_name}' '#D'" #!important
+# pane resizing
+# bind -r A-Left resize-pane -L l
+# bind -r A-Down resize-pane -D 3
+# bind -r A-Up resize-pane -U 2
+# bind -r A-Right resize-pane -R 3
+#
 # move status line to top
 set -g status-position top
 
@@ -415,7 +444,7 @@ tmux_conf_uninstall_plugins_on_reload=true
 
 # to enable a plugin, use the 'set -g @plugin' syntax:
 # visit https://github.com/tmux-plugins for available plugins
-set -g @plugin 'tmux-plugins/tmux-resurrect'
+# set -g @plugin 'tmux-plugins/tmux-resurrect'
 # set -g @plugin 'tmux-plugins/tmux-continuum'
 # set -g @continuum-restore 'on'
 set -g @plugin 'IngoMeyer441/tmux-easy-motion'
