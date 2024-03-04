@@ -83,12 +83,12 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 # defaults delete -g ApplePressAndHoldEnabled
 
 # First key repeat delay, default is 15 (225 ms); 1 = 15ms
-defaults write -g InitialKeyRepeat -float 40.0
+defaults write -g InitialKeyRepeat -float 20
 # or
 # defaults write -g InitialKeyRepeat -float 10.0
 
 # Subsequent key repeat delay, default is 2 (30 ms); 1 = 15ms
-defaults write NSGlobalDomain KeyRepeat -float 1.0
+defaults write NSGlobalDomain KeyRepeat -float 1.5
 # or
 # defaults write -g KeyRepeat -float 1.0
 

@@ -61,15 +61,15 @@
   delf (fork bspc (unshift del) (lsft rsft))
 )
 
-(defalias
-  tlc (chord tltr tl)
-  trc (chord tltr tr)
-)
-
 (defchords tltr 500
   (tl  ) @tl
   (  tr) @tr
   (tl tr) @tltr
+)
+
+(defalias
+  tlc (chord tltr tl)
+  trc (chord tltr tr)
 )
 
 ;; First layer
@@ -82,14 +82,23 @@
 )
 
 (defalias
-  ;; sticky
+  ;; sticky modifiers
   sMet (one-shot-release $ost lmet)
   sCtl (one-shot-release $ost lctl)
   sAlt (one-shot-release $ost lalt)
   sSft (one-shot-release $ost lsft)
   sFn (one-shot-release $ost fn)
-  sWin (multi (one-shot-release $ost lmet) (one-shot-release $ost lctl) (one-shot-release $ost lalt)) ;; window manager key (meant for window manipulation)
-  sHyp (multi (one-shot-press $ost lmet) (one-shot-press $ost lctl) (one-shot-press $ost lalt) (one-shot-press $ost lsft)) ;; hyper key (meant for popping up different UI elements from apps on screen)
+  sWin (multi
+    (one-shot-release $ost lmet)
+    (one-shot-release $ost lctl)
+    (one-shot-release $ost lalt)
+  ) ;; window manager key (meant for window manipulation)
+  sHyp (multi
+    (one-shot-press $ost lmet)
+    (one-shot-press $ost lctl)
+    (one-shot-press $ost lalt)
+    (one-shot-press $ost lsft)
+  ) ;; hyper key (meant for popping up different UI elements from apps on screen)
 
   cw (caps-word 2000)
 
@@ -103,39 +112,67 @@
   _   esc   @sWin    XX     XX    XX       XX     @btb   up   tab    @cw   _
   _   @sAlt  @sCtl  @sSft  @sMet  XX      @pguf  left  down  rght   @pgdf   _
   _   @sFn   XX     @sHyp   XX    XX       XX      XX    bspc  del     XX   _
-               XX                  _                 @tr
+               _                  _                 _
 )
 
 (defalias
+  ;; symbols fork
   excf (fork @exc (unshift grv) (lsft rsft))
   atsf (fork @ats @til (lsft rsft))
   octf (fork @oct @car (lsft rsft))
   dolf (fork @dol @per (lsft rsft))
+
+  ;; brackets forks
   curf (fork @cuo @cuc (lsft rsft))
   parf (fork @pao @pac (lsft rsft))
   sqrf (fork [ (unshift ]) (lsft rsft))
+
+  ;; function forks
+  1f (fork 1 (unmod f1)(fn))
+  2f (fork 2 (unmod f2)(fn))
+  3f (fork 3 (unmod f3)(fn))
+  4f (fork 4 (unmod f4)(fn))
+  5f (fork 5 (unmod f5)(fn))
+  6f (fork 6 (unmod f6)(fn))
+  7f (fork 7 (unmod f7)(fn))
+  8f (fork 8 (unmod f8)(fn))
+  9f (fork 9 (unmod f9)(fn))
+  0f (fork 0 (unmod f10)(fn))
+  minf (fork min (unmod f11)(fn))
+  pluf (fork @plu (unmod f12)(fn))
 )
+
 
 ;; TR layer
 (deflayer tr
-  _   @excf @atsf @octf  @dolf    XX       XX    7   8   9   @plu  eql
-  _   @amp  @pip  @curf  @parf  @sqrf      @ast  4   5   6   min   _
-  _    XX    @ano   @anc   XX      XX        _   0   1   2   3     _
-                 @tl                   _                XX
+  _   @excf @atsf @octf  @dolf    XX       XX    @7f   @8f   @9f   @pluf  eql
+  _   @amp  @pip  @curf  @parf  @sqrf      @ast  @4f   @5f   @6f   @minf   _
+  _    XX    @ano   @anc   XX      XX        _   @0f   @1f   @2f   @3f     _
+                 _                   _                _
 )
 
 (defalias
   srs (cmd /usr/local/bin/dash -c "/usr/bin/open -a ScreenSaverEngine")
   zzz (cmd /usr/local/bin/dash -c "/usr/bin/pmset sleepnow")
-  voldf (fork vold (unshift mute) (lsft rsft))
   scref (fork @srs @zzz (lsft rsft))
+  voldf (fork vold (unshift mute) (lsft rsft))
   medif (fork next (unshift prev) (lsft rsft))
+  dms dynamic-macro-record-stop
+  dst (dynamic-macro-record-stop-truncate 1)
+  dr0 (dynamic-macro-record 0)
+  dr1 (dynamic-macro-record 1)
+  dr2 (dynamic-macro-record 2)
+  dp0 (dynamic-macro-play 0)
+  dp1 (dynamic-macro-play 1)
+  dp2 (dynamic-macro-play 2)
+  tddm0 (tap-dance 200 (@dp0 @dr0))
+  tddm1 (tap-dance 200 (@dp1 @dr1))
 )
 
 ;; TLTR layer
 (deflayer tltr
-  _    @scref  brup    pp     volu   XX            XX    XX   XX   XX   XX    XX
-  _    XX      lrld      XX    XX    XX            XX    XX   XX   XX   XX    _
-  _    brdown  @medif  @voldf  XX    XX            XX    XX   XX   XX   XX    _
-                 XX                         _                     XX
+  @tddm0  @scref  brup    pp   volu   XX            XX   XX   XX   XX   XX  XX
+  -        XX      XX     XX    XX    XX            XX   XX   XX   XX   XX  XX
+  _       brdown  @medif @voldf  XX   XX            XX   XX   XX   XX   XX   _
+                 _                         _                     _
 )

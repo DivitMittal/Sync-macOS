@@ -79,4 +79,5 @@ yabai -m rule --add app="^Calculator$" sticky=on
 
 echo "yabai configuration loaded..."
 
-
+sudo /Users/div/.local/bin/kanata --cfg /Users/div/Sync-macOS/mackup/.config/kanata/custom.kbd 1> /dev/null 2> /private/tmp/rs.kanata.err.log
+read -d "q" -t 2 --

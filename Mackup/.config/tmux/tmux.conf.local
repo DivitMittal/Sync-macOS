@@ -77,7 +77,7 @@ tmux_conf_theme=enabled
 # default theme
 tmux_conf_theme_colour_1="default"    # default of the tty i.e., transparent
 tmux_conf_theme_colour_2="#000000"    # black
-tmux_conf_theme_colour_3="#8a8a8a"    # light gray
+tmux_conf_theme_colour_3="#000000"    # black
 tmux_conf_theme_colour_4="#00ff00"    # bright green
 tmux_conf_theme_colour_5="#00ff00"    # green
 tmux_conf_theme_colour_6="#080808"    # dark gray
@@ -86,7 +86,7 @@ tmux_conf_theme_colour_8="#080808"    # dark gray
 tmux_conf_theme_colour_9="#ffff00"    # yellow
 tmux_conf_theme_colour_10="#ff00af"   # pink
 tmux_conf_theme_colour_11="#5fff00"   # green
-tmux_conf_theme_colour_12="#8a8a8a"   # light gray
+tmux_conf_theme_colour_12="#000000"   # black
 tmux_conf_theme_colour_13="#e4e4e4"   # white
 tmux_conf_theme_colour_14="#080808"   # dark gray
 tmux_conf_theme_colour_15="#080808"   # dark gray
@@ -140,13 +140,13 @@ tmux_conf_theme_pane_indicator="$tmux_conf_theme_colour_4"
 tmux_conf_theme_pane_active_indicator="$tmux_conf_theme_colour_4"
 
 # status line style
-tmux_conf_theme_message_fg="$tmux_conf_theme_colour_1"
+tmux_conf_theme_message_fg="$tmux_conf_theme_colour_2"
 tmux_conf_theme_message_bg="$tmux_conf_theme_colour_5"
 tmux_conf_theme_message_attr="bold"
 
 # status line command style (<prefix> : Escape)
-tmux_conf_theme_message_command_fg="$tmux_conf_theme_colour_5"
-tmux_conf_theme_message_command_bg="$tmux_conf_theme_colour_1"
+tmux_conf_theme_message_command_fg="$tmux_conf_theme_colour_1"
+tmux_conf_theme_message_command_bg="$tmux_conf_theme_colour_2"
 tmux_conf_theme_message_command_attr="bold"
 
 # window modes style
@@ -155,7 +155,7 @@ tmux_conf_theme_mode_bg="$tmux_conf_theme_colour_5"
 tmux_conf_theme_mode_attr="bold"
 
 # status line style
-tmux_conf_theme_status_fg="$tmux_conf_theme_colour_3"
+tmux_conf_theme_status_fg="$tmux_conf_theme_colour_2"
 tmux_conf_theme_status_bg="$tmux_conf_theme_colour_1"
 tmux_conf_theme_status_attr="none"
 
@@ -444,13 +444,9 @@ tmux_conf_uninstall_plugins_on_reload=true
 
 # to enable a plugin, use the 'set -g @plugin' syntax:
 # visit https://github.com/tmux-plugins for available plugins
-# set -g @plugin 'tmux-plugins/tmux-resurrect'
-# set -g @plugin 'tmux-plugins/tmux-continuum'
-# set -g @continuum-restore 'on'
-set -g @plugin 'IngoMeyer441/tmux-easy-motion'
-set -g @easy-motion-prefix "j"
-# set -g @plugin 'schasse/tmux-jump'
-set -g @plugin 'sainnhe/tmux-fzf'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'schasse/tmux-jump'
+set -g @plugin 'sainnhe/tmux-fzf' # prefix + F
 set -g @plugin 'tmux-plugins/tmux-open'
 
 # ------------------------------------------------------------------- custom variables ----------------------------------------------------------
