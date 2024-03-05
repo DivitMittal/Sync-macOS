@@ -84,6 +84,10 @@ if status --is-interactive
     pyenv init - | source
     pyenv virtualenv-init - | source
 
+    #Ruby
+    # rbenv
+    rbenv init - fish | source
+
     # fifc plugin environment variables
     set -gx fifc_editor nvim
     set -gx fifc_fd_opts --hidden
