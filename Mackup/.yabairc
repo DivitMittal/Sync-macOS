@@ -4,7 +4,7 @@
 #                               NOTES                                    #
 ##########################################################################
 ####################### Modify the launchctl plist (improved performance)
-# plist xml can be found at "yabai --install-service"
+# plist xml can be found at "yabai --install-service (i.e. ~/Library/LaunchAgents/com.koekeishiya.yabai.plist)"
 # Setting dash as the shell for yabai commands.
 #
 #  <key>EnvironmentVariables</key>
@@ -79,5 +79,5 @@ yabai -m rule --add app="^Calculator$" sticky=on
 
 echo "yabai configuration loaded..."
 
+# Kanata daemon (must have a kanata sudoers file)
 sudo /Users/div/.local/bin/kanata --cfg /Users/div/Sync-macOS/mackup/.config/kanata/custom.kbd 1> /dev/null 2> /private/tmp/rs.kanata.err.log
-read -d "q" -t 2 --

@@ -78,19 +78,19 @@ defaults write com.apple.screencapture type -string "jpg"
 #####################################################
 
 # Enable key repeat on press and hold instead of various similar characters
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+defaults write -g ApplePressAndHoldEnabled -bool false
 # to restore above settings changed above
 # defaults delete -g ApplePressAndHoldEnabled
 
 # First key repeat delay, default is 15 (225 ms); 1 = 15ms
-defaults write -g InitialKeyRepeat -float 20
+defaults write -g InitialKeyRepeat -float 35
 # or
 # defaults write -g InitialKeyRepeat -float 10.0
 
 # Subsequent key repeat delay, default is 2 (30 ms); 1 = 15ms
-defaults write NSGlobalDomain KeyRepeat -float 1.5
+# defaults write NSGlobalDomain KeyRepeat -float 1.5
 # or
-# defaults write -g KeyRepeat -float 1.0
+defaults write -g KeyRepeat -float 1.0
 
 # Hides the dialog box that appears for Dictation on multiple fn key presses
 defaults write com.apple.HIToolbox AppleDictationAutoEnable -int 1
