@@ -81,3 +81,4 @@ echo "yabai configuration loaded..."
 
 # Kanata daemon (must have a kanata sudoers file)
 sudo /Users/div/.local/bin/kanata --cfg /Users/div/Sync-macOS/mackup/.config/kanata/custom.kbd 1> /dev/null 2> /private/tmp/rs.kanata.err.log
+
