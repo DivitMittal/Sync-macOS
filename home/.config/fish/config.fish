@@ -68,25 +68,23 @@ fish_add_path $brew_prefix/opt/postgresql@14/bin
 ## Rust
 fish_add_path $HOME/.cargo/bin
 
-## Python
-# pyenv
-set -gx PYENV_ROOT $HOME/.pyenv
-fish_add_path $PYENV_ROOT/bin
-pyenv init --path | source
-
 if status --is-interactive
     fish_add_path $HOME/.config/emacs/bin # Doom Emacs
     # fish_add_path /System/Library/PrivateFrameworks/Apple80211.framework/Resources #Airport Utility
 
+    ## Ruby
+    # rbenv
+    rbenv init - fish | source
+
     ## Python
-    # pyenv
+    # pip
     alias pip-uninstall-all 'pip freeze | cut -d "@" -f1 | xargs pip uninstall -y'
+    # pyenv
+    set -gx PYENV_ROOT $HOME/.pyenv
+    fish_add_path $PYENV_ROOT/bin
     pyenv init - | source
     pyenv virtualenv-init - | source
 
-    #Ruby
-    # rbenv
-    rbenv init - fish | source
 
     # fifc plugin environment variables
     set -gx fifc_editor nvim
@@ -97,6 +95,8 @@ if status --is-interactive
     # PatrickF1/fzf.fish plugin environment variables
     set -gx fzf_fd_opts --hidden
     set -gx fzf_preview_dir_cmd eza --all --color=always --icons=always --classify --group-directories-first --group --hyperlink --color-scale --color-scale-mode=gradient
+    # GNU Screen config env var
+    set -gx SCREENRC $HOME/.config/screen/screenrc
 end
 
 
