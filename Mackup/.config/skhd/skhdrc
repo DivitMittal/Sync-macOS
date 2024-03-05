@@ -95,26 +95,26 @@
 ########################################################################
 #                                 CONFIG                               #
 ########################################################################
-# General rules and keys defined to integrate seamlessly with custom TLTR keyboard layout
-#
+############## General rules and keys defined to integrate seamlessly with custom TLTR keyboard layout
 # cmd + ctrl + shift + alt or TL + d - hyper key (meant for popping stuff on the display)
-# cmd + ctrl + alt or TL + w - window key (meant for window management)
-# fn or TL + p - function key
+# cmd + ctrl + alt or TL + w - window manager key (meant for window manipulation)
+# fn or TL + x - function key
 
-### Application specific keyboard shortcuts (not part of skhdrc; for reference purpose) to be set for (spaceman)
-# ctrl + esc - refresh current spaces info
+############## Application specific keyboard shortcuts (not part of skhdrc; for reference purposes)
+# ctrl + esc - refresh current spaces info (spaceman)
 
 ################## Launcher stuff onto the screen ##################
-cmd + ctrl + shift + alt - t      : open -a "wezterm"
-cmd + ctrl + shift + alt - b      : open -a "floorp"
-cmd + ctrl + shift + alt - l      : open -a "launchpad"
-cmd + ctrl + shift + alt - return : open -a "Finder"
-# cmd + ctrl + shift + alt - f     : homerow hints
-# cmd + ctrl + shift + alt - s     : homerow search
-# cmd + ctrl + shift + alt - r     : homerow scroll
-# cmd + ctrl + shift + alt - space : launches raycast
-# cmd + ctrl + shift + alt - p     : raycast command palatte generated from the help menu
-# cmd + ctrl + shift + alt - w     : raycast list windows
+hyper - t      : open -a "wezterm"
+hyper - b      : open -a "floorp"
+hyper - l      : open -a "launchpad"
+hyper - return : open -a "Finder"
+# hyper - f     : homerow hints
+# hyper - s     : homerow search
+# hyper - r     : homerow scroll
+# hyper - space : launches raycast
+# hyper - p     : raycast command palatte generated from the help menu
+# hyper - w     : raycast list windows
+
 cmd + ctrl + alt - space  : open -a "Mission Control" # launch misson control
 
 ################## Window Manipulation ############################
@@ -140,10 +140,17 @@ cmd + ctrl + alt - 8     : yabai -m window --grid 2:1:0:0:1:1
 cmd + ctrl + alt - 2     : yabai -m window --grid 2:1:0:1:1:1
 cmd + ctrl + alt - 5     : yabai -m window --grid 1:1:0:0:1:1
 
+###### Window size
+# decrease window size 0x1B = '-'
+cmd + ctrl + alt - 0x1B : yabai -m window --resize top_left:+50:+50; yabai -m window --resize bottom_right:-50:-50; yabai -m window --resize top_right:-50:+50; yabai -m window --resize bottom_left:+50:-50
+
+# increase window size 0x18 = '=' & shift+0x18 = '+'
+cmd + ctrl + shift + alt - 0x18 : yabai -m window --resize top_left:-50:-50; yabai -m window --resize bottom_right:+50:+50; yabai -m window --resize top_right:+50:-50; yabai -m window --resize bottom_left:-50:+50
+
 ########## window positioning
 # window mirroring
-cmd + ctrl + alt - y     : yabai -m space --mirror y-axis
-cmd + ctrl + alt - x     : yabai -m space --mirror x-axis
+# cmd + ctrl + alt - y     : yabai -m space --mirror y-axis
+# cmd + ctrl + alt - x     : yabai -m space --mirror x-axis
 # window warping
 # cmd + ctrl + alt - y: yabai -m window --warp east
 # cmd + ctrl + alt - l: yabai -m window --warp north
@@ -153,28 +160,36 @@ cmd + ctrl + alt - x     : yabai -m space --mirror x-axis
 # cmd + ctrl + alt - q: yabai -m window --swap east
 # cmd + ctrl + alt - 4 : yabai -m window --swap west
 
-# Send window to desktop and follow focus
+# Send window to desktop
 cmd + ctrl + alt - tab          : yabai -m window --space next
 cmd + ctrl + shift + alt - tab  : yabai -m window --space prev
 
 ################################# Switching modes ##########################################
-# toggle sticky(+float), topmost, picture-in-picture
+############ toggle sticky(+float), topmost, picture-in-picture
 cmd + ctrl + alt - p      : yabai -m window --toggle sticky --toggle topmost --toggle pip
 # float / unfloat window and center on screen
 # cmd + ctrl + alt - space : yabai -m window --toggle float --grid 1:1:0:0:1:1
-# Windowing Layout for current space
+
+############ windowing layout for current space
 # for toggling b/w bsp & floating modes
 cmd + ctrl + alt - t      : yabai -m space --layout $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "float" else "bsp" end')
 
 ################################ Desktop/Space Manipulation ##################################
+########## manoeuvre b/w spaces
+# cycles the last space back to first when moving to right space & vice versa
 cmd + ctrl + alt - right  : id="$(yabai -m query --spaces --display | jq 'sort_by(.index) | reverse | .[map(."has-focus") | index(true) - 1].index')" && yabai -m space --focus "${id}"; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
 cmd + ctrl + alt - left   : id="$(yabai -m query --spaces --display | jq 'sort_by(.index) | .[map(."has-focus") | index(true) - 1].index')" && yabai -m space --focus "${id}"; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
+# switch spaces without cycling
 # cmd + ctrl + alt - right  : yabai -m space --focus next; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
 # cmd + ctrl + alt - left   : yabai -m space --focus prev; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
-cmd + ctrl + alt - c      : yabai -m space --create; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
-cmd + ctrl + alt - d      : yabai -m space --destroy; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
+# switch spaces using hammerspoon ipc(xpc)
 # cmd + ctrl + alt - right  : hs -c "GoNextSpace()"; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
 # cmd + ctrl + alt - left   : hs -c "GoPrevSpace()"; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
+
+########## create & delete current space
+cmd + ctrl + alt - c      : yabai -m space --create; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
+cmd + ctrl + alt - d      : yabai -m space --destroy; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
+# create & delete spaces using hammerspoon ipc(xpc)
 # cmd + ctrl + alt - d      : hs -c "RemoveCurrentSpace()"; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
 # cmd + ctrl + alt - c      : hs -c "AddSpace()"; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
 
@@ -194,14 +209,6 @@ cmd + ctrl + alt - d      : yabai -m space --destroy; sleep 0.2; cliclick kd:ctr
 # move floating window
 # shift + ctrl - a : yabai -m window --move rel:-20:0
 # shift + ctrl - s : yabai -m window --move rel:0:20
-
-# increase window size
-# shift + alt - a : yabai -m window --resize left:-20:0
-# shift + alt - w : yabai -m window --resize top:0:-20
-
-# decrease window size
-# shift + cmd - s : yabai -m window --resize bottom:0:-20
-# shift + cmd - w : yabai -m window --resize top:0:20
 
 # set insertion point in focused container
 # ctrl + alt - h : yabai -m window --insert west
