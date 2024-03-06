@@ -1,0 +1,42 @@
+(defsrc
+  tab    q    w    e    r    t         u    i    o    p   [     ]    ;; 12 keys
+  caps   a    s    d    f    g         j    k    l    ;    '    ret  ;; 12 keys
+  lsft   z    x    c    v    b         n    m    ,    .    /    rsft ;; 12 keys
+             lmet                spc               rmet               ;; 3  keys
+)
+(deftemplate shift-fork (key when-shifted-key)
+  (fork $key (unshift $when-shifted-key) (lsft rsft))
+)
+
+(deftemplate shift-fork-alias (key when-shifted-alias)
+  (fork $key $when-shifted-alias (lsft rsft))
+)
+
+
+(defchords tl-tr 500
+  (tl tr) (layer-while-held TLTR)
+)
+
+(defalias
+  tl (chord tl-tr tl)
+  tr (chord tl-tr tr)
+)
+(defalias
+  ;; volume and media controls
+  voldf (template-expand shift-fork vold mute)
+  medif (template-expand shift-fork next prev)
+
+  ;; Dynamic macro
+  ;; dms dynamic-macro-record-stop
+  dst (dynamic-macro-record-stop-truncate 4)
+  dr (dynamic-macro-record 0)
+  dp (dynamic-macro-play 0)
+  dmr (tap-dance 200 (@dr @dst))
+)
+
+(deflayer TLTR
+  _  XX  brup    pp   volu  XX            XX   XX   XX   XX  XX   a
+  _    XX     XX     XX    XX  @dmr           XX   XX   XX   XX  @dp  _
+  _  brdown @medif @voldf  XX   XX            XX   XX   XX   XX  XX   _
+             @tl                       lrld                    @tr
+)
