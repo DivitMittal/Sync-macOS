@@ -92,30 +92,31 @@
 #
 #               an EOL character signifies the end of the bind.
 
+
 ########################################################################
 #                                 CONFIG                               #
 ########################################################################
 ############## General rules and keys defined to integrate seamlessly with custom TLTR keyboard layout
-# cmd + ctrl + shift + alt or TL + d - hyper key (meant for popping stuff on the display)
-# cmd + ctrl + alt or TL + w - window manager key (meant for window manipulation)
-# fn or TL + x - function key
+# cmd + ctrl + shift + alt or TL + d : hyper key (meant for popping stuff on the display)
+# cmd + ctrl + alt or TL + w         : window manager key (meant for window manipulation)
+# fn or TL + x                       : function key
 
 ############## Application specific keyboard shortcuts (not part of skhdrc; for reference purposes)
-# ctrl + esc - refresh current spaces info (spaceman)
+# hyper - space : raycast launch
+# hyper - p     : raycast command palatte generated from the menu bar's menu
+# hyper - w     : raycast list windows
+# hyper - f     : homerow hints
+# hyper - /     : homerow search
+# hyper - r     : homerow scroll
+# ctrl + esc    : spaceman refresh current spaces info
+# hyper - m     : menuwhere menu under the mouse cursor
+# hyper - h     : bartender hidden menu bar items
 
 ################## Launcher stuff onto the screen ##################
-hyper - t      : open -a "wezterm"
-hyper - b      : open -a "floorp"
-hyper - l      : open -a "launchpad"
-hyper - return : open -a "Finder"
-# hyper - f     : homerow hints
-# hyper - s     : homerow search
-# hyper - r     : homerow scroll
-# hyper - space : launches raycast
-# hyper - p     : raycast command palatte generated from the help menu
-# hyper - w     : raycast list windows
-
-cmd + ctrl + alt - space  : open -a "Mission Control" # launch misson control
+hyper - return            : open -a "wezterm"
+hyper - l                 : open -a "launchpad"
+hyper - e                 : open -a "Finder"
+cmd + ctrl + alt - space  : open -a "Mission Control"
 
 ################## Window Manipulation ############################
 ######### focus window
@@ -142,7 +143,7 @@ cmd + ctrl + alt - 5     : yabai -m window --grid 1:1:0:0:1:1
 
 ###### Window size
 # decrease window size 0x1B = '-'
-cmd + ctrl + alt - 0x1B : yabai -m window --resize top_left:+50:+50; yabai -m window --resize bottom_right:-50:-50; yabai -m window --resize top_right:-50:+50; yabai -m window --resize bottom_left:+50:-50
+cmd + ctrl + alt - 0x1B         : yabai -m window --resize top_left:+50:+50; yabai -m window --resize bottom_right:-50:-50; yabai -m window --resize top_right:-50:+50; yabai -m window --resize bottom_left:+50:-50
 
 # increase window size 0x18 = '=' & shift+0x18 = '+'
 cmd + ctrl + shift + alt - 0x18 : yabai -m window --resize top_left:-50:-50; yabai -m window --resize bottom_right:+50:+50; yabai -m window --resize top_right:+50:-50; yabai -m window --resize bottom_left:-50:+50
@@ -152,15 +153,15 @@ cmd + ctrl + shift + alt - 0x18 : yabai -m window --resize top_left:-50:-50; yab
 # cmd + ctrl + alt - y     : yabai -m space --mirror y-axis
 # cmd + ctrl + alt - x     : yabai -m space --mirror x-axis
 # window warping
-# cmd + ctrl + alt - y: yabai -m window --warp east
-# cmd + ctrl + alt - l: yabai -m window --warp north
-# cmd + ctrl + alt - : yabai -m window --warp north
-# cmd + ctrl + alt - : yabai -m window --warp south
+# cmd + ctrl + alt - y     : yabai -m window --warp east
+# cmd + ctrl + alt - l     : yabai -m window --warp north
+# cmd + ctrl + alt -       : yabai -m window --warp north
+# cmd + ctrl + alt -       : yabai -m window --warp south
 # swap managed window
-# cmd + ctrl + alt - q: yabai -m window --swap east
-# cmd + ctrl + alt - 4 : yabai -m window --swap west
+# cmd + ctrl + alt - q     : yabai -m window --swap east
+# cmd + ctrl + alt - 4     : yabai -m window --swap west
 
-# Send window to desktop
+# Send window to virtual desktop/space
 cmd + ctrl + alt - tab          : yabai -m window --space next
 cmd + ctrl + shift + alt - tab  : yabai -m window --space prev
 
@@ -192,30 +193,4 @@ cmd + ctrl + alt - d      : yabai -m space --destroy; sleep 0.2; cliclick kd:ctr
 # create & delete spaces using hammerspoon ipc(xpc)
 # cmd + ctrl + alt - d      : hs -c "RemoveCurrentSpace()"; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
 # cmd + ctrl + alt - c      : hs -c "AddSpace()"; sleep 0.2; cliclick kd:ctrl kp:esc ku:ctrl
-
-
-############################################################################
-#                             Un-implemented Samples                      #
-############################################################################
-# balance size of windows
-# shift + alt - 0 : yabai -m space --balance
-
-# create desktop, move window and follow focus - uses jq for parsing json (brew install jq)
-# shift + cmd - n : yabai -m space --create && \
-#                   index="$(yabai -m query --spaces --display | jq 'map(select(."is-native-fullscreen" == false))[-1].index')" && \
-#                   yabai -m window --space "${index}" && \
-#                   yabai -m space --focus "${index}"
-
-# move floating window
-# shift + ctrl - a : yabai -m window --move rel:-20:0
-# shift + ctrl - s : yabai -m window --move rel:0:20
-
-# set insertion point in focused container
-# ctrl + alt - h : yabai -m window --insert west
-
-# toggle window zoom
-# alt - d : yabai -m window --toggle zoom-parent
-# alt - f : yabai -m window --toggle zoom-fullscreen
-# toggle window split type
-# alt - e : yabai -m window --toggle split
 

@@ -1,9 +1,7 @@
-(A Document Being Saved By Sparkle)
 AlDente.app
 AltTab.app
 Bartender 5.app
 Floorp.app
-Google Chrome Dev.app
 Hammerspoon.app
 Homerow.app
 JetBrains Toolbox.app
