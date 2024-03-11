@@ -6,6 +6,7 @@
 set newtab about:blank
 
 bind N back
+bind F hint -t
 bind I forward
 bind U undo
 bind u scrollline -1
@@ -14,18 +15,19 @@ bind n scrollpx -25
 bind i scrollpx 25
 bind gd tabdetach
 
-set hintdelay 100
+set hintdelay 10
 " hint chars for Colemak-mod-DH keyboard layout
 set hintchars tnseriaodhfuwyqlp
+set hintuppercase false
 
 " Sets nvim(editor) inside kitty(terminal emulator) as preferred editor
 set editorcmd /usr/local/bin/kitty -e 'nvim'
 
-" " Inject Google Translate
-" " This (clearly) is remotely hosted code. Google will be sent the whole contents of the page you are on if you run `:translate`
-" " From https://github.com/jeremiahlee/page-translator
+" Inject Google Translate
+" This (clearly) is remotely hosted code. Google will be sent the whole contents of the page you are on if you run `:translate`
+" From https://github.com/jeremiahlee/page-translator
 command translate js let googleTranslateCallback = document.createElement('script'); googleTranslateCallback.innerHTML = "function googleTranslateElementInit(){ new google.translate.TranslateElement(); }"; document.body.insertBefore(googleTranslateCallback, document.body.firstChild); let googleTranslateScript = document.createElement('script'); googleTranslateScript.charset="UTF-8"; googleTranslateScript.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit&tl=&sl=&hl="; document.body.insertBefore(googleTranslateScript, document.body.firstChild);
 
-" " Suspend / "discard" all tabs - handy for stretching out battery life
+" Suspend / "discard" all tabs - handy for stretching out battery life
 command discardall jsb browser.tabs.query({}).then(ts => browser.tabs.discard(ts.map(t=>t.id)))
 

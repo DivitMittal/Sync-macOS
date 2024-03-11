@@ -1,5 +1,6 @@
-huggingface-hub 0.21.3
+huggingface-hub 0.21.4
 mac-cleanup 3.0.4
 mackup 0.8.40
 pipenv 2023.12.1
+radian 0.6.12
 virtualenv 20.25.1

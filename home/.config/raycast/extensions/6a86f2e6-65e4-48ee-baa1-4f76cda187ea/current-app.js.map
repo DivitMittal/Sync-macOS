@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/current-app.ts"],
+  "sourcesContent": ["import { Clipboard, getFrontmostApplication, showHUD } from \"@raycast/api\";\n\nexport default async function Command() {\n  const frontmostApplication = await getFrontmostApplication();\n  if (frontmostApplication.bundleId) {\n    await Clipboard.copy(frontmostApplication.bundleId);\n    await showHUD(`Copied bundle id ${frontmostApplication.bundleId}`);\n  } else {\n    await showHUD(\"Can't copy current app's bundle id\");\n  }\n}\n"],
+  "mappings": "yaAAA,IAAAA,EAAA,GAAAC,EAAAD,EAAA,aAAAE,IAAA,eAAAC,EAAAH,GAAA,IAAAI,EAA4D,wBAE5D,eAAOF,GAAiC,CACtC,IAAMG,EAAuB,QAAM,2BAAwB,EACvDA,EAAqB,UACvB,MAAM,YAAU,KAAKA,EAAqB,QAAQ,EAClD,QAAM,WAAQ,oBAAoBA,EAAqB,UAAU,GAEjE,QAAM,WAAQ,oCAAoC,CAEtD",
+  "names": ["current_app_exports", "__export", "Command", "__toCommonJS", "import_api", "frontmostApplication"]
+}

@@ -10,8 +10,8 @@ Menuwhere.app
 Microsoft Excel.app
 Microsoft OneNote.app
 Microsoft Teams (work or school).app
-Microsoft Word.app
 Notion.app
+ONLYOFFICE.app
 Obsidian.app
 OneDrive.app
 PDF Expert.app
