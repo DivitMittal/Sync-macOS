@@ -69,6 +69,7 @@ fish_add_path $brew_prefix/opt/postgresql@14/bin
 fish_add_path $HOME/.cargo/bin
 
 if status --is-interactive
+    ####################################   Config when fish is interactive ###############################################3
     fish_add_path $HOME/.config/emacs/bin # Doom Emacs
     # fish_add_path /System/Library/PrivateFrameworks/Apple80211.framework/Resources #Airport Utility
 
@@ -97,11 +98,8 @@ if status --is-interactive
     set -gx fzf_preview_dir_cmd eza --all --color=always --icons=always --classify --group-directories-first --group --hyperlink --color-scale --color-scale-mode=gradient
     # GNU Screen config env var
     set -gx SCREENRC $HOME/.config/screen/screenrc
-end
 
-
-############################################ Aliases #################################################
-if status --is-interactive
+    ############################################ Aliases #################################################
     alias showpath 'echo $PATH | sed "s/ /\n/g"'
     alias showid "id | sed 's/ /\n/g' | sed 's/,/\n/g'"
 
@@ -143,11 +141,9 @@ if status --is-interactive
     abbr --position command --add gitpl 'git pull'
     abbr --position command --add gitf 'git fetch'
     abbr --position command --add gitc 'git commit'
-end
 
 
-####################################### Initializations ###############################################
-if status --is-interactive
+    ####################################### Initializations ###############################################
     # Run Fastfetch - fetch system info
     if type -q fastfetch && test "$TERM_PROGRAM" = "WezTerm" && test "$TERM" = "xterm-256color"
         ff
