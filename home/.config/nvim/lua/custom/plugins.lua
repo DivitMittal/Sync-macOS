@@ -277,6 +277,14 @@ local plugins = {
       { "<A-Left>", '<cmd>lua require("smart-splits").resize_left() <CR>', desc = "resize pane left across splits" },
     }
   },
+
+  {
+    'tridactyl/vim-tridactyl',
+    enabled = true,
+    cond = not vim.g.vscode,
+    event = "VeryLazy"
+  },
+
 }
 
 return plugins
