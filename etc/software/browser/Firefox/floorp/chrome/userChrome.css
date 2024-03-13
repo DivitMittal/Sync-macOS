@@ -19,12 +19,6 @@ Quote: https://userChrome.org | https://github.com/topics/userchrome
 @charset "UTF-8";
 @-moz-document url(chrome://browser/content/browser.xhtml) {
 /* Please write your custom CSS under this line*/
-  #sidebar {
-    max-width: none !important;
-    min-width: 0 !important;
-    width: 350px !important;
-  }
-
   .titlebar-buttonbox-container {
     display:none!important;
   }
