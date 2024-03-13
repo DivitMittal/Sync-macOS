@@ -3,11 +3,11 @@
 	email = 64.69.76.69.74.m@gmail.com
 
 [core]
-	editor        = nvim
-	pager		  = delta
-	autocrlf      = input
-	ignorecase    = false
-	excludesfile  = ~/.gitignore
+	editor       = nvim
+	pager        = delta
+	autocrlf     = input
+	ignorecase   = false
+	excludesfile = ~/.config/git/ignore
 
 [init]
 	defaultBranch = master
