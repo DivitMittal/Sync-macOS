@@ -134,8 +134,8 @@
   gra (unshift grv)
 
   ;; symbols' forks
-  ampf (template-expand shift-fork-alias @amp @ats)
-  pipf (template-expand shift-fork-alias @pip @exc)
+  ampf (template-expand shift-fork-alias @amp @til)
+  pipf (template-expand shift-fork-alias @pip @gra)
 
   ;; brackets' forks
   curf (template-expand shift-fork-alias @cuo @cuc)
@@ -159,7 +159,7 @@
 
 ;; TR (Thumb Right) layer (symbols & numbers)
 (deflayer TR
-  _   @gra  @til   @oct   @dol   XX        @perf  @7f   @8f   @9f   @plu  eql
+  _   @exc  @ats   @oct   @dol  @car        @perf  @7f   @8f   @9f   @plu  eql
   _   @ampf @pipf  @curf  @parf @sqrf      @astf  @4f   @5f   @6f   min    _
   _    XX   @ano  @anc    XX    XX         /     @0f   @1f   @2f   @3f    _
                      _                   _               XX
