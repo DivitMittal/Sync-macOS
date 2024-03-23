@@ -1,25 +1,15 @@
 # .bash_profile -*- mode: sh -*-
+# loaded on interactive login, in the following order, 1.~/.bash_profile 2.~/.bash_login 3.~/.profile
 
-# Load interactive settings
+export BADOTDIR="$HOME/.config/bash"
+
+# Load interactive login settings
+if [[ -f $BADOTDIR/.profile ]]; then
+  source $BADOTDIR/.profile
+fi
+
+# Load interactive non-login settings
 if [[ -f $HOME/.bashrc ]]; then
   source $HOME/.bashrc
 fi
-
-# Place for hosting Git repos
-export GIT_HOSTING='git@github.com:DivitMittal'
-
-# Don't check mail when opening terminal.
-unset MAILCHECK
-
-# Change this to your console based IRC client of choice.
-export IRC_CLIENT='weechat'
-
-# Set Xterm/screen/Tmux title with only a short hostname.
-export SHORT_HOSTNAME=$(hostname -s)
-
-# Set Xterm/screen/Tmux title with only a short username.
-export SHORT_USER=${USER:0:8}
-
-# Set Xterm/screen/Tmux title with shortened command and directory.
-export SHORT_TERM_LINE=true
 

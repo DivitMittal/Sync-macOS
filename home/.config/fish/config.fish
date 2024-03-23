@@ -31,6 +31,8 @@ fish_add_path $HOME/.local/bin
 ################################## Additional Programs ##############################################
 ## Homebrew
 set -gx HOMEBREW_NO_ENV_HINTS 1
+set -gx HOMEBREW_BUNDLE_FILE "$HOME/.config/brew/Brewfile"
+
 # Homebrew paths
 fish_add_path $brew_prefix/bin
 fish_add_path $brew_prefix/sbin
@@ -122,7 +124,7 @@ if status --is-interactive
     alias apps-backup "env ls /Applications/ 1> $HOME/Sync-macOS/etc/ref-txts/apps_(date +%b%y).txt"
     alias gem-ultimate 'sudo gem update; sudo gem cleanup'
     alias pipx-ultimate 'pipx upgrade-all; pipx list --short 1> ~/Sync-macOS/etc/ref-txts/pipx_list.txt'
-    alias brew-ultimate 'brew update; and brew upgrade; and brew autoremove; and brew cleanup -s --prune=0; and brew bundle dump --file=~/.Brewfile --force; and rm -rf (brew --cache)'
+    alias brew-ultimate 'brew update; and brew upgrade; and brew autoremove; and brew cleanup -s --prune=0; and brew bundle dump --force; and rm -rf (brew --cache)'
     alias mac-ultimate 'sudo -v; brew-ultimate; apps-backup'
 
     # Recursively delete `.DS_Store` files for macOS

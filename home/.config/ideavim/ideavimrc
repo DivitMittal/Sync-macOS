@@ -91,3 +91,4 @@ Plug 'michaeljsmith/vim-indent-object'
 " => Plugins Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <CR> :action KJumpAction.Char2<cr>
+

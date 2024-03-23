@@ -7,6 +7,8 @@ brew_prefix='/usr/local'
 PS1="%F{cyan}%~%f %# "
 
 ## Environment Variables
+export BADOTDIR="$HOME/.config/bash"
+export HISTFILE=${BADOTDIR:-$HOME}/.bash_history
 export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
 export TERM='xterm-256color'

@@ -18,6 +18,9 @@ nnoremap u <nop>
 " Make Vim more usefula
 set nocompatible
 
+" disable viminfo logging
+set viminfofile=NONE
+
 " Set line numbers
 set number
 set relativenumber
