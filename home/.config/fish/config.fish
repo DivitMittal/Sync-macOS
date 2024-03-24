@@ -93,18 +93,19 @@ if status --is-interactive
   set -gx FZF_DEFAULT_OPTS "--multi --cycle --border --height 50% --bind='space:toggle' --bind='tab:down' --bind='btab:up' --no-scrollbar --marker='*' --preview-window=wrap"
   set -gx FZF_DEFAULT_COMMAND 'fd --hidden'
 
-  # PatrickF1/fzf.fish plugin environment variables
+  # PatrickF1/fzf.fish plugin
   set -gx fzf_fd_opts --hidden
   set -gx fzf_preview_dir_cmd eza --all --color=always --icons=always --classify --group-directories-first --group --hyperlink --color-scale --color-scale-mode=gradient
-  set fzf_diff_highlighter delta --paging=never --width=20
-  set fzf_preview_file_cmd bat
+  set -gx fzf_diff_highlighter delta --paging=never --width=20
+  set -gx fzf_preview_file_cmd bat --style=numbers
   fzf_configure_bindings --directory=\ef --variables=\ev --processes=\ep --git_status=\es --git_log=\el --history=
 
-  # fifc plugin environment variables
+  # fifc plugin
   set -gx fifc_editor nvim
   set -gx fifc_fd_opts --hidden
   set -gx fifc_bat_opts --style=numbers
   set -gx fifc_exa_opts --all --classify --icons --oneline --group-directories-first --group
+  fifc --order 1 --condition 'test "$fifc_group" = "directories"' --source _fifc_source_files
 
   # GNU Screen config env var
   set -gx SCREENRC $HOME/.config/screen/screenrc
