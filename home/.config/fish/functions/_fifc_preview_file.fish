@@ -40,7 +40,6 @@ function _fifc_preview_file -d "Preview the selected file with the right tool de
             else
                 _fifc_preview_file_default "$fifc_candidate"
             end
-
     end
 end
 

@@ -6,4 +6,3 @@ function _fifc_preview_file_default -d "Display informations about the selected 
     file -b "$argv"
     set_color normal
 end
-

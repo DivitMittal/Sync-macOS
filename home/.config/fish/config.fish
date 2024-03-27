@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 #################################### Setting variables ########################################
 # Delete all previous paths in current fish terminal session
-set --erase fish_user_paths
+set -e fish_user_paths
 
 ## Fish variables
 set -g fish_greeting ''
@@ -25,10 +25,10 @@ end
 set -gx EDITOR 'nvim'
 set -gx VISUAL 'nvim'
 set -gx PAGER 'less'
-set -gx LESS '--RAW-CONTROL-CHARS --mouse -C --tilde --tabs=2 -W --status-column -i'
-set -gx LESSHISTFILE '-'
-set -gx LESSOPEN "|$brew_prefix/bin/lesspipe.sh %s"
-set -gx LESSCOLORIZER 'bat'
+set -x LESS '--RAW-CONTROL-CHARS --mouse -C --tilde --tabs=2 -W --status-column -i'
+set -x LESSHISTFILE '-'
+set -x LESSOPEN "|$brew_prefix/bin/lesspipe.sh %s"
+set -x LESSCOLORIZER 'bat'
 
 # Adding to PATH env var
 fish_add_path $HOME/.local/bin
@@ -36,8 +36,8 @@ fish_add_path $HOME/.local/bin
 
 ################################## Additional Programs ##############################################
 ## Homebrew
-set -gx HOMEBREW_NO_ENV_HINTS 1
-set -gx HOMEBREW_BUNDLE_FILE "$HOME/.config/brew/Brewfile"
+set -x HOMEBREW_NO_ENV_HINTS 1
+set -x HOMEBREW_BUNDLE_FILE "$HOME/.config/brew/Brewfile"
 
 # Homebrew paths
 fish_add_path $brew_prefix/bin
@@ -90,15 +90,15 @@ if status --is-interactive
   # pip
   alias pip-uninstall-all 'pip freeze | cut -d "@" -f1 | xargs pip uninstall -y'
   # pyenv
-  set -gx PYENV_ROOT $HOME/.pyenv
+  set -x PYENV_ROOT $HOME/.pyenv
   fish_add_path $PYENV_ROOT/bin
   pyenv init - | source
   pyenv virtualenv-init - | source
 
   ## FZF - fuzzy finder
   # fzf
-  set -gx FZF_DEFAULT_OPTS "--multi --cycle --border --height 50% --bind='space:toggle' --bind='tab:down' --bind='btab:up' --no-scrollbar --marker='*' --preview-window=wrap"
-  set -gx FZF_DEFAULT_COMMAND 'fd --hidden'
+  set -x FZF_DEFAULT_OPTS "--multi --cycle --border --height 50% --bind='space:toggle' --bind='tab:down' --bind='btab:up' --no-scrollbar --marker='*' --preview-window=wrap"
+  set -x FZF_DEFAULT_COMMAND 'fd --hidden'
 
   # PatrickF1/fzf.fish plugin
   set -gx fzf_fd_opts --hidden
@@ -115,7 +115,7 @@ if status --is-interactive
   # fifc --order 1 --condition 'test "$fifc_group" = "directories"' --source _fifc_source_files
 
   # GNU Screen config env var
-  set -gx SCREENRC $HOME/.config/screen/screenrc
+  set -x SCREENRC $HOME/.config/screen/screenrc
 
   ############################################ Aliases #################################################
   alias showpath 'echo $PATH | sed "s/ /\n/g"'
@@ -123,7 +123,7 @@ if status --is-interactive
 
   # Mapping "ls" to "eza"
   set -l eza_params "--all" "--classify" "--icons=always" "--group-directories-first" "--color=always" "--color-scale" "--color-scale-mode=gradient" "--hyperlink"
-  alias ll "eza -lbhHigUmuSa@ $eza_params"
+  alias ll "eza -lbhHigUmuSa@ $eza_params | ov -H1"
   alias lt "eza -T --level=2 $eza_params" # tree listing with depth 2
   alias ls "eza $eza_params"
 
@@ -163,7 +163,7 @@ if status --is-interactive
 
   ####################################### Initializations ###############################################
   # Run Fastfetch - fetch system info
-  if type -q fastfetch && test "$TERM_PROGRAM" = "WezTerm" && test "$TERM" = "xterm-256color"
+  if type -q fastfetch; and test "$TERM_PROGRAM" = "WezTerm"; and test "$TERM" = "xterm-256color"
     ff
   end
 
