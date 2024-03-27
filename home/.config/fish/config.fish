@@ -24,6 +24,12 @@ end
 ## Environment Variables
 set -gx EDITOR 'nvim'
 set -gx VISUAL 'nvim'
+set -gx PAGER 'less'
+set -gx LESS '--RAW-CONTROL-CHARS --mouse -C --tilde --tabs=2 -W --status-column -i'
+set -gx LESSHISTFILE '-'
+set -gx LESSOPEN "|$brew_prefix/bin/lesspipe.sh %s"
+set -gx LESSCOLORIZER 'bat'
+
 # Adding to PATH env var
 fish_add_path $HOME/.local/bin
 
@@ -74,6 +80,7 @@ if status --is-interactive
   ####################################   Config when fish is interactive ###############################################3
   fish_add_path $HOME/.config/emacs/bin # Doom Emacs
   # fish_add_path /System/Library/PrivateFrameworks/Apple80211.framework/Resources #Airport Utility
+  fish_add_path /Applications/Floorp.app/Contents/MacOS # Floorp browser
 
   ## Ruby
   # rbenv
@@ -98,14 +105,14 @@ if status --is-interactive
   set -gx fzf_preview_dir_cmd eza --all --color=always --icons=always --classify --group-directories-first --group --hyperlink --color-scale --color-scale-mode=gradient
   set -gx fzf_diff_highlighter delta --paging=never --width=20
   set -gx fzf_preview_file_cmd bat --style=numbers
-  fzf_configure_bindings --directory=\ef --variables=\ev --processes=\ep --git_status=\es --git_log=\el --history=
+  fzf_configure_bindings --variables=\ev --processes=\ep --git_status=\es --git_log=\el --history= --directory=
 
   # fifc plugin
   set -gx fifc_editor nvim
   set -gx fifc_fd_opts --hidden
   set -gx fifc_bat_opts --style=numbers
   set -gx fifc_exa_opts --all --classify --icons --oneline --group-directories-first --group
-  fifc --order 1 --condition 'test "$fifc_group" = "directories"' --source _fifc_source_files
+  # fifc --order 1 --condition 'test "$fifc_group" = "directories"' --source _fifc_source_files
 
   # GNU Screen config env var
   set -gx SCREENRC $HOME/.config/screen/screenrc
@@ -122,7 +129,7 @@ if status --is-interactive
 
   # Other similar mappings
   alias man 'batman'
-  alias cat 'bat'
+  alias cat 'bat --paging=never'
   alias ff 'fastfetch --logo-type iterm --logo $HOME/Sync-macOS/assets/a-12.png --pipe false --structure Title:OS:Kernel:Uptime:Display:Terminal:CPU:CPUUsage:GPU:Memory:Swap:LocalIP --gpu-temp true --cpu-temp true --title-color-user magenta --title-color-at blue --cpu-format "{1} @ {#4;35}{8}{#}" --gpu-format "{2} @ {#4;35}{4}{#}"'
 
   # Directory shortcuts for macOS

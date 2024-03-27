@@ -21,6 +21,7 @@ Spaceman.app
 Spotify.app
 Syntax Highlight.app
 Thunderbird.app
+Todoist.app
 Tor Browser.app
 Utilities
 Visual Studio Code.app

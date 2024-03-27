@@ -15,16 +15,24 @@ function _fifc_preview_file -d "Preview the selected file with the right tool de
                 cat "$fifc_candidate"
             end
         case image pdf
-            if type -q chafa
-                chafa $fifc_chafa_opts "$fifc_candidate"
+            if type -q wezterm
+                wezterm imgcat "$fifc_candidate"
             else
-                _fifc_preview_file_default "$fifc_candidate"
+              if type -q chafa
+                  chafa $fifc_chafa_opts "$fifc_candidate"
+              else
+                  _fifc_preview_file_default "$fifc_candidate"
+              end
             end
         case archive
-            if type -q 7z
-                7z l ""$fifc_candidate"" | tail -n +17 | awk '{ print $6 }'
+            if type -q 7zz
+                7zz l ""$fifc_candidate"" | tail -n +17 | awk '{ print $6 }'
             else
-                _fifc_preview_file_default "$fifc_candidate"
+                if type -q 7z
+                    7z l ""$fifc_candidate"" | tail -n +17 | awk '{ print $6 }'
+                else
+                    _fifc_preview_file_default "$fifc_candidate"
+                end
             end
         case binary
             if type -q hexyl
@@ -35,3 +43,4 @@ function _fifc_preview_file -d "Preview the selected file with the right tool de
 
     end
 end
+
